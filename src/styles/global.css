@@ -52,6 +52,7 @@ nav {
   font-family: var(--font-head);
   font-size: 22px; font-weight: 700; letter-spacing: 0.04em;
   color: var(--white);
+  white-space: nowrap;
 }
 .nav-logo span { color: var(--orange); }
 .nav-logo .bolt {
@@ -626,6 +627,8 @@ footer {
 @media (max-width: 768px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links { display: none; }
+  .nav-logo { font-size: 18px; }
+  .nav-logo span { display: none; }
   .hero-stats { gap: 24px; }
   .hero-stat:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px; }
   .why-grid { grid-template-columns: 1fr; }

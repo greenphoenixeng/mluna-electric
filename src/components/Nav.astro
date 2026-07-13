@@ -13,15 +13,112 @@
     <li><a href="/#services">Services</a></li>
     <li><a href="/#about">About</a></li>
     <li><a href="/gallery">Gallery</a></li>
-    <li><a href="/estimator">Estimator</a></li>
+    <li><a href="/#estimator">Estimator</a></li>
     <li><a href="/#area">Service Area</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
-  <a href="tel:+1-610-555-0100" class="nav-cta">Call Now</a>
+  <div class="nav-right">
+    <a href="tel:+1-610-555-0100" class="nav-cta">Call Now</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <ul>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/gallery">Gallery</a></li>
+    <li><a href="/#estimator">Estimator</a></li>
+    <li><a href="/#area">Service Area</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+1-610-555-0100" class="nav-mobile-call">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 010 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+    (610) 555-0100
+  </a>
+</div>
+
+<style>
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 40px; height: 40px;
+    background: none; border: none; cursor: pointer; padding: 6px;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--white);
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-menu {
+    display: none;
+    position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+    background: rgba(14,14,14,0.98);
+    backdrop-filter: blur(16px);
+    z-index: 99;
+    flex-direction: column;
+    padding: 32px 24px 48px;
+    overflow-y: auto;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu ul {
+    list-style: none; display: flex; flex-direction: column; gap: 0;
+    flex: 1;
+  }
+  .nav-mobile-menu ul li a {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: -0.01em; color: var(--white);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--dark3);
+    transition: color 0.15s;
+  }
+  .nav-mobile-menu ul li a:hover { color: var(--orange); }
+
+  .nav-mobile-call {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; text-transform: uppercase;
+    color: var(--orange); letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 768px) {
+    .nav-hamburger { display: flex; }
+  }
+</style>
 
 <script>
   const nav = document.querySelector('nav');
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger?.classList.remove('open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
   window.addEventListener('scroll', () => {
     if (nav) {
       nav.style.background = window.scrollY > 40

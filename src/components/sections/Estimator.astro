@@ -1,0 +1,318 @@
+---
+---
+
+<section class="hest" id="estimator">
+  <div class="hest-inner">
+
+    <div class="hest-header fade-up">
+      <div class="section-label">Cost Estimator</div>
+      <h2 class="section-title">What Will Your<br/>Project Cost?</h2>
+      <p class="section-sub" style="max-width:520px;">Pick a service type and adjust the inputs — we'll show you a rough range. Final pricing always starts with a free on-site visit.</p>
+    </div>
+
+    <div class="hest-body">
+
+      <div class="hest-cards" id="hest-cards"></div>
+
+      <div class="hest-panel">
+        <div class="hest-prompt" id="hest-prompt">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <p>Select a service type to see your cost range</p>
+        </div>
+        <div class="hest-active" id="hest-active">
+          <div class="hest-active-svc" id="hest-active-svc"></div>
+          <div class="hest-input-wrap" id="hest-input-wrap"></div>
+          <div class="hest-result">
+            <div class="hest-result-label">Estimated range</div>
+            <div class="hest-range" id="hest-range">—</div>
+            <p class="hest-note">Ballpark only. Actual cost varies by access, materials &amp; permit fees.</p>
+            <a href="/#contact" class="btn-primary">
+              Request Free Estimate
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .hest { background: var(--dark2); padding: 100px 5%; }
+  .hest-inner { max-width: 1200px; margin: 0 auto; }
+  .hest-header { margin-bottom: 56px; }
+
+  .hest-body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .hest-cards { display: flex; flex-direction: column; gap: 6px; }
+
+  .hest-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-left: 3px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    padding: 14px 16px 14px 18px;
+    cursor: pointer; text-align: left;
+    transition: background 0.15s, border-color 0.15s, border-left-color 0.15s;
+  }
+  .hest-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.14);
+    border-left-color: rgba(255,103,43,0.55);
+  }
+  .hest-card.selected {
+    background: rgba(255,103,43,0.08);
+    border-color: rgba(255,103,43,0.28);
+    border-left-color: var(--orange);
+  }
+  .hest-card-text { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+  .hest-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--white); transition: color 0.15s;
+  }
+  .hest-card.selected .hest-card-label { color: var(--orange); }
+  .hest-card-sub { font-size: 12px; color: var(--muted); line-height: 1.3; }
+  .hest-card-arrow {
+    color: rgba(255,255,255,0.2); flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .hest-card:hover .hest-card-arrow { color: var(--orange); }
+  .hest-card.selected .hest-card-arrow { color: var(--orange); transform: translateX(2px); }
+
+  .hest-panel {
+    background: var(--dark);
+    border: 1px solid var(--dark3);
+    border-radius: 4px;
+    display: flex; align-items: stretch;
+  }
+
+  .hest-prompt {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px; width: 100%; padding: 60px 40px;
+    color: var(--muted); text-align: center;
+  }
+  .hest-prompt svg { opacity: 0.25; }
+  .hest-prompt p { font-size: 15px; line-height: 1.5; }
+
+  .hest-active {
+    display: none; flex-direction: column; width: 100%; flex: 1;
+  }
+  .hest-active.visible { display: flex; }
+
+  .hest-active-svc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--orange);
+    padding: 24px 36px 0;
+  }
+
+  .hest-input-wrap {
+    padding: 18px 36px 28px;
+    border-bottom: 1px solid var(--dark3);
+  }
+
+  /* Slider */
+  .hest-slider-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 16px;
+  }
+  .hest-slider-name { font-size: 15px; color: var(--light); }
+  .hest-slider-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; color: var(--white);
+  }
+  .hest-slider {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px;
+    background: var(--dark3); border-radius: 2px;
+    outline: none; cursor: pointer;
+  }
+  .hest-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--orange); cursor: pointer;
+    border: 3px solid var(--dark);
+    box-shadow: 0 0 0 1.5px var(--orange);
+  }
+  .hest-slider::-moz-range-thumb {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--orange); cursor: pointer;
+    border: 3px solid var(--dark);
+  }
+  .hest-slider-ticks {
+    display: flex; justify-content: space-between;
+    margin-top: 8px; font-size: 11px; color: var(--muted);
+  }
+
+  /* Radio */
+  .hest-radio-label { font-size: 15px; color: var(--light); margin-bottom: 12px; }
+  .hest-radios { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hest-radio {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--dark2); border: 1.5px solid var(--dark3);
+    border-radius: 4px; padding: 10px 16px;
+    cursor: pointer; font-size: 14px; color: var(--light);
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+  .hest-radio input { display: none; }
+  .hest-radio.selected { border-color: var(--orange); background: rgba(255,103,43,0.08); color: var(--white); }
+  .hest-radio::before {
+    content: ''; width: 13px; height: 13px;
+    border-radius: 50%; border: 2px solid var(--dark3);
+    flex-shrink: 0; transition: border-color 0.15s, background 0.15s;
+  }
+  .hest-radio.selected::before { border-color: var(--orange); background: var(--orange); }
+
+  /* Result */
+  .hest-result { padding: 36px 36px; display: flex; flex-direction: column; justify-content: space-evenly; flex: 1; gap: 0; }
+  .hest-result-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+  }
+  .hest-range {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 800; line-height: 1; color: var(--orange);
+  }
+  .hest-note {
+    font-size: 13px; color: var(--muted); line-height: 1.55; max-width: 420px;
+  }
+
+  @media (max-width: 900px) {
+    .hest-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 540px) {
+    .hest { padding: 80px 5%; }
+    .hest-card { flex: 1 1 100%; }
+    .hest-input-wrap { padding: 16px 24px 24px; }
+    .hest-result { padding: 24px; }
+    .hest-active-svc { padding: 20px 24px 0; }
+  }
+</style>
+
+<script>
+  const SVCS = [
+    { id: 'residential',    label: 'Residential',        sub: 'Homes, condos & townhouses',
+      inp: { type: 'slider', label: 'Number of rooms', min: 1, max: 15, step: 1, val: 4, unit: 'rooms' },
+      price(v) { const b = 900 + v * 210; return [Math.round(b * 0.75), Math.round(b * 1.3)]; } },
+    { id: 'commercial',     label: 'Commercial',          sub: 'Offices, retail & industrial',
+      inp: { type: 'slider', label: 'Square footage', min: 500, max: 10000, step: 500, val: 2000, unit: 'sq ft' },
+      price(v) { return [Math.round(v * 2.5), Math.round(v * 5)]; } },
+    { id: 'panel',          label: 'Panel Upgrade',       sub: '100A → 200A & beyond',
+      inp: { type: 'radio', label: 'New panel size', options: ['100A', '200A', '400A'], val: '200A' },
+      price(v) { return ({'100A': [900,1700], '200A': [1500,3500], '400A': [3000,6500]})[v] || [1500,3500]; } },
+    { id: 'newconstruction', label: 'New Construction',   sub: 'Rough-in through finish',
+      inp: { type: 'slider', label: 'Square footage', min: 500, max: 6000, step: 250, val: 1500, unit: 'sq ft' },
+      price(v) { return [Math.round(v * 4), Math.round(v * 7)]; } },
+    { id: 'ev',             label: 'EV Charger',          sub: 'Level 2 home & commercial',
+      inp: { type: 'radio', label: 'Charger type', options: ['Level 1 (120V)', 'Level 2 (240V)', 'Commercial Station'], val: 'Level 2 (240V)' },
+      price(v) { return ({'Level 1 (120V)': [300,700], 'Level 2 (240V)': [600,1800], 'Commercial Station': [2000,6000]})[v] || [600,1800]; } },
+    { id: 'generator',      label: 'Generator',           sub: 'Standby whole-home backup',
+      inp: { type: 'radio', label: 'Generator size', options: ['7.5 kW', '11 kW', '14 kW', '20 kW', '22 kW'], val: '14 kW' },
+      price(v) { return ({'7.5 kW': [2800,4800], '11 kW': [3800,6200], '14 kW': [4800,8000], '20 kW': [7200,11500], '22 kW': [8500,13500]})[v] || [3000,10000]; } },
+    { id: 'lighting',       label: 'Lighting & Fixtures',  sub: 'Recessed, LED, outdoor',
+      inp: { type: 'slider', label: 'Number of fixtures', min: 1, max: 30, step: 1, val: 6, unit: 'fixtures' },
+      price(v) { return [Math.round(v * 150), Math.round(v * 290 + 100)]; } },
+  ];
+
+  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  let activeSvc = null;
+  let activeVal = null;
+
+  function renderCards() {
+    const el = document.getElementById('hest-cards');
+    if (!el) return;
+    el.innerHTML = SVCS.map(s => `
+      <button class="hest-card" data-id="${s.id}">
+        <div class="hest-card-text">
+          <span class="hest-card-label">${s.label}</span>
+          <span class="hest-card-sub">${s.sub}</span>
+        </div>
+        <svg class="hest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    `).join('');
+    el.querySelectorAll('.hest-card').forEach(btn => {
+      btn.addEventListener('click', () => selectSvc(btn.dataset.id));
+    });
+  }
+
+  function renderInput(svc) {
+    const wrap = document.getElementById('hest-input-wrap');
+    const inp = svc.inp;
+    if (inp.type === 'slider') {
+      activeVal = inp.val;
+      wrap.innerHTML = `
+        <div class="hest-slider-header">
+          <span class="hest-slider-name">${inp.label}</span>
+          <span class="hest-slider-val" id="hest-slval">${inp.val} ${inp.unit}</span>
+        </div>
+        <input type="range" class="hest-slider" id="hest-sl"
+          min="${inp.min}" max="${inp.max}" step="${inp.step}" value="${inp.val}" />
+        <div class="hest-slider-ticks">
+          <span>${inp.min} ${inp.unit}</span>
+          <span>${inp.max} ${inp.unit}</span>
+        </div>
+      `;
+      document.getElementById('hest-sl').addEventListener('input', (e) => {
+        activeVal = parseInt(e.target.value);
+        document.getElementById('hest-slval').textContent = `${activeVal} ${inp.unit}`;
+        updateRange();
+      });
+    } else {
+      activeVal = inp.val;
+      wrap.innerHTML = `
+        <div class="hest-radio-label">${inp.label}</div>
+        <div class="hest-radios">
+          ${inp.options.map(o => `
+            <label class="hest-radio${o === inp.val ? ' selected' : ''}">
+              <input type="radio" name="hest-r" value="${o}"${o === inp.val ? ' checked' : ''} />${o}
+            </label>
+          `).join('')}
+        </div>
+      `;
+      wrap.querySelectorAll('input[type="radio"]').forEach(r => {
+        r.addEventListener('change', () => {
+          wrap.querySelectorAll('.hest-radio').forEach(l => l.classList.remove('selected'));
+          r.closest('.hest-radio').classList.add('selected');
+          activeVal = r.value;
+          updateRange();
+        });
+      });
+    }
+  }
+
+  function updateRange() {
+    if (!activeSvc || activeVal === null) return;
+    const [lo, hi] = activeSvc.price(activeVal);
+    document.getElementById('hest-range').textContent = `${fmt(lo)} – ${fmt(hi)}`;
+  }
+
+  function selectSvc(id) {
+    activeSvc = SVCS.find(s => s.id === id);
+    if (!activeSvc) return;
+    document.querySelectorAll('.hest-card').forEach(c => c.classList.remove('selected'));
+    document.querySelector(`.hest-card[data-id="${id}"]`).classList.add('selected');
+    document.getElementById('hest-prompt').style.display = 'none';
+    document.getElementById('hest-active').classList.add('visible');
+    document.getElementById('hest-active-svc').textContent = activeSvc.label;
+    renderInput(activeSvc);
+    updateRange();
+  }
+
+  renderCards();
+  selectSvc('residential');
+</script>

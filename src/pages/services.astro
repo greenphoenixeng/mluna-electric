@@ -5,106 +5,222 @@ import Footer from '@/components/Footer.astro';
 
 const services = [
   {
-    category: 'Residential',
-    icon: '🏠',
+    num: '01',
+    title: 'Residential Electrical',
+    sub: 'Homes, condos & townhouses',
     items: [
       'Panel upgrades & replacements',
       'Whole-home rewiring',
       'Outlet & switch installation',
       'Ceiling fan & lighting installation',
       'GFCI & AFCI breaker upgrades',
-      'Smoke & CO detector installation',
-      'Home EV charger installation',
+      'Smoke & CO detector wiring',
     ],
   },
   {
-    category: 'Commercial',
-    icon: '🏢',
+    num: '02',
+    title: 'Commercial & Office',
+    sub: 'Offices, retail & light industrial',
     items: [
-      'Office & retail buildouts',
       'Tenant improvement electrical',
+      'Office & retail buildouts',
       'Code compliance upgrades',
       'Commercial lighting retrofit',
-      'Generator hookups',
       '3-phase power installation',
-      'Data / low-voltage rough-in',
+      'Data & low-voltage rough-in',
     ],
   },
   {
-    category: 'Service & Repair',
-    icon: '🔧',
+    num: '03',
+    title: 'New Construction',
+    sub: 'Rough-in through finish',
+    items: [
+      'Complete rough-in wiring',
+      'Service & meter installation',
+      'Exterior & site electrical',
+      'Underground conduit runs',
+      'Permit coordination',
+      'Final inspection walk-through',
+    ],
+  },
+  {
+    num: '04',
+    title: 'Panel Upgrades',
+    sub: '100A → 200A & beyond',
+    items: [
+      '200A service upgrades',
+      'Main breaker replacement',
+      'Sub-panel installation',
+      'Arc-fault (AFCI) upgrades',
+      'Meter base replacement',
+      'Utility coordination',
+    ],
+  },
+  {
+    num: '05',
+    title: 'EV Charger Install',
+    sub: 'Level 2 home & commercial',
+    items: [
+      'Level 2 charger installation',
+      'Dedicated 240V circuit',
+      'Panel capacity assessment',
+      'Interior & garage mounting',
+      'Commercial charging stations',
+      'Permit & inspection handling',
+    ],
+  },
+  {
+    num: '06',
+    title: 'Service & Repair',
+    sub: 'Diagnosis & same-week scheduling',
     items: [
       'Tripped breaker diagnosis',
       'Dead outlet troubleshooting',
       'Flickering light repair',
       'Electrical safety inspections',
       'Code violation corrections',
-      'Emergency electrical service',
+      'Emergency service available',
     ],
   },
   {
-    category: 'EV & Solar Prep',
-    icon: '☀️',
+    num: '07',
+    title: 'Generator Install',
+    sub: 'Standby whole-home backup',
     items: [
-      'Level 2 EV charger installation',
-      'Dedicated circuit installation',
-      'Solar-ready panel preparation',
-      'Battery backup circuit prep',
+      'Standby generator installation',
+      'Automatic transfer switch (ATS)',
+      'Utility coordination & permitting',
+      'Proper grounding & bonding',
+      'Load calculation & sizing',
+      'Post-install testing & walk-through',
     ],
   },
 ];
 ---
 
 <Layout
-  title="Electrical Services | M Luna Electric — Austin, TX"
-  description="Full-service electrical contractor in Austin, TX. Residential, commercial, EV chargers, and more. Free estimates."
+  title="Electrical Services | M. Luna Electric — Kennett Square, PA"
+  description="Full-service electrical contractor serving Chester & Delaware County, PA. Residential, commercial, panel upgrades, EV chargers, new construction. Free estimates."
 >
   <Nav />
 
-  <main class="pt-16">
-    <!-- Hero -->
-    <section class="bg-navy-900 py-20 text-white">
-      <div class="container-lg">
-        <h1 class="section-heading text-white mb-4">Our Services</h1>
-        <p class="text-white/70 max-w-xl text-lg">
-          Quality electrical work for homes and businesses across the Austin area.
-        </p>
-      </div>
-    </section>
+  <div class="svc-hero">
+    <div class="svc-hero-inner">
+      <div class="section-label">What We Do</div>
+      <h1 class="section-title">Our<br/>Services</h1>
+      <p class="section-sub">Residential to utility-scale — if it's electrical, we do it right. Licensed, insured, and serving Chester &amp; Delaware County.</p>
+    </div>
+  </div>
 
-    <!-- Services grid -->
-    <section class="py-20 bg-white">
-      <div class="container-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {services.map((s) => (
-            <div class="border border-gray-100 rounded-2xl p-8">
-              <div class="flex items-center gap-3 mb-6">
-                <span class="text-4xl">{s.icon}</span>
-                <h2 class="font-heading font-bold text-navy-800 text-2xl">{s.category}</h2>
-              </div>
-              <ul class="space-y-3">
-                {s.items.map((item) => (
-                  <li class="flex items-start gap-2 text-gray-700">
-                    <span class="text-electric-400 mt-0.5 shrink-0">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+  <section class="svc-grid-section">
+    <div class="svc-grid-inner">
+      {services.map((s) => (
+        <div class="svc-card fade-up">
+          <div class="svc-card-header">
+            <span class="svc-card-num">{s.num}</span>
+            <div>
+              <div class="svc-card-title">{s.title}</div>
+              <div class="svc-card-sub">{s.sub}</div>
             </div>
-          ))}
+          </div>
+          <ul class="svc-card-list">
+            {s.items.map(item => (
+              <li>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </section>
 
-    <!-- CTA -->
-    <section class="py-16 bg-navy-900 text-white text-center">
-      <div class="container-lg">
-        <h2 class="text-3xl font-heading font-bold mb-4">Don't see what you need?</h2>
-        <p class="text-white/70 mb-8">Call or email us — we handle most residential and commercial electrical work.</p>
-        <a href="/contact" class="btn-primary">Get a Free Quote</a>
+  <div class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Don't See<br/>What You Need?</h2>
+      <p>Call or message us — we handle most residential and commercial electrical work.</p>
+      <div class="cta-band-actions">
+        <a href="/#contact" class="btn-dark">Request a Free Quote</a>
+        <a href="tel:+16105550100" class="btn-white">Call Us Directly</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <Footer />
 </Layout>
+
+<style>
+  .svc-hero {
+    background: var(--black);
+    padding: 140px 5% 80px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .svc-hero-inner { max-width: 800px; margin: 0 auto; }
+  .svc-hero .section-title { font-size: clamp(52px, 8vw, 88px); }
+
+  .svc-grid-section { background: var(--dark); padding: 80px 5%; }
+  .svc-grid-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .svc-card {
+    background: var(--dark2);
+    border: 1px solid var(--dark3);
+    padding: 40px 32px;
+    transition: border-color 0.2s;
+  }
+  .svc-card:hover { border-color: var(--orange); }
+
+  .svc-card-header {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .svc-card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; color: var(--orange);
+    letter-spacing: 0.1em; padding-top: 3px; flex-shrink: 0;
+  }
+  .svc-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 800; text-transform: uppercase;
+    color: var(--white); line-height: 1.1; margin-bottom: 4px;
+  }
+  .svc-card-sub { font-size: 13px; color: var(--muted); }
+
+  .svc-card-list {
+    list-style: none; display: flex; flex-direction: column; gap: 12px;
+  }
+  .svc-card-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px; color: var(--light); line-height: 1.4;
+  }
+  .svc-card-list li svg {
+    color: var(--orange); flex-shrink: 0; margin-top: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-grid-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .svc-hero { padding: 120px 5% 60px; }
+    .svc-grid-inner { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
