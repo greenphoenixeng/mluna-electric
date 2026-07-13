@@ -1,0 +1,110 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+const services = [
+  {
+    category: 'Residential',
+    icon: '🏠',
+    items: [
+      'Panel upgrades & replacements',
+      'Whole-home rewiring',
+      'Outlet & switch installation',
+      'Ceiling fan & lighting installation',
+      'GFCI & AFCI breaker upgrades',
+      'Smoke & CO detector installation',
+      'Home EV charger installation',
+    ],
+  },
+  {
+    category: 'Commercial',
+    icon: '🏢',
+    items: [
+      'Office & retail buildouts',
+      'Tenant improvement electrical',
+      'Code compliance upgrades',
+      'Commercial lighting retrofit',
+      'Generator hookups',
+      '3-phase power installation',
+      'Data / low-voltage rough-in',
+    ],
+  },
+  {
+    category: 'Service & Repair',
+    icon: '🔧',
+    items: [
+      'Tripped breaker diagnosis',
+      'Dead outlet troubleshooting',
+      'Flickering light repair',
+      'Electrical safety inspections',
+      'Code violation corrections',
+      'Emergency electrical service',
+    ],
+  },
+  {
+    category: 'EV & Solar Prep',
+    icon: '☀️',
+    items: [
+      'Level 2 EV charger installation',
+      'Dedicated circuit installation',
+      'Solar-ready panel preparation',
+      'Battery backup circuit prep',
+    ],
+  },
+];
+---
+
+<Layout
+  title="Electrical Services | M Luna Electric — Austin, TX"
+  description="Full-service electrical contractor in Austin, TX. Residential, commercial, EV chargers, and more. Free estimates."
+>
+  <Nav />
+
+  <main class="pt-16">
+    <!-- Hero -->
+    <section class="bg-navy-900 py-20 text-white">
+      <div class="container-lg">
+        <h1 class="section-heading text-white mb-4">Our Services</h1>
+        <p class="text-white/70 max-w-xl text-lg">
+          Quality electrical work for homes and businesses across the Austin area.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services grid -->
+    <section class="py-20 bg-white">
+      <div class="container-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {services.map((s) => (
+            <div class="border border-gray-100 rounded-2xl p-8">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="text-4xl">{s.icon}</span>
+                <h2 class="font-heading font-bold text-navy-800 text-2xl">{s.category}</h2>
+              </div>
+              <ul class="space-y-3">
+                {s.items.map((item) => (
+                  <li class="flex items-start gap-2 text-gray-700">
+                    <span class="text-electric-400 mt-0.5 shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-navy-900 text-white text-center">
+      <div class="container-lg">
+        <h2 class="text-3xl font-heading font-bold mb-4">Don't see what you need?</h2>
+        <p class="text-white/70 mb-8">Call or email us — we handle most residential and commercial electrical work.</p>
+        <a href="/contact" class="btn-primary">Get a Free Quote</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

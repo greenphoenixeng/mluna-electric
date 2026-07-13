@@ -1,0 +1,92 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout
+  title="Electrical Cost Estimator | M Luna Electric — Austin, TX"
+  description="Get a rough cost estimate for your electrical project with our free online estimator. Serving Austin, TX."
+>
+  <Nav />
+
+  <main class="pt-16">
+    <section class="bg-navy-900 py-20 text-white">
+      <div class="container-lg">
+        <h1 class="section-heading text-white mb-4">Project Estimator</h1>
+        <p class="text-white/70 max-w-xl text-lg">
+          Get a rough idea of what your project might cost. Estimates are ranges — final pricing requires an on-site visit.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="container-lg max-w-2xl">
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8">
+          <h2 class="font-heading font-bold text-navy-800 text-2xl mb-6">Tell us about your project</h2>
+
+          <!-- Step 1: Job type -->
+          <div class="mb-6">
+            <label class="block font-medium text-gray-700 mb-2">What type of work do you need?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="job-type-group">
+              {[
+                { value: 'panel', label: 'Panel Upgrade', base: [1500, 4000] },
+                { value: 'wiring', label: 'New Wiring / Outlets', base: [200, 1200] },
+                { value: 'lighting', label: 'Lighting Installation', base: [150, 800] },
+                { value: 'ev', label: 'EV Charger Install', base: [500, 1500] },
+                { value: 'commercial', label: 'Commercial Buildout', base: [2000, 15000] },
+                { value: 'service', label: 'Service Call / Repair', base: [150, 600] },
+              ].map((job) => (
+                <button
+                  class="job-type-btn border-2 border-gray-200 rounded-lg p-4 text-left hover:border-electric-400 transition-colors"
+                  data-value={job.value}
+                  data-base-low={job.base[0]}
+                  data-base-high={job.base[1]}
+                >
+                  <span class="font-medium text-navy-800">{job.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="estimate-result" class="hidden bg-white border-2 border-electric-400 rounded-xl p-6 text-center">
+            <p class="text-sm text-gray-500 mb-1">Rough estimate range</p>
+            <p class="text-4xl font-heading font-bold text-navy-800" id="estimate-range">$0 – $0</p>
+            <p class="text-xs text-gray-400 mt-2">
+              * This is a ballpark only. Actual cost depends on your specific situation.
+            </p>
+            <a href="/contact" class="btn-primary mt-4 inline-flex">Get an Exact Quote</a>
+          </div>
+
+          <p class="text-xs text-gray-400 mt-6 text-center">
+            Need something more specific? <a href="/contact" class="text-electric-500 hover:underline">Contact us for a free on-site estimate.</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.job-type-btn');
+  const result = document.getElementById('estimate-result')!;
+  const rangeEl = document.getElementById('estimate-range')!;
+
+  const fmt = (n: number) =>
+    n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('border-electric-400', 'bg-electric-50'));
+      btn.classList.add('border-electric-400');
+
+      const low = parseInt(btn.dataset.baseLow ?? '0');
+      const high = parseInt(btn.dataset.baseHigh ?? '0');
+      rangeEl.textContent = `${fmt(low)} – ${fmt(high)}`;
+      result.classList.remove('hidden');
+    });
+  });
+</script>

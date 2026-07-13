@@ -1,0 +1,41 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+// TODO: replace with actual project photos from client
+// Images go in src/assets/gallery/ and are imported here or via glob
+const placeholderCount = 9;
+---
+
+<Layout
+  title="Project Gallery | M Luna Electric — Austin, TX"
+  description="Browse completed electrical projects by M Luna Electric — panel upgrades, commercial work, EV chargers, and more."
+>
+  <Nav />
+
+  <main class="pt-16">
+    <section class="bg-navy-900 py-20 text-white">
+      <div class="container-lg">
+        <h1 class="section-heading text-white mb-4">Project Gallery</h1>
+        <p class="text-white/70 max-w-xl text-lg">A look at some of our completed work across Austin.</p>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="container-lg">
+        <!-- Gallery grid - replace placeholders with real images -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: placeholderCount }).map((_, i) => (
+            <div class="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center text-gray-400 text-sm">
+              <!-- Replace with: <Image src={photo} alt="Project description" class="w-full h-full object-cover" /> -->
+              Photo {i + 1} — client to provide
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

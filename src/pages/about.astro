@@ -1,0 +1,71 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout
+  title="About M Luna Electric | Licensed Electrician — Austin, TX"
+  description="M Luna Electric is a family-owned electrical contractor in Austin, TX with over 10 years of experience serving residential and commercial clients."
+>
+  <Nav />
+
+  <main class="pt-16">
+    <section class="bg-navy-900 py-20 text-white">
+      <div class="container-lg">
+        <h1 class="section-heading text-white mb-4">About Us</h1>
+        <p class="text-white/70 max-w-xl text-lg">Family-owned. Austin-based. Built on trust and quality workmanship.</p>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="py-20 bg-white">
+      <div class="container-lg">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="section-heading mb-6">Our Story</h2>
+          <!-- TODO: replace with client-provided copy -->
+          <p class="text-gray-700 text-lg leading-relaxed mb-6">
+            M Luna Electric was founded on a simple belief: every customer deserves honest pricing,
+            quality work, and a contractor who shows up when they say they will.
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            With over a decade of electrical experience across Austin and the surrounding Hill Country,
+            we've built our reputation one job at a time — from service panel upgrades to full commercial buildouts.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            We're licensed, insured, and committed to doing the job right the first time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-20 bg-gray-50">
+      <div class="container-lg">
+        <h2 class="section-heading text-center mb-14">Why Choose M Luna Electric</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { icon: '🏅', title: 'Licensed & Insured', body: 'Fully licensed in Texas. Liability insurance and workers comp on every job.' },
+            { icon: '📋', title: 'Honest Estimates', body: 'Free, itemized quotes with no hidden fees. You know the price before we start.' },
+            { icon: '⏱️', title: 'On Time. Every Time.', body: 'We respect your schedule. If something changes, we call ahead.' },
+          ].map(({ icon, title, body }) => (
+            <div class="text-center p-6">
+              <span class="text-5xl mb-4 block">{icon}</span>
+              <h3 class="font-heading font-bold text-navy-800 text-xl mb-2">{title}</h3>
+              <p class="text-gray-600">{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-navy-900 text-white text-center">
+      <div class="container-lg">
+        <h2 class="text-3xl font-heading font-bold mb-4">Ready to work together?</h2>
+        <a href="/contact" class="btn-primary">Get a Free Estimate</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

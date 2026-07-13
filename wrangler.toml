@@ -1,0 +1,15 @@
+name = "mluna-electric"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+[vars]
+# Non-secret vars only — secrets go in CF Pages dashboard or .dev.vars locally
+NOTIFY_EMAIL = "contact@mlunaelectric.com"
+
+# Staging environment
+[env.staging]
+name = "mluna-electric-staging"
+
+[env.staging.vars]
+NOTIFY_EMAIL = "mike@greenphoenixengineering.com"
