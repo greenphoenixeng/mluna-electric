@@ -1,10 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import aboutPhoto from '@/assets/images/IMG_0272.jpeg';
 ---
 <section class="about" id="about">
   <div class="about-inner">
     <div class="about-visual fade-up">
       <div class="about-img-wrap">
-        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80" alt="Electrician working on panel" />
+        <Image src={aboutPhoto} alt="M. Luna Electric electrician installing commercial electrical panel" />
         <div class="about-img-overlay"></div>
       </div>
       <div class="about-badge">

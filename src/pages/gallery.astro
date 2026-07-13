@@ -2,40 +2,236 @@
 import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import { Image } from 'astro:assets';
 
-// TODO: replace with actual project photos from client
-// Images go in src/assets/gallery/ and are imported here or via glob
-const placeholderCount = 9;
+import img267 from '@/assets/images/IMG_0267.jpeg';
+import img271 from '@/assets/images/IMG_0271.jpeg';
+import img272 from '@/assets/images/IMG_0272.jpeg';
+import img161 from '@/assets/images/IMG_0161.jpeg';
+import img162 from '@/assets/images/IMG_0162.jpeg';
+import img163 from '@/assets/images/IMG_0163.jpeg';
+import img164 from '@/assets/images/IMG_0164.jpeg';
+import img226 from '@/assets/images/IMG_0226.JPG';
+import img227 from '@/assets/images/IMG_0227.JPG';
+import img228 from '@/assets/images/IMG_0228.JPG';
+import img231 from '@/assets/images/IMG_0231.JPG';
+import img232 from '@/assets/images/IMG_0232.JPG';
+
+const categories = [
+  {
+    id: 'panels',
+    label: 'Panel Work',
+    title: 'Panel Upgrades',
+    photos: [
+      { src: img267, alt: 'Completed Eaton commercial panel installation — clean and labeled' },
+      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
+      { src: img271, alt: 'Electrical panel wiring in progress on concrete block wall' },
+    ],
+  },
+  {
+    id: 'commercial',
+    label: 'Commercial & New Construction',
+    title: 'Commercial Work',
+    photos: [
+      { src: img163, alt: 'Multi-panel commercial electrical system on stone building — finished' },
+      { src: img161, alt: 'Exterior meter base installation on new construction stone building' },
+      { src: img162, alt: 'Wide view — commercial multi-panel install with bucket truck on site' },
+      { src: img164, alt: 'Commercial electrical installation at multi-unit building' },
+    ],
+  },
+  {
+    id: 'utility',
+    label: 'Utility-Scale',
+    title: 'Large-Scale Projects',
+    photos: [
+      { src: img226, alt: 'Pad-mount transformer with meter base on galvanized support posts' },
+      { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
+      { src: img227, alt: 'Interior of open switchgear cabinet showing organized cable terminations' },
+      { src: img228, alt: 'Underground conduit installation in excavated trench' },
+      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },
+    ],
+  },
+];
 ---
 
 <Layout
-  title="Project Gallery | M Luna Electric — Austin, TX"
-  description="Browse completed electrical projects by M Luna Electric — panel upgrades, commercial work, EV chargers, and more."
+  title="Project Gallery | M. Luna Electric — Kennett Square, PA"
+  description="Browse completed electrical projects by M. Luna Electric — panel upgrades, commercial installations, utility-scale work, and new construction across Chester County, PA."
 >
   <Nav />
 
-  <main class="pt-16">
-    <section class="bg-navy-900 py-20 text-white">
-      <div class="container-lg">
-        <h1 class="section-heading text-white mb-4">Project Gallery</h1>
-        <p class="text-white/70 max-w-xl text-lg">A look at some of our completed work across Austin.</p>
-      </div>
-    </section>
+  <div class="gallery-hero">
+    <div class="gallery-hero-inner">
+      <div class="section-label">Our Work</div>
+      <h1 class="section-title">Project<br/>Gallery</h1>
+      <p class="section-sub">Real jobs. Real results. A look at completed electrical work across Chester and Delaware County.</p>
+    </div>
+  </div>
 
-    <section class="py-20 bg-white">
-      <div class="container-lg">
-        <!-- Gallery grid - replace placeholders with real images -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: placeholderCount }).map((_, i) => (
-            <div class="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center text-gray-400 text-sm">
-              <!-- Replace with: <Image src={photo} alt="Project description" class="w-full h-full object-cover" /> -->
-              Photo {i + 1} — client to provide
+  {categories.map((cat) => (
+    <section class="gallery-cat" id={cat.id}>
+      <div class="gallery-cat-inner">
+        <div class="gallery-cat-header">
+          <div class="section-label">{cat.label}</div>
+          <h2 class="gallery-cat-title">{cat.title}</h2>
+        </div>
+        <div class="gallery-grid" data-count={cat.photos.length}>
+          {cat.photos.map((photo) => (
+            <div class="gallery-item fade-up">
+              <Image src={photo.src} alt={photo.alt} />
             </div>
           ))}
         </div>
       </div>
     </section>
-  </main>
+  ))}
+
+  <div class="gallery-cta">
+    <div class="gallery-cta-inner">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Get a free estimate — we respond within one business day.</p>
+      <div class="gallery-cta-actions">
+        <a href="/#contact" class="btn-primary">Request a Free Quote</a>
+        <a href="tel:+16105550100" class="btn-outline">Call Us Directly</a>
+      </div>
+    </div>
+  </div>
 
   <Footer />
 </Layout>
+
+<style>
+  .gallery-hero {
+    background-color: var(--black);
+    padding: 140px 24px 80px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .gallery-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .gallery-hero .section-title {
+    font-size: clamp(56px, 8vw, 96px);
+  }
+
+  .gallery-cat {
+    background-color: var(--dark);
+    padding: 80px 24px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .gallery-cat:nth-child(odd) {
+    background-color: var(--black);
+  }
+  .gallery-cat-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .gallery-cat-header {
+    margin-bottom: 40px;
+  }
+  .gallery-cat-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 8px 0 0;
+    letter-spacing: -0.5px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4/3;
+    background-color: var(--dark2);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.04);
+  }
+
+  .gallery-cta {
+    background-color: var(--orange);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .gallery-cta-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .gallery-cta h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--black);
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+  .gallery-cta p {
+    color: rgba(0,0,0,0.7);
+    font-size: 18px;
+    margin: 0 0 32px;
+  }
+  .gallery-cta-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--black);
+    color: var(--black);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover {
+    background: var(--black);
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .gallery-hero {
+      padding: 120px 16px 60px;
+    }
+    .gallery-cat {
+      padding: 60px 16px;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
