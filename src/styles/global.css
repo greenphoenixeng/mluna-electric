@@ -567,6 +567,56 @@ footer {
   padding: 4px 12px; border-radius: 40px;
 }
 
+/* ── PROJECTS ── */
+.projects { background: var(--black); padding: 100px 5%; }
+.projects-inner { max-width: 1280px; margin: 0 auto; }
+
+.projects-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 40px; gap: 24px; flex-wrap: wrap;
+}
+.projects-header .section-title { margin: 0; }
+.projects-view-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-head); font-size: 15px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--orange);
+  transition: gap 0.2s;
+  white-space: nowrap;
+}
+.projects-view-all:hover { gap: 12px; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.projects-item {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  background: var(--dark2);
+}
+.projects-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.projects-item:hover img { transform: scale(1.05); }
+
+.projects-footer { text-align: center; }
+.btn-outline-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  font-family: var(--font-head); font-size: 15px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 14px 32px; border-radius: 40px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline-dark:hover { border-color: var(--orange); color: var(--orange); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .about-inner, .why-inner, .area-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -574,6 +624,7 @@ footer {
   .footer-inner { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links { display: none; }
   .hero-stats { gap: 24px; }
   .hero-stat:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px; }

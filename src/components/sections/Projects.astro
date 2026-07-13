@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+
+import img267 from '@/assets/images/IMG_0267.jpeg';
+import img272 from '@/assets/images/IMG_0272.jpeg';
+import img163 from '@/assets/images/IMG_0163.jpeg';
+import img161 from '@/assets/images/IMG_0161.jpeg';
+import img226 from '@/assets/images/IMG_0226.JPG';
+import img231 from '@/assets/images/IMG_0231.JPG';
+
+const photos = [
+  { src: img267, alt: 'Completed commercial panel installation — Eaton breaker board' },
+  { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
+  { src: img163, alt: 'Multi-panel commercial system on stone building — finished' },
+  { src: img161, alt: 'Exterior meter base installation on new construction' },
+  { src: img226, alt: 'Pad-mount transformer with meter base on galvanized posts' },
+  { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
+];
+---
+
+<section class="projects" id="projects">
+  <div class="projects-inner">
+    <div class="projects-header fade-up">
+      <div class="projects-header-text">
+        <div class="section-label">Our Work</div>
+        <h2 class="section-title">Real Jobs.<br/>Real Results.</h2>
+      </div>
+      <a href="/gallery" class="projects-view-all">
+        View Full Gallery
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="projects-grid">
+      {photos.map((photo) => (
+        <a href="/gallery" class="projects-item fade-up">
+          <Image src={photo.src} alt={photo.alt} />
+        </a>
+      ))}
+    </div>
+
+    <div class="projects-footer fade-up">
+      <a href="/gallery" class="btn-outline-dark">
+        View All Projects
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
