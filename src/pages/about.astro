@@ -2,70 +2,227 @@
 import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import { Image } from 'astro:assets';
+
+import photo272 from '@/assets/images/IMG_0272.jpeg';
+import photo267 from '@/assets/images/IMG_0267.jpeg';
+import photo163 from '@/assets/images/IMG_0163.jpeg';
 ---
 
 <Layout
-  title="About M Luna Electric | Licensed Electrician — Austin, TX"
-  description="M Luna Electric is a family-owned electrical contractor in Austin, TX with over 10 years of experience serving residential and commercial clients."
+  title="About M. Luna Electric | Licensed Electrician — Kennett Square, PA"
+  description="M. Luna Electric is a family-owned electrical contractor based in Kennett Square, PA with over 10 years serving Chester & Delaware County. Licensed, insured, bilingual."
 >
   <Nav />
 
-  <main class="pt-16">
-    <section class="bg-navy-900 py-20 text-white">
-      <div class="container-lg">
-        <h1 class="section-heading text-white mb-4">About Us</h1>
-        <p class="text-white/70 max-w-xl text-lg">Family-owned. Austin-based. Built on trust and quality workmanship.</p>
-      </div>
-    </section>
+  <div class="about-pg-hero">
+    <div class="about-pg-hero-inner">
+      <div class="section-label">About Us</div>
+      <h1 class="section-title">Built on<br/>Craftsmanship<br/>&amp; Reliability</h1>
+      <p class="section-sub">Family-owned. Kennett Square-based. Over a decade of honest electrical work across Chester and Delaware County.</p>
+    </div>
+  </div>
 
-    <!-- Story -->
-    <section class="py-20 bg-white">
-      <div class="container-lg">
-        <div class="max-w-3xl mx-auto">
-          <h2 class="section-heading mb-6">Our Story</h2>
-          <!-- TODO: replace with client-provided copy -->
-          <p class="text-gray-700 text-lg leading-relaxed mb-6">
-            M Luna Electric was founded on a simple belief: every customer deserves honest pricing,
-            quality work, and a contractor who shows up when they say they will.
-          </p>
-          <p class="text-gray-700 leading-relaxed mb-6">
-            With over a decade of electrical experience across Austin and the surrounding Hill Country,
-            we've built our reputation one job at a time — from service panel upgrades to full commercial buildouts.
-          </p>
-          <p class="text-gray-700 leading-relaxed">
-            We're licensed, insured, and committed to doing the job right the first time.
-          </p>
+  <section class="about-pg-story">
+    <div class="about-pg-story-inner">
+      <div class="about-pg-photo fade-up">
+        <div class="about-pg-img-wrap">
+          <Image src={photo272} alt="M. Luna Electric electrician installing commercial panel" />
+          <div class="about-pg-overlay"></div>
+        </div>
+        <div class="about-pg-badge">
+          <span class="about-pg-badge-num">10+</span>
+          <span class="about-pg-badge-text">Years Serving<br/>Chester County</span>
         </div>
       </div>
-    </section>
 
-    <!-- Values -->
-    <section class="py-20 bg-gray-50">
-      <div class="container-lg">
-        <h2 class="section-heading text-center mb-14">Why Choose M Luna Electric</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { icon: '🏅', title: 'Licensed & Insured', body: 'Fully licensed in Texas. Liability insurance and workers comp on every job.' },
-            { icon: '📋', title: 'Honest Estimates', body: 'Free, itemized quotes with no hidden fees. You know the price before we start.' },
-            { icon: '⏱️', title: 'On Time. Every Time.', body: 'We respect your schedule. If something changes, we call ahead.' },
-          ].map(({ icon, title, body }) => (
-            <div class="text-center p-6">
-              <span class="text-5xl mb-4 block">{icon}</span>
-              <h3 class="font-heading font-bold text-navy-800 text-xl mb-2">{title}</h3>
-              <p class="text-gray-600">{body}</p>
-            </div>
-          ))}
-        </div>
+      <div class="about-pg-text fade-up">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title" style="font-size: clamp(36px,5vw,56px);">One Job at<br/>a Time</h2>
+        <p class="section-sub">
+          M. Luna Electric was founded on a simple belief: every customer deserves honest pricing, quality work, and a contractor who shows up when they say they will.
+        </p>
+        <p class="section-sub" style="margin-top: 16px;">
+          With over a decade of electrical experience across Chester and Delaware County, we've built our reputation one job at a time — from service panel upgrades on historic stone buildings to utility-scale commercial installations.
+        </p>
+        <p class="section-sub" style="margin-top: 16px;">
+          We're licensed, fully insured in Pennsylvania, and our bilingual team communicates clearly in both English and Spanish so nothing gets lost in translation.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="py-16 bg-navy-900 text-white text-center">
-      <div class="container-lg">
-        <h2 class="text-3xl font-heading font-bold mb-4">Ready to work together?</h2>
-        <a href="/contact" class="btn-primary">Get a Free Estimate</a>
+  <section class="about-pg-stats">
+    <div class="about-pg-stats-inner">
+      <div class="about-pg-stat fade-up">
+        <div class="about-pg-stat-num">10+</div>
+        <div class="about-pg-stat-label">Years in Business</div>
       </div>
-    </section>
-  </main>
+      <div class="about-pg-stat fade-up">
+        <div class="about-pg-stat-num">500+</div>
+        <div class="about-pg-stat-label">Projects Completed</div>
+      </div>
+      <div class="about-pg-stat fade-up">
+        <div class="about-pg-stat-num">2</div>
+        <div class="about-pg-stat-label">Counties Served</div>
+      </div>
+      <div class="about-pg-stat fade-up">
+        <div class="about-pg-stat-num">100%</div>
+        <div class="about-pg-stat-label">PA Licensed &amp; Insured</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-pg-values">
+    <div class="about-pg-values-inner">
+      <div class="about-pg-values-header fade-up">
+        <div class="section-label">What We Stand For</div>
+        <h2 class="section-title" style="font-size: clamp(36px,5vw,56px);">The Difference<br/>Is in the Details</h2>
+      </div>
+      <div class="about-pg-values-grid">
+        {[
+          { num: '01', title: 'On-Time, Every Time',   body: 'We respect your schedule. If we\'re running late, you\'ll hear from us before you have to call.' },
+          { num: '02', title: 'Code Compliant',         body: 'Every job done to current NEC and PA state code. We pull permits and pass inspections — no shortcuts.' },
+          { num: '03', title: 'Upfront Pricing',        body: 'You know the price before we start. No surprise invoices, no upsells mid-job.' },
+          { num: '04', title: 'Bilingual Team',         body: 'We communicate in English and Spanish so nothing gets lost in translation.' },
+          { num: '05', title: 'GC-Ready Crew',          body: 'We sequence, communicate, and deliver clean rough-ins that pass every time.' },
+          { num: '06', title: 'Local &amp; Accountable', body: 'We live here too. Our reputation in Chester County is built one job at a time.' },
+        ].map(v => (
+          <div class="about-pg-value fade-up">
+            <div class="about-pg-value-num">{v.num}</div>
+            <div class="about-pg-value-title" set:html={v.title} />
+            <p class="about-pg-value-body">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-pg-gallery">
+    <div class="about-pg-gallery-inner">
+      <div class="about-pg-gallery-img fade-up">
+        <Image src={photo267} alt="Finished commercial Eaton panel installation" />
+      </div>
+      <div class="about-pg-gallery-img fade-up">
+        <Image src={photo163} alt="Multi-panel commercial system on stone building" />
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Ready to Work<br/>Together?</h2>
+      <p>Get a free estimate — we respond within one business day.</p>
+      <div class="cta-band-actions">
+        <a href="/#contact" class="btn-dark">Request a Free Quote</a>
+        <a href="tel:+16105550100" class="btn-white">Call Us Directly</a>
+      </div>
+    </div>
+  </div>
 
   <Footer />
 </Layout>
+
+<style>
+  .about-pg-hero {
+    background: var(--black);
+    padding: 140px 5% 80px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .about-pg-hero-inner { max-width: 800px; margin: 0 auto; }
+  .about-pg-hero .section-title { font-size: clamp(52px, 8vw, 88px); }
+
+  .about-pg-story { background: var(--dark); padding: 100px 5%; }
+  .about-pg-story-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-pg-img-wrap {
+    position: relative; border-radius: 4px; overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+  .about-pg-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .about-pg-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,14,14,0.5) 0%, transparent 60%);
+  }
+  .about-pg-badge {
+    position: absolute; bottom: 24px; left: 24px;
+    background: var(--orange);
+    padding: 16px 20px; border-radius: 4px;
+    display: flex; flex-direction: column;
+  }
+  .about-pg-badge-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 40px; font-weight: 800; line-height: 1;
+    color: #000;
+  }
+  .about-pg-badge-text { font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.7); line-height: 1.3; }
+
+  .about-pg-stats { background: var(--black); padding: 60px 5%; border-top: 1px solid var(--dark3); border-bottom: 1px solid var(--dark3); }
+  .about-pg-stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border-left: 1px solid var(--dark3);
+  }
+  .about-pg-stat {
+    padding: 32px 40px;
+    border-right: 1px solid var(--dark3);
+  }
+  .about-pg-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px; font-weight: 800; line-height: 1;
+    color: var(--orange); margin-bottom: 8px;
+  }
+  .about-pg-stat-label { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .about-pg-values { background: var(--dark2); padding: 100px 5%; }
+  .about-pg-values-inner { max-width: 1200px; margin: 0 auto; }
+  .about-pg-values-header { margin-bottom: 60px; }
+  .about-pg-values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .about-pg-value {
+    background: var(--dark); padding: 40px 32px;
+    border: 1px solid var(--dark3);
+  }
+  .about-pg-value-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--orange);
+    letter-spacing: 0.1em; margin-bottom: 16px;
+  }
+  .about-pg-value-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 800; text-transform: uppercase;
+    color: var(--white); margin-bottom: 12px;
+  }
+  .about-pg-value-body { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+  .about-pg-gallery { background: var(--black); padding: 0 5% 80px; }
+  .about-pg-gallery-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .about-pg-gallery-img { aspect-ratio: 16/9; overflow: hidden; border-radius: 4px; }
+  .about-pg-gallery-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 1024px) {
+    .about-pg-story-inner { grid-template-columns: 1fr; gap: 48px; }
+    .about-pg-stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .about-pg-values-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-pg-gallery-inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .about-pg-hero { padding: 120px 5% 60px; }
+    .about-pg-stats-inner { grid-template-columns: 1fr 1fr; border-left: none; }
+    .about-pg-stat { border-left: 1px solid var(--dark3); padding: 24px 20px; }
+    .about-pg-values-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>

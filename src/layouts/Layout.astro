@@ -44,15 +44,35 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "@type": "ElectricalContractor",
         "name": "M. Luna Electric",
         "url": "https://mlunaelectric.com",
-        "telephone": "TBD",
+        "description": "Family-owned electrical contractor serving residential, commercial, and new construction clients across Chester and Delaware County, PA.",
+        "telephone": "+1-610-555-0100",
+        "email": "info@mlunaelectric.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Kennett Square",
           "addressRegion": "PA",
+          "postalCode": "19348",
           "addressCountry": "US"
         },
-        "areaServed": "Chester & Delaware County, PA",
-        "priceRange": "$$"
+        "areaServed": [
+          "Kennett Square, PA", "West Chester, PA", "Coatesville, PA",
+          "Downingtown, PA", "Malvern, PA", "Exton, PA", "Oxford, PA",
+          "Media, PA", "Newtown Square, PA", "Havertown, PA"
+        ],
+        "openingHours": ["Mo-Fr 07:00-18:00"],
+        "priceRange": "$$",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Electrical Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Electrical" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Electrical" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panel Upgrades" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "New Construction" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "EV Charger Installation" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lighting Installation" } }
+          ]
+        }
       }
     </script>
 

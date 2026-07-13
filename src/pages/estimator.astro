@@ -2,91 +2,195 @@
 import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+
+const jobs = [
+  { value: 'panel',      label: 'Panel Upgrade',        sub: '100A → 200A service upgrade', low: 1500,  high: 4000  },
+  { value: 'wiring',     label: 'New Wiring / Outlets',  sub: 'Outlets, circuits, rewire',   low: 300,   high: 1500  },
+  { value: 'lighting',   label: 'Lighting & Fixtures',   sub: 'Install, retrofit, dimmers',  low: 200,   high: 1000  },
+  { value: 'ev',         label: 'EV Charger Install',    sub: 'Level 2 home or commercial',  low: 500,   high: 1800  },
+  { value: 'commercial', label: 'Commercial Buildout',   sub: 'Office, retail, new build',   low: 2500,  high: 20000 },
+  { value: 'service',    label: 'Service Call / Repair', sub: 'Diagnosis + repair',          low: 150,   high: 600   },
+];
 ---
 
 <Layout
-  title="Electrical Cost Estimator | M Luna Electric — Austin, TX"
-  description="Get a rough cost estimate for your electrical project with our free online estimator. Serving Austin, TX."
+  title="Electrical Cost Estimator | M. Luna Electric — Kennett Square, PA"
+  description="Get a rough cost estimate for your electrical project. M. Luna Electric serves Chester & Delaware County, PA — free on-site estimates available."
 >
   <Nav />
 
-  <main class="pt-16">
-    <section class="bg-navy-900 py-20 text-white">
-      <div class="container-lg">
-        <h1 class="section-heading text-white mb-4">Project Estimator</h1>
-        <p class="text-white/70 max-w-xl text-lg">
-          Get a rough idea of what your project might cost. Estimates are ranges — final pricing requires an on-site visit.
-        </p>
+  <div class="est-hero">
+    <div class="est-hero-inner">
+      <div class="section-label">Free Estimator</div>
+      <h1 class="section-title">What Will<br/>Your Project<br/>Cost?</h1>
+      <p class="section-sub">Select your job type for a ballpark range. Final pricing always comes with a free on-site visit — no surprises.</p>
+    </div>
+  </div>
+
+  <section class="est-section">
+    <div class="est-inner">
+
+      <div class="est-label">Select job type</div>
+      <div class="est-grid">
+        {jobs.map((job) => (
+          <button
+            class="est-card"
+            data-low={job.low}
+            data-high={job.high}
+            data-label={job.label}
+          >
+            <span class="est-card-title">{job.label}</span>
+            <span class="est-card-sub">{job.sub}</span>
+          </button>
+        ))}
       </div>
-    </section>
 
-    <section class="py-20 bg-white">
-      <div class="container-lg max-w-2xl">
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8">
-          <h2 class="font-heading font-bold text-navy-800 text-2xl mb-6">Tell us about your project</h2>
-
-          <!-- Step 1: Job type -->
-          <div class="mb-6">
-            <label class="block font-medium text-gray-700 mb-2">What type of work do you need?</label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="job-type-group">
-              {[
-                { value: 'panel', label: 'Panel Upgrade', base: [1500, 4000] },
-                { value: 'wiring', label: 'New Wiring / Outlets', base: [200, 1200] },
-                { value: 'lighting', label: 'Lighting Installation', base: [150, 800] },
-                { value: 'ev', label: 'EV Charger Install', base: [500, 1500] },
-                { value: 'commercial', label: 'Commercial Buildout', base: [2000, 15000] },
-                { value: 'service', label: 'Service Call / Repair', base: [150, 600] },
-              ].map((job) => (
-                <button
-                  class="job-type-btn border-2 border-gray-200 rounded-lg p-4 text-left hover:border-electric-400 transition-colors"
-                  data-value={job.value}
-                  data-base-low={job.base[0]}
-                  data-base-high={job.base[1]}
-                >
-                  <span class="font-medium text-navy-800">{job.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <!-- Result -->
-          <div id="estimate-result" class="hidden bg-white border-2 border-electric-400 rounded-xl p-6 text-center">
-            <p class="text-sm text-gray-500 mb-1">Rough estimate range</p>
-            <p class="text-4xl font-heading font-bold text-navy-800" id="estimate-range">$0 – $0</p>
-            <p class="text-xs text-gray-400 mt-2">
-              * This is a ballpark only. Actual cost depends on your specific situation.
-            </p>
-            <a href="/contact" class="btn-primary mt-4 inline-flex">Get an Exact Quote</a>
-          </div>
-
-          <p class="text-xs text-gray-400 mt-6 text-center">
-            Need something more specific? <a href="/contact" class="text-electric-500 hover:underline">Contact us for a free on-site estimate.</a>
-          </p>
+      <div class="est-result" id="est-result" aria-live="polite">
+        <div class="est-result-inner">
+          <div class="est-result-label">Typical range for <span id="est-job-name">—</span></div>
+          <div class="est-range" id="est-range">—</div>
+          <p class="est-disclaimer">Ballpark only — actual cost depends on access, materials, and local permit fees. Get an exact number with a free on-site visit.</p>
+          <a href="/#contact" class="btn-primary est-cta">
+            Request a Free Quote
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
-    </section>
-  </main>
+
+    </div>
+  </section>
 
   <Footer />
 </Layout>
 
+<style>
+  .est-hero {
+    background: var(--black);
+    padding: 140px 5% 80px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .est-hero-inner { max-width: 800px; margin: 0 auto; }
+  .est-hero .section-title { font-size: clamp(52px, 8vw, 88px); }
+
+  .est-section {
+    background: var(--dark);
+    padding: 80px 5%;
+    min-height: 60vh;
+  }
+  .est-inner { max-width: 860px; margin: 0 auto; }
+
+  .est-label {
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .est-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .est-card {
+    display: flex; flex-direction: column; gap: 6px;
+    background: var(--dark2);
+    border: 1.5px solid var(--dark3);
+    border-radius: 6px;
+    padding: 24px 20px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .est-card:hover { border-color: var(--muted); }
+  .est-card.selected {
+    border-color: var(--orange);
+    background: rgba(255,103,43,0.07);
+  }
+  .est-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.02em;
+    color: var(--white);
+  }
+  .est-card.selected .est-card-title { color: var(--orange); }
+  .est-card-sub { font-size: 13px; color: var(--muted); }
+
+  .est-result {
+    background: var(--dark2);
+    border: 1.5px solid var(--dark3);
+    border-radius: 6px;
+    padding: 40px;
+    display: none;
+    animation: slideIn 0.3s ease;
+  }
+  .est-result.visible { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .est-result-label {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .est-result-label span { color: var(--white); }
+
+  .est-range {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 800; line-height: 1;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .est-disclaimer {
+    font-size: 14px; color: var(--muted);
+    max-width: 520px; line-height: 1.6;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--dark3);
+  }
+
+  .est-cta { margin-top: 0; }
+
+  @media (max-width: 640px) {
+    .est-grid { grid-template-columns: 1fr 1fr; }
+    .est-result { padding: 24px; }
+    .est-hero { padding: 120px 5% 60px; }
+  }
+  @media (max-width: 420px) {
+    .est-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.job-type-btn');
-  const result = document.getElementById('estimate-result')!;
-  const rangeEl = document.getElementById('estimate-range')!;
+  const cards = document.querySelectorAll<HTMLButtonElement>('.est-card');
+  const result = document.getElementById('est-result')!;
+  const rangeEl = document.getElementById('est-range')!;
+  const jobName = document.getElementById('est-job-name')!;
 
   const fmt = (n: number) =>
     n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      buttons.forEach((b) => b.classList.remove('border-electric-400', 'bg-electric-50'));
-      btn.classList.add('border-electric-400');
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
 
-      const low = parseInt(btn.dataset.baseLow ?? '0');
-      const high = parseInt(btn.dataset.baseHigh ?? '0');
+      const low  = parseInt(card.dataset.low  ?? '0');
+      const high = parseInt(card.dataset.high ?? '0');
+      const label = card.dataset.label ?? '';
+
+      jobName.textContent = label;
       rangeEl.textContent = `${fmt(low)} – ${fmt(high)}`;
-      result.classList.remove('hidden');
+
+      result.classList.remove('visible');
+      void result.offsetWidth; // reset animation
+      result.classList.add('visible');
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   });
 </script>
