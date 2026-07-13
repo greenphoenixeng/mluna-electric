@@ -1,69 +1,30 @@
 ---
-const navLinks = [
-  { label: 'Services', href: '/services' },
-  { label: 'About', href: '/about' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Estimator', href: '/estimator' },
-  { label: 'Contact', href: '/contact' },
-];
-
-const currentPath = Astro.url.pathname;
 ---
-
-<header class="fixed top-0 left-0 right-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/10">
-  <div class="container-lg flex items-center justify-between h-16">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 text-white font-heading font-bold text-lg">
-      <span class="text-electric-400">⚡</span>
-      <span>M Luna Electric</span>
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-6">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            'text-sm font-medium transition-colors duration-200',
-            currentPath === link.href
-              ? 'text-electric-400'
-              : 'text-white/80 hover:text-white',
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
-      <a href="/contact" class="btn-primary text-sm py-2 px-4">Get a Quote</a>
-    </nav>
-
-    <!-- Mobile menu toggle -->
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-white p-2"
-      aria-label="Toggle menu"
-    >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="bolt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
       </svg>
-    </button>
-  </div>
-
-  <!-- Mobile nav -->
-  <div id="mobile-menu" class="md:hidden hidden bg-navy-800 border-t border-white/10 px-4 py-4">
-    {navLinks.map((link) => (
-      <a
-        href={link.href}
-        class="block py-2 text-white/80 hover:text-white font-medium"
-      >
-        {link.label}
-      </a>
-    ))}
-    <a href="/contact" class="btn-primary mt-4 w-full justify-center text-sm">Get a Quote</a>
-  </div>
-</header>
+    </div>
+    M. Luna <span>&nbsp;Electric</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+1-610-555-0100" class="nav-cta">Call Now</a>
+</nav>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (nav) {
+      nav.style.background = window.scrollY > 40
+        ? 'rgba(14,14,14,0.98)'
+        : 'rgba(14,14,14,0.92)';
+    }
+  });
 </script>

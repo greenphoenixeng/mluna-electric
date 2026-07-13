@@ -1,45 +1,73 @@
 ---
-const year = new Date().getFullYear();
 ---
-
-<footer class="bg-navy-900 text-white/70 py-12">
-  <div class="container-lg">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-      <!-- Brand -->
-      <div>
-        <p class="text-white font-heading font-bold text-lg mb-2">
-          <span class="text-electric-400">⚡</span> M Luna Electric
-        </p>
-        <p class="text-sm">Licensed electrical contractor serving Austin, TX and surrounding areas.</p>
-        <p class="text-sm mt-2">License #: TBD</p>
-      </div>
-
-      <!-- Quick links -->
-      <div>
-        <p class="text-white font-semibold mb-3">Quick Links</p>
-        <ul class="space-y-2 text-sm">
-          <li><a href="/services" class="hover:text-white transition-colors">Services</a></li>
-          <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
-          <li><a href="/gallery" class="hover:text-white transition-colors">Gallery</a></li>
-          <li><a href="/estimator" class="hover:text-white transition-colors">Get an Estimate</a></li>
-          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <p class="text-white font-semibold mb-3">Contact</p>
-        <ul class="space-y-2 text-sm">
-          <li>📞 <a href="tel:TBD" class="hover:text-white transition-colors">TBD</a></li>
-          <li>✉️ <a href="mailto:TBD" class="hover:text-white transition-colors">TBD</a></li>
-          <li>📍 Austin, TX</li>
-        </ul>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo" style="display:inline-flex; margin-bottom:16px; font-size:20px;">
+        <div class="bolt" style="width:28px;height:28px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        M. Luna <span>&nbsp;Electric</span>
+      </a>
+      <p class="footer-brand-sub">
+        Licensed electrical contractor serving Chester &amp; Delaware County, PA. Residential, commercial, and new construction.
+      </p>
+      <div class="footer-social">
+        <a href="#" class="footer-social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Google">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2c2.76 0 5.26 1.07 7.1 2.8L16.5 7.5C15.25 6.35 13.7 5.6 12 5.6c-3.54 0-6.4 2.86-6.4 6.4s2.86 6.4 6.4 6.4c2.85 0 5.23-1.75 6.05-4.2H12v-3h9.8c.13.65.2 1.32.2 2 0 5.52-4.48 10-10 10z"/></svg>
+        </a>
       </div>
     </div>
 
-    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2 text-xs">
-      <p>© {year} M Luna Electric. All rights reserved.</p>
-      <p>Website by <a href="https://greenphoenixengineering.com" class="hover:text-white transition-colors">Green Phoenix Engineering</a></p>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Residential Electrical</a></li>
+        <li><a href="#services">Commercial &amp; Office</a></li>
+        <li><a href="#services">Panel Upgrades</a></li>
+        <li><a href="#services">New Construction</a></li>
+        <li><a href="#services">EV Charger Install</a></li>
+        <li><a href="#services">Lighting &amp; Fixtures</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Free Quote</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+16105550100">(610) 555-0100</a></li>
+        <li><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></li>
+        <li style="color:var(--mid); cursor:default;">Kennett Square, PA</li>
+        <li style="color:var(--mid); cursor:default;">Chester &amp; Delaware County</li>
+        <li style="color:var(--mid); cursor:default; margin-top:4px;">Mon–Fri 7am–6pm</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2025 M. Luna Electric. All rights reserved.</div>
+    <div class="footer-license">🔌 PA Licensed Electrical Contractor</div>
+    <div>
+      <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="#">Terms</a>
     </div>
   </div>
 </footer>

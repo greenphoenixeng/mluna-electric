@@ -1,0 +1,135 @@
+---
+---
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
+      <p class="section-sub">
+        Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
+      </p>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 010 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Phone</div>
+            <div class="contact-method-value"><a href="tel:+16105550100">(610) 555-0100</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Email</div>
+            <div class="contact-method-value"><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Location</div>
+            <div class="contact-method-value">Kennett Square, PA</div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Hours</div>
+            <div class="contact-method-value">Mon–Fri 7am–6pm · Sat by Appt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form fade-up">
+      <div class="form-title">Request a Free Quote</div>
+      <form id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First Name</label>
+            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last Name</label>
+            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone</label>
+            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(610) 555-0100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="service">Service Needed</label>
+          <select class="form-control" id="service" name="service">
+            <option value="">Select a service...</option>
+            <option>Residential Electrical</option>
+            <option>Commercial / Office</option>
+            <option>Panel Upgrade</option>
+            <option>New Construction</option>
+            <option>EV Charger Install</option>
+            <option>Lighting &amp; Fixtures</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Project Description</label>
+          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send My Quote Request →</button>
+        <p id="form-status" class="form-status-msg" style="display:none; margin-top:12px; text-align:center; font-size:14px;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+      fname: (form.elements.namedItem('fname') as HTMLInputElement)?.value,
+      lname: (form.elements.namedItem('lname') as HTMLInputElement)?.value,
+      email: (form.elements.namedItem('email') as HTMLInputElement)?.value,
+      phone: (form.elements.namedItem('phone') as HTMLInputElement)?.value,
+      service: (form.elements.namedItem('service') as HTMLSelectElement)?.value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement)?.value,
+    };
+
+    status.style.display = 'block';
+    status.style.color = 'var(--muted)';
+    status.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        status.style.color = '#4ade80';
+        status.textContent = '✓ Message sent! We\'ll follow up within one business day.';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.style.color = '#f87171';
+      status.textContent = 'Something went wrong. Please call us directly.';
+    }
+  });
+</script>

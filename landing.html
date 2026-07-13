@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="M. Luna Electric — Licensed electricians serving Kennett Square, Chester & Delaware County, PA. Residential, commercial, and new construction electrical services." />
+  <title>M. Luna Electric | Kennett Square, PA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:   #FF672B;
+      --orange-d: #D14711;
+      --orange-l: #FF8A5C;
+      --black:    #0E0E0E;
+      --dark:     #161616;
+      --dark2:    #1E1E1E;
+      --dark3:    #282828;
+      --mid:      #444;
+      --muted:    #888;
+      --light:    #C8C8C8;
+      --white:    #F7F7F7;
+      --font-body: 'Karla', sans-serif;
+      --font-head: 'Barlow Condensed', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-head);
+      font-size: 22px; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-logo .bolt {
+      width: 32px; height: 32px;
+      background: var(--orange);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo .bolt svg { width: 18px; height: 18px; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .nav-links a { color: var(--light); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--orange);
+      color: #000;
+      font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 40px;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--orange-l); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 120px 5% 80px;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 65% 50%, rgba(255,103,43,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 80% at 90% 10%, rgba(255,103,43,0.10) 0%, transparent 60%),
+        linear-gradient(160deg, #0E0E0E 0%, #1A1A1A 100%);
+      z-index: 0;
+    }
+
+    /* Electrical grid overlay */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Lightning bolt decoration */
+    .hero-bolt-deco {
+      position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+      width: min(420px, 45vw);
+      z-index: 1; opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,103,43,0.12);
+      border: 1px solid rgba(255,103,43,0.35);
+      color: var(--orange-l);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 40px;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: normal; color: var(--orange); }
+
+    .hero-sub {
+      font-size: 18px; color: var(--light);
+      max-width: 520px; line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 16px 32px; border-radius: 40px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(255,103,43,0.35);
+    }
+    .btn-primary:hover { background: var(--orange-l); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,103,43,0.45); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      font-weight: 700; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 15px 28px; border-radius: 40px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); background: rgba(255,103,43,0.06); }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 0;
+      margin-top: 64px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 36px;
+    }
+    .hero-stat {
+      flex: 1; min-width: 130px;
+      padding-right: 32px;
+    }
+    .hero-stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.08); margin-right: 32px; }
+    .hero-stat-num {
+      font-family: var(--font-head);
+      font-size: 42px; font-weight: 800;
+      color: var(--orange); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--dark2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 5%;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 36px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust-item svg { color: var(--orange); flex-shrink: 0; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 96px 5%; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800; text-transform: uppercase; line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .section-sub { color: var(--light); font-size: 17px; line-height: 1.65; max-width: 540px; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--black); }
+    .services-header {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      align-items: flex-end; justify-content: space-between;
+      margin-bottom: 56px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--dark2);
+      padding: 40px 36px;
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative; overflow: hidden;
+      transition: background 0.25s, border-color 0.25s;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { background: #222; border-color: rgba(255,103,43,0.2); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,103,43,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      transition: background 0.25s;
+    }
+    .service-card:hover .service-icon { background: rgba(255,103,43,0.22); }
+    .service-icon svg { color: var(--orange); width: 26px; height: 26px; }
+
+    .service-title {
+      font-family: var(--font-head);
+      font-size: 22px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.02em; margin-bottom: 12px;
+    }
+    .service-desc { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--dark); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrap {
+      width: 100%; aspect-ratio: 4/5;
+      background: var(--dark3);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: grayscale(20%);
+    }
+    .about-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(255,103,43,0.25) 100%);
+    }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--orange);
+      color: #000;
+      padding: 24px 28px;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .about-badge-num {
+      font-family: var(--font-head);
+      font-size: 42px; font-weight: 800; line-height: 1;
+      display: block;
+    }
+    .about-badge-text { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .about-content .section-sub { margin-bottom: 32px; }
+
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .about-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 16px; color: var(--light); line-height: 1.5;
+    }
+    .about-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 20px; height: 20px; margin-top: 2px;
+      background: rgba(255,103,43,0.15);
+      border-radius: 50%;
+      border: 1.5px solid var(--orange);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FF672B'%3E%3Cpath d='M13 4L6 11 3 8'/%3E%3C/svg%3E");
+      background-size: 12px; background-repeat: no-repeat; background-position: center;
+    }
+
+    /* ── WHY US ── */
+    .why { background: var(--dark2); }
+    .why-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: start;
+    }
+    .why-sticky { position: sticky; top: 100px; }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .why-card {
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 32px 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .why-card:hover { border-color: rgba(255,103,43,0.3); transform: translateY(-3px); }
+    .why-card-num {
+      font-family: var(--font-head);
+      font-size: 48px; font-weight: 800; line-height: 1;
+      color: rgba(255,103,43,0.25); margin-bottom: 12px;
+    }
+    .why-card-title {
+      font-family: var(--font-head);
+      font-size: 18px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 8px;
+    }
+    .why-card-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── SERVICE AREA ── */
+    .area { background: var(--black); }
+    .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .area-map {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 48px;
+      text-align: center;
+    }
+    .area-map-pin {
+      width: 80px; height: 80px;
+      background: rgba(255,103,43,0.12);
+      border: 2px solid var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .area-map-pin svg { color: var(--orange); width: 36px; height: 36px; }
+    .area-map-title {
+      font-family: var(--font-head);
+      font-size: 28px; font-weight: 800; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .area-map-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .area-towns {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    }
+    .area-town {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      font-size: 13px; color: var(--light); padding: 6px 14px;
+    }
+
+    .area-content .section-sub { margin-bottom: 28px; }
+    .area-features { display: flex; flex-direction: column; gap: 14px; }
+    .area-feature {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; color: var(--light);
+    }
+    .area-feature-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(255,103,43,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .area-feature-icon svg { color: var(--orange); width: 18px; height: 18px; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--orange);
+      padding: 80px 5%;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 100% at 10% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 100% at 90% 50%, rgba(0,0,0,0.15) 0%, transparent 60%);
+    }
+    .cta-band-inner { position: relative; z-index: 1; }
+    .cta-band h2 {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800; text-transform: uppercase; line-height: 1.0;
+      color: #000; margin-bottom: 14px;
+    }
+    .cta-band p { font-size: 18px; color: rgba(0,0,0,0.65); margin-bottom: 36px; }
+    .cta-band-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #000; color: var(--white);
+      font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 16px 32px; border-radius: 40px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-dark:hover { background: #1a1a1a; transform: translateY(-2px); }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,0,0,0.12); border: 2px solid rgba(0,0,0,0.3);
+      color: #000;
+      font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 14px 28px; border-radius: 40px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-white:hover { background: rgba(0,0,0,0.2); transform: translateY(-2px); }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--dark); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
+    }
+    .contact-info .section-sub { margin-bottom: 40px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 20px; }
+    .contact-method {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .contact-method-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(255,103,43,0.12);
+      border: 1px solid rgba(255,103,43,0.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-method-icon svg { color: var(--orange); width: 22px; height: 22px; }
+    .contact-method-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .contact-method-value { font-size: 17px; font-weight: 600; color: var(--white); }
+    .contact-method-value a:hover { color: var(--orange); }
+
+    .contact-form {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 40px;
+    }
+    .form-title {
+      font-family: var(--font-head);
+      font-size: 24px; font-weight: 700; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .form-control {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 4px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+    .form-control:focus { border-color: var(--orange); background: rgba(255,103,43,0.04); }
+    .form-control::placeholder { color: var(--mid); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+    select.form-control { cursor: pointer; }
+    select.form-control option { background: var(--dark2); }
+
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--orange); color: #000;
+      font-family: var(--font-body);
+      font-weight: 800; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;
+      border: none; border-radius: 40px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(255,103,43,0.3);
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--orange-l); transform: translateY(-1px); box-shadow: 0 10px 32px rgba(255,103,43,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 56px 5% 32px;
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; font-size: 20px; }
+    .footer-brand-sub { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 260px; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .footer-social-btn:hover { background: rgba(255,103,43,0.12); border-color: var(--orange); }
+    .footer-social-btn svg { width: 16px; height: 16px; color: var(--muted); }
+    .footer-social-btn:hover svg { color: var(--orange); }
+
+    .footer-col-title {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; justify-content: space-between;
+      font-size: 13px; color: var(--mid);
+    }
+    .footer-bottom a { color: var(--mid); transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--orange); }
+    .footer-license {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 4px 12px; border-radius: 40px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .about-inner, .why-inner, .area-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-sticky { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 24px; }
+      .hero-stat:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .contact-form { padding: 24px; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="bolt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+    </div>
+    M. Luna <span>&nbsp;Electric</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+1-610-555-0100" class="nav-cta">Call Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Big decorative bolt SVG -->
+  <svg class="hero-bolt-deco" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="180,10 60,240 145,240 120,490 240,200 155,200" fill="#FF672B"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">Licensed &amp; Insured · Kennett Square, PA</div>
+    <h1>Power<br/>Your <em>Project.</em><br/>Done Right.</h1>
+    <p class="hero-sub">
+      M. Luna Electric delivers expert residential, commercial, and new construction electrical work across Chester &amp; Delaware County. No shortcuts. On time. Every time.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.0 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        Get a Free Quote
+      </a>
+      <a href="#services" class="btn-ghost">
+        Our Services
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">Years in Business</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Projects Completed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">2</div>
+        <div class="hero-stat-label">Counties Served</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Licensed &amp; Insured</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    PA Licensed Electrician
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    Fully Insured
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Same-Week Scheduling
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    Family-Owned &amp; Operated
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    5-Star Rated
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Full-Service<br/>Electrical Work</h2>
+    </div>
+    <p class="section-sub">
+      From panel upgrades to full commercial builds — we handle every phase of the electrical scope with a crew that shows up prepared and finishes clean.
+    </p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="service-title">Residential Electrical</div>
+      <p class="service-desc">New installs, rewires, outlet upgrades, ceiling fans, smoke detectors, and everything in between. Done right the first time.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <div class="service-title">Commercial &amp; Office</div>
+      <p class="service-desc">Retail fit-outs, office build-outs, lighting systems, and data/power infrastructure for businesses across the region.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <div class="service-title">Panel Upgrades</div>
+      <p class="service-desc">200A service upgrades, subpanel installs, load center replacements — safe, code-compliant, and inspected.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="12" y1="7" x2="12" y2="17"/>
+        </svg>
+      </div>
+      <div class="service-title">New Construction</div>
+      <p class="service-desc">Rough-in, trim-out, and final for custom homes and commercial builds. We coordinate with GCs and pass every inspection.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+        </svg>
+      </div>
+      <div class="service-title">EV Charger Install</div>
+      <p class="service-desc">Level 2 home and commercial EV charging station installation. Permits pulled, panels verified, chargers activated.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+      </div>
+      <div class="service-title">Lighting &amp; Fixtures</div>
+      <p class="service-desc">Recessed lighting, LED retrofits, outdoor security lights, under-cabinet lighting — any scope, any style.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual fade-up">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80" alt="Electrician working on panel" />
+        <div class="about-img-overlay"></div>
+      </div>
+      <div class="about-badge">
+        <span class="about-badge-num">10+</span>
+        <span class="about-badge-text">Years Serving<br/>Chester County</span>
+      </div>
+    </div>
+
+    <div class="about-content fade-up">
+      <div class="section-label">About M. Luna Electric</div>
+      <h2 class="section-title">Built on<br/>Craftsmanship &amp;<br/>Reliability</h2>
+      <p class="section-sub">
+        M. Luna Electric is a family-owned electrical contractor based in Kennett Square, PA. We've been serving homeowners, property managers, and general contractors across Chester and Delaware County with honest work and real expertise.
+      </p>
+      <ul class="about-list">
+        <li>Licensed, bonded, and insured in Pennsylvania</li>
+        <li>Residential, commercial, and new construction experience</li>
+        <li>Clean installs — we respect your space and clean up before we leave</li>
+        <li>Straightforward pricing with no hidden fees</li>
+        <li>Bilingual team — English &amp; Spanish</li>
+      </ul>
+      <a href="#contact" class="btn-primary">
+        Request a Free Quote
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="why-sticky">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">The<br/>Difference<br/>Is in<br/>the Details</h2>
+      <p class="section-sub" style="margin-top:16px;">
+        There's no shortage of electricians. There's a shortage of ones who show up on time, communicate clearly, and finish clean. That's us.
+      </p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-card-num">01</div>
+        <div class="why-card-title">On-Time, Every Time</div>
+        <p class="why-card-text">We respect your schedule. If we're running late, you'll hear from us before you have to call us.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">02</div>
+        <div class="why-card-title">Code Compliant</div>
+        <p class="why-card-text">Every job is done to current NEC and PA state code. We pull permits and pass inspections — no shortcuts.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">03</div>
+        <div class="why-card-title">Upfront Pricing</div>
+        <p class="why-card-text">You'll know the price before we start. No surprise invoices, no upsells mid-job.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">04</div>
+        <div class="why-card-title">Bilingual Team</div>
+        <p class="why-card-text">We communicate in both English and Spanish so nothing gets lost in translation.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">05</div>
+        <div class="why-card-title">GC-Ready Crew</div>
+        <p class="why-card-text">We know how to work in a coordinated job site — sequencing, communication, and clean rough-ins that pass every time.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">06</div>
+        <div class="why-card-title">Local &amp; Accountable</div>
+        <p class="why-card-text">We live here too. Our reputation in Chester County is built one job at a time — and we intend to keep it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="area" id="area">
+  <div class="area-inner">
+    <div class="area-map fade-up">
+      <div class="area-map-pin">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div class="area-map-title">Kennett Square, PA</div>
+      <div class="area-map-sub">Serving Chester &amp; Delaware County</div>
+      <div class="area-towns">
+        <span class="area-town">Kennett Square</span>
+        <span class="area-town">West Chester</span>
+        <span class="area-town">Coatesville</span>
+        <span class="area-town">Phoenixville</span>
+        <span class="area-town">Downingtown</span>
+        <span class="area-town">Malvern</span>
+        <span class="area-town">Media</span>
+        <span class="area-town">Newtown Square</span>
+        <span class="area-town">Havertown</span>
+        <span class="area-town">Exton</span>
+        <span class="area-town">Oxford</span>
+        <span class="area-town">Avondale</span>
+      </div>
+    </div>
+
+    <div class="area-content fade-up">
+      <div class="section-label">Service Area</div>
+      <h2 class="section-title">Serving the<br/>Greater Philly<br/>Suburbs</h2>
+      <p class="section-sub">
+        Based out of Kennett Square, we run jobs throughout Chester and Delaware County — residential neighborhoods, commercial corridors, and new development sites alike.
+      </p>
+      <div class="area-features">
+        <div class="area-feature">
+          <div class="area-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span>Fast response — most jobs scheduled within the week</span>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span>No travel surcharge within Chester &amp; Delaware County</span>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <span>Emergency and after-hours availability for existing clients</span>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>On GC bid lists for residential &amp; light commercial builds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Ready to Get<br/>Started?</h2>
+    <p>Tell us about your project — we'll get back to you within one business day with a quote.</p>
+    <div class="cta-band-actions">
+      <a href="#contact" class="btn-dark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.0 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        Request a Free Quote
+      </a>
+      <a href="tel:+1-610-555-0100" class="btn-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.0 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        Call Us Directly
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
+      <p class="section-sub">
+        Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
+      </p>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.0 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Phone</div>
+            <div class="contact-method-value"><a href="tel:+16105550100">(610) 555-0100</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Email</div>
+            <div class="contact-method-value"><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Location</div>
+            <div class="contact-method-value">Kennett Square, PA</div>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-method-label">Hours</div>
+            <div class="contact-method-value">Mon–Fri 7am–6pm · Sat by Appt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form fade-up">
+      <div class="form-title">Request a Free Quote</div>
+      <form action="#" method="post">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First Name</label>
+            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last Name</label>
+            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone</label>
+            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(610) 555-0100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="service">Service Needed</label>
+          <select class="form-control" id="service" name="service">
+            <option value="">Select a service...</option>
+            <option>Residential Electrical</option>
+            <option>Commercial / Office</option>
+            <option>Panel Upgrade</option>
+            <option>New Construction</option>
+            <option>EV Charger Install</option>
+            <option>Lighting &amp; Fixtures</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Project Description</label>
+          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send My Quote Request →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="display:inline-flex; margin-bottom:16px; font-size:20px;">
+        <div class="bolt" style="width:28px;height:28px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        M. Luna <span>&nbsp;Electric</span>
+      </a>
+      <p class="footer-brand-sub">
+        Licensed electrical contractor serving Chester &amp; Delaware County, PA. Residential, commercial, and new construction.
+      </p>
+      <div class="footer-social">
+        <a href="#" class="footer-social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Google">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2c2.76 0 5.26 1.07 7.1 2.8L16.5 7.5C15.25 6.35 13.7 5.6 12 5.6c-3.54 0-6.4 2.86-6.4 6.4s2.86 6.4 6.4 6.4c2.85 0 5.23-1.75 6.05-4.2H12v-3h9.8c.13.65.2 1.32.2 2 0 5.52-4.48 10-10 10z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Residential Electrical</a></li>
+        <li><a href="#services">Commercial &amp; Office</a></li>
+        <li><a href="#services">Panel Upgrades</a></li>
+        <li><a href="#services">New Construction</a></li>
+        <li><a href="#services">EV Charger Install</a></li>
+        <li><a href="#services">Lighting &amp; Fixtures</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Free Quote</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+16105550100">(610) 555-0100</a></li>
+        <li><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></li>
+        <li style="color:var(--mid); cursor:default;">Kennett Square, PA</li>
+        <li style="color:var(--mid); cursor:default;">Chester &amp; Delaware County</li>
+        <li style="color:var(--mid); cursor:default; margin-top:4px;">Mon–Fri 7am–6pm</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2025 M. Luna Electric. All rights reserved.</div>
+    <div class="footer-license">🔌 PA Licensed Electrical Contractor</div>
+    <div>
+      <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(14,14,14,0.98)'
+      : 'rgba(14,14,14,0.92)';
+  });
+</script>
+</body>
+</html>

@@ -2,128 +2,41 @@
 import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
-
-const services = [
-  {
-    icon: '🏠',
-    title: 'Residential',
-    description: 'Panel upgrades, wiring, outlets, lighting, and whole-home electrical solutions.',
-  },
-  {
-    icon: '🏢',
-    title: 'Commercial',
-    description: 'Office buildouts, tenant improvements, code compliance, and commercial installs.',
-  },
-  {
-    icon: '⚡',
-    title: 'Service Calls',
-    description: 'Troubleshooting, repairs, and emergency electrical work. Fast response.',
-  },
-  {
-    icon: '☀️',
-    title: 'EV & Solar Prep',
-    description: 'EV charger installation and solar-ready panel preparation.',
-  },
-];
+import Hero from '@/components/sections/Hero.astro';
+import TrustBar from '@/components/sections/TrustBar.astro';
+import Services from '@/components/sections/Services.astro';
+import About from '@/components/sections/About.astro';
+import WhyUs from '@/components/sections/WhyUs.astro';
+import ServiceArea from '@/components/sections/ServiceArea.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import Contact from '@/components/sections/Contact.astro';
 ---
 
 <Layout
-  title="M Luna Electric — Licensed Electrical Contractor | Austin, TX"
-  description="M Luna Electric is a licensed electrical contractor serving Austin, TX. Residential, commercial, and service calls. Free estimates."
+  title="M. Luna Electric | Kennett Square, PA"
+  description="M. Luna Electric — Licensed electricians serving Kennett Square, Chester & Delaware County, PA. Residential, commercial, and new construction electrical services."
 >
   <Nav />
-
-  <!-- Hero -->
-  <section class="relative min-h-screen flex items-center bg-navy-900 pt-16">
-    <!-- Background pattern: subtle dot grid -->
-    <div class="absolute inset-0" style="background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 32px 32px;"></div>
-
-    <div class="container-lg relative z-10 py-24">
-      <div class="max-w-3xl">
-        <p class="text-electric-400 font-semibold tracking-wider uppercase text-sm mb-4">Licensed & Insured · Austin, TX</p>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-tight mb-6">
-          Electrical Work<br />Done Right.
-        </h1>
-        <p class="text-xl text-white/70 mb-10 max-w-xl">
-          M Luna Electric delivers quality residential and commercial electrical services throughout the Austin area. Honest pricing. Reliable work.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/contact" class="btn-primary">Get a Free Quote</a>
-          <a href="/services" class="btn-outline">Our Services</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 animate-bounce">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-  </section>
-
-  <!-- Services snapshot -->
-  <section class="py-24 bg-white">
-    <div class="container-lg">
-      <div class="text-center mb-14">
-        <h2 class="section-heading mb-4">What We Do</h2>
-        <p class="text-gray-600 max-w-xl mx-auto">
-          From service panels to service calls, we handle the full range of electrical needs for homeowners and businesses.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map((s) => (
-          <div class="border border-gray-100 rounded-xl p-6 hover:shadow-lg hover:border-electric-400 transition-all duration-200">
-            <span class="text-4xl mb-4 block">{s.icon}</span>
-            <h3 class="font-heading font-bold text-navy-800 text-lg mb-2">{s.title}</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">{s.description}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="text-center mt-10">
-        <a href="/services" class="text-electric-500 font-semibold hover:underline">
-          View all services →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust strip -->
-  <section class="py-16 bg-navy-800">
-    <div class="container-lg">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {[
-          { stat: '10+', label: 'Years Experience' },
-          { stat: '500+', label: 'Projects Completed' },
-          { stat: '5★', label: 'Average Rating' },
-          { stat: '100%', label: 'Licensed & Insured' },
-        ].map(({ stat, label }) => (
-          <div>
-            <p class="text-electric-400 font-heading font-bold text-4xl mb-1">{stat}</p>
-            <p class="text-white/70 text-sm">{label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="py-24 bg-gray-50">
-    <div class="container-lg text-center">
-      <h2 class="section-heading mb-4">Ready to get started?</h2>
-      <p class="text-gray-600 mb-8 max-w-lg mx-auto">
-        Contact us for a free estimate. We respond within one business day.
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/contact" class="btn-primary">Get a Free Quote</a>
-        <a href="/estimator" class="inline-flex items-center gap-2 border-2 border-navy-800 text-navy-800 font-semibold px-6 py-3 rounded-lg hover:bg-navy-800 hover:text-white transition-colors duration-200">
-          Try Our Estimator
-        </a>
-      </div>
-    </div>
-  </section>
-
+  <Hero />
+  <TrustBar />
+  <Services />
+  <About />
+  <WhyUs />
+  <ServiceArea />
+  <CtaBand />
+  <Contact />
   <Footer />
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
