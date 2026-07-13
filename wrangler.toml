@@ -7,9 +7,9 @@ pages_build_output_dir = "./dist"
 # Non-secret vars only — secrets go in CF Pages dashboard or .dev.vars locally
 NOTIFY_EMAIL = "contact@mlunaelectric.com"
 
-# Staging environment
-[env.staging]
-name = "mluna-electric-staging"
+# Preview environment (used for staging review)
+[env.preview]
+name = "mluna-electric-preview"
 
-[env.staging.vars]
+[env.preview.vars]
 NOTIFY_EMAIL = "mike@greenphoenixengineering.com"
