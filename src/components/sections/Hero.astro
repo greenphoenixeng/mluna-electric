@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import heroBg from '@/assets/images/Gemini-hero.png';
 ---
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <Image src={heroBg} alt="" class="hero-bg-img" />
+    <div class="hero-bg-overlay"></div>
+  </div>
   <div class="hero-grid"></div>
 
   <svg class="hero-bolt-deco" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,10 +14,10 @@
   </svg>
 
   <div class="hero-content">
-    <div class="hero-badge">Licensed &amp; Insured · Kennett Square, PA</div>
-    <h1>Power<br/>Your <em>Project.</em><br/>Done Right.</h1>
+    <div class="hero-badge">PA Master Licensed · Kennett Square, PA</div>
+    <h1>Wired Right.<br/>The First <em>Time.</em></h1>
     <p class="hero-sub">
-      M. Luna Electric delivers expert residential, commercial, and new construction electrical work across Chester &amp; Delaware County. No shortcuts. On time. Every time.
+      Chester County's trusted electrical contractor since 2004. Master licensed, family-owned, 9-person crew — residential panels to full commercial builds, done right across Chester &amp; Delaware County.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">
@@ -27,20 +32,20 @@
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="hero-stat-num">10+</div>
-        <div class="hero-stat-label">Years in Business</div>
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">Years Experience</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">500+</div>
-        <div class="hero-stat-label">Projects Completed</div>
+        <div class="hero-stat-num">9</div>
+        <div class="hero-stat-label">Team Members</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Service Trucks</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">2</div>
         <div class="hero-stat-label">Counties Served</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">100%</div>
-        <div class="hero-stat-label">Licensed &amp; Insured</div>
       </div>
     </div>
   </div>

@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacy Policy | M. Luna Electric"
+  description="Privacy Policy for M. Luna Electric — how we collect and use information submitted through our website."
+>
+  <Nav />
+
+  <main class="legal-page">
+    <div class="legal-inner">
+      <h1>Privacy Policy</h1>
+      <p class="legal-date">Effective date: July 1, 2026</p>
+
+      <p>M. Luna Electric, Inc. ("we," "us," or "our") operates this website to provide information about our electrical services and to allow customers to request quotes. This Privacy Policy explains what information we collect, how we use it, and your rights with respect to it.</p>
+
+      <h2>Information We Collect</h2>
+      <p>We collect information you provide directly to us, including:</p>
+      <ul>
+        <li>Name, email address, and phone number submitted through our contact or quote request form</li>
+        <li>Details about your project or service request</li>
+        <li>Any other information you choose to include in a message to us</li>
+      </ul>
+      <p>We do not use tracking cookies, behavioral advertising, or third-party analytics platforms. Our hosting provider (Cloudflare) may collect standard server logs including IP addresses and browser type as part of normal site operation.</p>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use the information you submit solely to:</p>
+      <ul>
+        <li>Respond to your quote request or inquiry</li>
+        <li>Schedule and coordinate electrical services</li>
+        <li>Follow up on service-related communications</li>
+      </ul>
+      <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+      <h2>Data Retention</h2>
+      <p>We retain contact information for as long as necessary to fulfill the purpose for which it was collected, or as required for business records. You may request deletion of your information at any time by contacting us.</p>
+
+      <h2>Security</h2>
+      <p>We take reasonable measures to protect the information submitted through this website. However, no internet transmission is completely secure, and we cannot guarantee the absolute security of your data.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>This site is hosted on Cloudflare Pages. Form submissions are processed via Resend. These providers operate under their own privacy policies and are used solely to deliver functionality on this site.</p>
+
+      <h2>Your Rights</h2>
+      <p>You may contact us at any time to request access to, correction of, or deletion of personal information we hold about you.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy-related questions or requests:</p>
+      <p>
+        M. Luna Electric, Inc.<br />
+        Kennett Square, PA 19348<br />
+        <a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a>
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>We may update this policy from time to time. The effective date at the top of this page reflects when it was last revised. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-page {
+    background: var(--black);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+  .legal-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--light);
+  }
+  .legal-inner h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .legal-date {
+    color: var(--mid);
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+  .legal-inner h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 40px 0 12px;
+    letter-spacing: 0.03em;
+  }
+  .legal-inner p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-inner ul {
+    margin: 0 0 16px 24px;
+  }
+  .legal-inner ul li {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+  .legal-inner a {
+    color: var(--orange);
+    text-decoration: underline;
+  }
+</style>

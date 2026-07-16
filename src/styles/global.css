@@ -90,11 +90,18 @@ nav {
 
 .hero-bg {
   position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 60% at 65% 50%, rgba(255,103,43,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 80% at 90% 10%, rgba(255,103,43,0.10) 0%, transparent 60%),
-    linear-gradient(160deg, #0E0E0E 0%, #1A1A1A 100%);
-  z-index: 0;
+  z-index: 0; overflow: hidden;
+  background: #0E0E0E;
+}
+.hero-bg-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 35% center;
+  opacity: 0.3;
+}
+.hero-bg-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 65% 50%, rgba(255,103,43,0.10) 0%, transparent 65%);
 }
 
 .hero-grid {

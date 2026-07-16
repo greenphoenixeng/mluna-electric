@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Terms of Use | M. Luna Electric"
+  description="Terms of Use for the M. Luna Electric website."
+>
+  <Nav />
+
+  <main class="legal-page">
+    <div class="legal-inner">
+      <h1>Terms of Use</h1>
+      <p class="legal-date">Effective date: July 1, 2026</p>
+
+      <p>By accessing or using this website, you agree to the following terms. If you do not agree, please do not use the site.</p>
+
+      <h2>Website Use</h2>
+      <p>This website is provided for informational purposes and to facilitate contact with M. Luna Electric, Inc. You may use this site only for lawful purposes and in a manner consistent with these terms. You may not use the site in any way that could damage, disable, or impair its operation or interfere with others' use of it.</p>
+
+      <h2>Estimates and Pricing</h2>
+      <p>Any pricing estimates provided through the online estimator tool are for general reference only and do not constitute a binding quote or contract. Actual costs depend on site conditions, scope of work, materials, and applicable codes. A formal written proposal will be provided prior to commencing any work.</p>
+
+      <h2>No Professional Advice</h2>
+      <p>Content on this website is for general informational purposes only. It does not constitute professional electrical, engineering, or legal advice. Always consult a licensed professional before making decisions about electrical work at your property.</p>
+
+      <h2>Intellectual Property</h2>
+      <p>All content on this site — including text, graphics, logos, and images — is the property of M. Luna Electric, Inc. or its content suppliers. You may not reproduce, distribute, or create derivative works without written permission.</p>
+
+      <h2>Third-Party Links</h2>
+      <p>This site may contain links to third-party websites. We are not responsible for the content, privacy practices, or accuracy of any third-party site and do not endorse them by inclusion of a link.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>M. Luna Electric, Inc. makes no warranties, express or implied, regarding the accuracy or completeness of this website's content. To the fullest extent permitted by law, we are not liable for any damages arising from your use of or reliance on this site or its content.</p>
+
+      <h2>Governing Law</h2>
+      <p>These terms are governed by the laws of the Commonwealth of Pennsylvania, without regard to its conflict-of-law provisions. Any disputes arising under these terms shall be resolved in the courts of Chester County, Pennsylvania.</p>
+
+      <h2>Changes to These Terms</h2>
+      <p>We may revise these terms at any time. The effective date at the top of this page indicates the most recent revision. Continued use of the site constitutes acceptance of the current terms.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms may be directed to:</p>
+      <p>
+        M. Luna Electric, Inc.<br />
+        Kennett Square, PA 19348<br />
+        <a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-page {
+    background: var(--black);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+  .legal-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--light);
+  }
+  .legal-inner h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .legal-date {
+    color: var(--mid);
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+  .legal-inner h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 40px 0 12px;
+    letter-spacing: 0.03em;
+  }
+  .legal-inner p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-inner ul {
+    margin: 0 0 16px 24px;
+  }
+  .legal-inner ul li {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+  .legal-inner a {
+    color: var(--orange);
+    text-decoration: underline;
+  }
+</style>
