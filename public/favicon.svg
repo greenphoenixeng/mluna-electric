@@ -1,12 +1,12 @@
-<svg viewBox="0 0 163 112" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 200 155" xmlns="http://www.w3.org/2000/svg">
   <style>
     .h{fill:#ffffff}
     @media (prefers-color-scheme: dark){.h{fill:#0e0e0e}}
   </style>
-  <path class="h" d="M 121,20 L 82,51 L 82,108 L 160,108 L 160,51 Z" stroke="#FF672B" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path class="h" d="M 52,5 L 3,46 L 3,108 L 30,108 L 30,70 L 74,70 L 74,108 L 101,108 L 101,46 Z" stroke="#FF672B" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
-  <rect x="121" y="51" width="7" height="19" rx="3" fill="#FF672B"/>
-  <rect x="136" y="51" width="7" height="19" rx="3" fill="#FF672B"/>
-  <rect x="114" y="70" width="36" height="16" rx="8" class="h" stroke="#FF672B" stroke-width="6.5"/>
-  <line x1="132" y1="86" x2="132" y2="108" stroke="#FF672B" stroke-width="7" stroke-linecap="round"/>
+  <path class="h" d="M 143,16 L 90,58 L 90,150 L 196,150 L 196,58 Z" stroke="#FF672B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+  <path class="h" d="M 55,5 L 3,50 L 3,150 L 28,150 L 28,100 L 82,100 L 82,150 L 107,150 L 107,50 Z" stroke="#FF672B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="132" y="66" width="7" height="22" rx="3" fill="#FF672B"/>
+  <rect x="147" y="66" width="7" height="22" rx="3" fill="#FF672B"/>
+  <rect x="121" y="88" width="44" height="17" rx="8" class="h" stroke="#FF672B" stroke-width="6"/>
+  <line x1="143" y1="105" x2="143" y2="132" stroke="#FF672B" stroke-width="7" stroke-linecap="round"/>
 </svg>

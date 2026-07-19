@@ -7,11 +7,12 @@ import { Image } from 'astro:assets';
 import photo272 from '@/assets/images/IMG_0272.jpeg';
 import photo267 from '@/assets/images/IMG_0267.jpeg';
 import photo163 from '@/assets/images/IMG_0163.jpeg';
+import moema15 from '@/assets/images/moema-15.jpg';
 ---
 
 <Layout
   title="About M. Luna Electric | Licensed Electrician — Kennett Square, PA"
-  description="M. Luna Electric is a family-owned electrical contractor based in Kennett Square, PA with over 10 years serving Chester & Delaware County. Licensed, insured, bilingual."
+  description="M. Luna Electric is a family-owned electrical contractor based in Kennett Square, PA with 20+ years serving Chester & Delaware County. Master licensed, bilingual, 9-person crew."
 >
   <Nav />
 
@@ -27,7 +28,7 @@ import photo163 from '@/assets/images/IMG_0163.jpeg';
     <div class="about-pg-story-inner">
       <div class="about-pg-photo fade-up">
         <div class="about-pg-img-wrap">
-          <Image src={photo272} alt="M. Luna Electric electrician installing commercial panel" />
+          <Image src={moema15} alt="M. Luna Electric crew on a Kennett Square project" />
           <div class="about-pg-overlay"></div>
         </div>
         <div class="about-pg-badge">
@@ -39,14 +40,14 @@ import photo163 from '@/assets/images/IMG_0163.jpeg';
       <div class="about-pg-text fade-up">
         <div class="section-label">Our Story</div>
         <h2 class="section-title" style="font-size: clamp(36px,5vw,56px);">Built from<br/>the Ground Up</h2>
-        <p class="section-sub">
-          Miguel Luna Cruz started as an electrician in 2004, spending over a decade mastering the trade. In 2018, he earned his Master Electrician license and launched M. Luna Electric — a solo operation with one truck and a commitment to doing the job right.
+        <p class="section-sub"><strong style="color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">The Foundation (2004–2017)</strong><br/>
+          Miguel Luna Cruz began his electrical journey in 2004, spending over a decade mastering the trade's complexities. His dedication culminated in 2018 when he earned his Master Electrician license — providing the foundation to launch M. Luna Electric as a solo operation with one truck.
         </p>
-        <p class="section-sub" style="margin-top: 16px;">
-          The business found its footing in Kennett Square's mushroom houses, where precision and reliability matter. Word spread, and M. Luna Electric expanded across Chester and Delaware County and eventually out of state.
+        <p class="section-sub" style="margin-top: 20px;"><strong style="color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">Growth &amp; Specialization</strong><br/>
+          The business found its footing in Kennett Square's mushroom houses, where precision and reliability aren't optional. The reputation built there allowed M. Luna Electric to expand across Chester and Delaware County and eventually serve clients out of state — before officially incorporating.
         </p>
-        <p class="section-sub" style="margin-top: 16px;">
-          Today, it's a team of 9 with 5 fully-equipped service trucks — still family-run, still built on the same principles Miguel started with.
+        <p class="section-sub" style="margin-top: 20px;"><strong style="color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">M. Luna Electric Today</strong><br/>
+          Driven by a loyal and growing client base, the company officially incorporated. Today, M. Luna Electric, Inc. has grown into a team of 9 dedicated employees running 5 fully-equipped service trucks — still family-run, still built on the same principles from day one.
         </p>
         <blockquote class="about-pg-quote">"We are still small, but we hope to grow by continuously helping our clients." — Miguel Luna Cruz</blockquote>
         <div class="about-pg-license fade-up">
@@ -114,13 +115,42 @@ import photo163 from '@/assets/images/IMG_0163.jpeg';
     </div>
   </section>
 
+  <section class="about-pg-mission">
+    <div class="about-pg-mission-inner">
+      <div class="about-pg-mission-text fade-up">
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title" style="font-size: clamp(32px,4.5vw,52px);">Family.<br/>Integrity.<br/>Community.</h2>
+        <p class="section-sub" style="margin-top: 24px;">
+          At M. Luna Electric, Inc., our business is built on family — and that extends to every client we serve. Miguel's daughter manages the office while pursuing her bachelor's degree. His son is training at Lincoln Tech to become the next generation of Master Electricians.
+        </p>
+        <p class="section-sub" style="margin-top: 16px;">
+          We put our clients' needs before our profits. Whether handling a residential update or a complex commercial project, our job isn't done when the power turns on — we believe in building lasting relationships through dedicated post-project care and reliable service.
+        </p>
+      </div>
+      <div class="about-pg-mission-cards fade-up">
+        <div class="about-mission-card">
+          <div class="about-mission-card-title">Family-Owned &amp; Operated</div>
+          <p class="about-mission-card-body">Three generations of the Luna family invested in every job — from the field to the front office.</p>
+        </div>
+        <div class="about-mission-card">
+          <div class="about-mission-card-title">Clients Before Profits</div>
+          <p class="about-mission-card-body">We prioritize your outcome over our margin. Transparent pricing, no upsells mid-job.</p>
+        </div>
+        <div class="about-mission-card">
+          <div class="about-mission-card-title">Post-Project Care</div>
+          <p class="about-mission-card-body">The job isn't done when the power turns on. We stand behind our work and maintain the relationship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="cta-band">
     <div class="cta-band-inner">
       <h2>Ready to Work<br/>Together?</h2>
       <p>Get a free estimate — we respond within one business day.</p>
       <div class="cta-band-actions">
         <a href="/#contact" class="btn-dark">Request a Free Quote</a>
-        <a href="tel:+16105550100" class="btn-white">Call Us Directly</a>
+        <a href="tel:+14846433625" class="btn-white">Call Us Directly</a>
       </div>
     </div>
   </div>
@@ -222,6 +252,34 @@ import photo163 from '@/assets/images/IMG_0163.jpeg';
     background: rgba(255,103,43,0.04);
     font-size: 16px; font-style: italic; color: var(--light);
     line-height: 1.65; border-radius: 0;
+  }
+
+  .about-pg-mission {
+    background: var(--dark);
+    padding: 100px 5%;
+    border-top: 1px solid var(--dark3);
+  }
+  .about-pg-mission-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .about-pg-mission-cards { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+  .about-mission-card {
+    padding: 28px 32px;
+    background: var(--dark2);
+    border: 1px solid var(--dark3);
+    border-left: 3px solid var(--orange);
+    border-radius: 0;
+  }
+  .about-mission-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 800; text-transform: uppercase;
+    color: var(--white); margin-bottom: 8px; letter-spacing: 0.02em;
+  }
+  .about-mission-card-body { font-size: 15px; color: var(--muted); line-height: 1.65; margin: 0; }
+
+  @media (max-width: 1024px) {
+    .about-pg-mission-inner { grid-template-columns: 1fr; gap: 48px; }
   }
 
   @media (max-width: 1024px) {
