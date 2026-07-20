@@ -124,7 +124,7 @@ const categories = [
         <div class="gallery-grid" data-count={cat.photos.length}>
           {cat.photos.map((photo) => (
             <div class="gallery-item fade-up">
-              <Image src={photo.src} alt={photo.alt} />
+              <Image src={photo.src} alt={photo.alt} width={1200} quality={82} />
             </div>
           ))}
         </div>
