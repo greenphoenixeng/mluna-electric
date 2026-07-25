@@ -12,6 +12,7 @@ import ServiceArea from '@/components/sections/ServiceArea.astro';
 import Estimator from '@/components/sections/Estimator.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import Contact from '@/components/sections/Contact.astro';
+import FadeUpObserver from '@/components/FadeUpObserver.astro';
 ---
 
 <Layout
@@ -32,15 +33,4 @@ import Contact from '@/components/sections/Contact.astro';
   <Footer />
 </Layout>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
+<FadeUpObserver threshold={0.1} rootMargin="0px 0px -40px 0px" />

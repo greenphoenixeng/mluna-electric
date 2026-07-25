@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import Contact from '@/components/sections/Contact.astro';
+import PageHero from '@/components/PageHero.astro';
+import FadeUpObserver from '@/components/FadeUpObserver.astro';
 ---
 
 <Layout
@@ -11,37 +13,15 @@ import Contact from '@/components/sections/Contact.astro';
 >
   <Nav />
 
-  <div class="contact-pg-hero">
-    <div class="contact-pg-hero-inner">
-      <div class="section-label">Get in Touch</div>
-      <h1 class="section-title">Let's Talk<br/>About Your<br/>Project</h1>
-      <p class="section-sub">Free estimates on all jobs. We respond within one business day.</p>
-    </div>
-  </div>
+  <PageHero
+    label="Get in Touch"
+    title="Let's Talk<br/>About Your<br/>Project"
+    sub="Free estimates on all jobs. We respond within one business day."
+  />
 
   <Contact showHeading={false} />
 
   <Footer />
 </Layout>
 
-<style>
-  .contact-pg-hero {
-    background: var(--black);
-    padding: 140px 5% 80px;
-    border-bottom: 1px solid var(--dark3);
-  }
-  .contact-pg-hero-inner { max-width: 800px; margin: 0 auto; }
-  .contact-pg-hero .section-title { font-size: clamp(52px, 8vw, 88px); }
-</style>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
+<FadeUpObserver />

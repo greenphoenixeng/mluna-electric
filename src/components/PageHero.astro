@@ -1,0 +1,30 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  sub?: string;
+  titleSize?: string;
+}
+
+const { label, title, sub, titleSize = 'clamp(52px, 8vw, 88px)' } = Astro.props;
+---
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-label">{label}</div>
+    <h1 class="section-title" style={`font-size: ${titleSize};`} set:html={title} />
+    {sub && <p class="section-sub" set:html={sub} />}
+  </div>
+</div>
+
+<style>
+  .page-hero {
+    background: var(--black);
+    padding: 140px 5% 80px;
+    border-bottom: 1px solid var(--dark3);
+  }
+  .page-hero-inner { max-width: 800px; margin: 0 auto; }
+
+  @media (max-width: 640px) {
+    .page-hero { padding: 120px 5% 60px; }
+  }
+</style>

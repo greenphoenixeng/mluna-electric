@@ -1,4 +1,6 @@
 ---
+import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
+
 interface Props {
   showHeading?: boolean;
 }
@@ -24,7 +26,7 @@ const { showHeading = true } = Astro.props;
           </div>
           <div>
             <div class="contact-method-label">Phone</div>
-            <div class="contact-method-value"><a href="tel:+14846433625">(484) 643-3625</a></div>
+            <div class="contact-method-value"><a href={TEL_HREF}>{SITE.phoneDisplay}</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -33,7 +35,7 @@ const { showHeading = true } = Astro.props;
           </div>
           <div>
             <div class="contact-method-label">Email</div>
-            <div class="contact-method-value"><a href="mailto:M.Luna.Electric@gmail.com">M.Luna.Electric@gmail.com</a></div>
+            <div class="contact-method-value"><a href={MAILTO_HREF}>{SITE.email}</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -42,7 +44,7 @@ const { showHeading = true } = Astro.props;
           </div>
           <div>
             <div class="contact-method-label">Location</div>
-            <div class="contact-method-value">Kennett Square, PA</div>
+            <div class="contact-method-value">{SITE.address.locality}, {SITE.address.region}</div>
           </div>
         </div>
         <div class="contact-method">
@@ -51,7 +53,7 @@ const { showHeading = true } = Astro.props;
           </div>
           <div>
             <div class="contact-method-label">Hours</div>
-            <div class="contact-method-value">Mon–Fri 7am–6pm · Sat by Appt</div>
+            <div class="contact-method-value">{SITE.hoursExtended}</div>
           </div>
         </div>
       </div>
@@ -77,7 +79,7 @@ const { showHeading = true } = Astro.props;
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone</label>
-            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(484) 555-0100" maxlength="40" />
+            <input class="form-control" type="tel" id="phone" name="phone" placeholder={SITE.phoneDisplay} maxlength="40" />
           </div>
         </div>
         <div class="form-group">

@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import PageHero from '@/components/PageHero.astro';
 
 const jobs = [
   { value: 'panel',      label: 'Panel Upgrade',        sub: '100A → 200A service upgrade', low: 1500,  high: 4000  },
@@ -20,13 +21,11 @@ const jobs = [
 >
   <Nav />
 
-  <div class="est-hero">
-    <div class="est-hero-inner">
-      <div class="section-label">Free Estimator</div>
-      <h1 class="section-title">What Will<br/>Your Project<br/>Cost?</h1>
-      <p class="section-sub">Select your job type for a ballpark range. Final pricing always comes with a free on-site visit — no surprises.</p>
-    </div>
-  </div>
+  <PageHero
+    label="Free Estimator"
+    title="What Will<br/>Your Project<br/>Cost?"
+    sub="Select your job type for a ballpark range. Final pricing always comes with a free on-site visit — no surprises."
+  />
 
   <section class="est-section">
     <div class="est-inner">
@@ -65,14 +64,6 @@ const jobs = [
 </Layout>
 
 <style>
-  .est-hero {
-    background: var(--black);
-    padding: 140px 5% 80px;
-    border-bottom: 1px solid var(--dark3);
-  }
-  .est-hero-inner { max-width: 800px; margin: 0 auto; }
-  .est-hero .section-title { font-size: clamp(52px, 8vw, 88px); }
-
   .est-section {
     background: var(--dark);
     padding: 80px 5%;
@@ -160,7 +151,6 @@ const jobs = [
   @media (max-width: 640px) {
     .est-grid { grid-template-columns: 1fr 1fr; }
     .est-result { padding: 24px; }
-    .est-hero { padding: 120px 5% 60px; }
   }
   @media (max-width: 420px) {
     .est-grid { grid-template-columns: 1fr; }
