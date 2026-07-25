@@ -185,24 +185,16 @@ nav {
 }
 .btn-ghost:hover { border-color: var(--orange); color: var(--orange); background: rgba(255,103,43,0.06); }
 
-.hero-stats {
-  display: flex; flex-wrap: wrap; gap: 0;
+.hero-license {
   margin-top: 64px;
   border-top: 1px solid rgba(255,255,255,0.08);
   padding-top: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-.hero-stat {
-  flex: 1; min-width: 130px;
-  padding-right: 32px;
-}
-.hero-stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.08); margin-right: 32px; }
-.hero-stat-num {
-  font-family: var(--font-head);
-  font-size: 42px; font-weight: 800;
-  color: var(--orange); line-height: 1;
-  margin-bottom: 4px;
-}
-.hero-stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* ── TRUST BAR ── */
 .trust-bar {
@@ -322,6 +314,11 @@ section { padding: 96px 5%; }
 .about-badge-text { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
 
 .about-content .section-sub { margin-bottom: 32px; }
+.mushroom-capital {
+  color: var(--white);
+  font-size: 1.15em;
+  font-weight: 600;
+}
 
 .about-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
 .about-list li {
@@ -634,8 +631,6 @@ footer {
   .nav-links { display: none; }
   .nav-logo { font-size: 18px; }
   .nav-logo span { display: none; }
-  .hero-stats { gap: 24px; }
-  .hero-stat:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px; }
   .why-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
