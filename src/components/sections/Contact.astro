@@ -54,21 +54,21 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="fname">First Name</label>
-            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" required />
+            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" maxlength="60" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="lname">Last Name</label>
-            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" required />
+            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" maxlength="60" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required />
+            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" maxlength="254" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone</label>
-            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(610) 555-0100" />
+            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(610) 555-0100" maxlength="40" />
           </div>
         </div>
         <div class="form-group">
@@ -87,7 +87,11 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="message">Project Description</label>
-          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..."></textarea>
+          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..." maxlength="5000" required></textarea>
+        </div>
+        <div class="form-group form-hp" aria-hidden="true">
+          <label class="form-label" for="company">Company</label>
+          <input class="form-control" type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
         </div>
         <button type="submit" class="form-submit">Send My Quote Request →</button>
         <p id="form-status" class="form-status-msg" style="display:none; margin-top:12px; text-align:center; font-size:14px;"></p>
@@ -96,19 +100,32 @@
   </div>
 </section>
 
+<style>
+  .form-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>
+
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const status = document.getElementById('form-status') as HTMLElement;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const field = (name: string) =>
+      (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null)?.value ?? '';
+
     const data = {
-      fname: (form.elements.namedItem('fname') as HTMLInputElement)?.value,
-      lname: (form.elements.namedItem('lname') as HTMLInputElement)?.value,
-      email: (form.elements.namedItem('email') as HTMLInputElement)?.value,
-      phone: (form.elements.namedItem('phone') as HTMLInputElement)?.value,
-      service: (form.elements.namedItem('service') as HTMLSelectElement)?.value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement)?.value,
+      name: `${field('fname')} ${field('lname')}`.trim(),
+      email: field('email'),
+      phone: field('phone'),
+      service: field('service'),
+      message: field('message'),
+      company: field('company'),
     };
 
     status.style.display = 'block';
