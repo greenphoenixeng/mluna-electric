@@ -150,14 +150,19 @@ import { ESTIMATOR_JOBS as jobs } from '@/lib/estimator';
 
 <script>
   const cards = document.querySelectorAll<HTMLButtonElement>('.est-card');
-  const result = document.getElementById('est-result')!;
-  const rangeEl = document.getElementById('est-range')!;
-  const jobName = document.getElementById('est-job-name')!;
+  const result = document.getElementById('est-result');
+  const rangeEl = document.getElementById('est-range');
+  const jobName = document.getElementById('est-job-name');
+
+  if (!result || !rangeEl || !jobName) {
+    console.error('estimator: expected #est-result, #est-range and #est-job-name on the page');
+  }
 
   import { formatRange } from '@/lib/estimator';
 
   cards.forEach((card) => {
     card.addEventListener('click', () => {
+      if (!result || !rangeEl || !jobName) return;
       cards.forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
 

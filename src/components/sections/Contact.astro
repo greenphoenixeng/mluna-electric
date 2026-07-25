@@ -148,6 +148,10 @@ const { showHeading = true } = Astro.props;
   const phoneInput = document.getElementById('phone');
   const phoneError = document.getElementById('phone-error');
 
+  if (!form || !status) {
+    console.error('contact form: #contact-form or #form-status is missing from the page');
+  }
+
   function digitsOnly(value) {
     return value.replace(/\D/g, '').slice(0, 10);
   }
@@ -195,7 +199,6 @@ const { showHeading = true } = Astro.props;
     else setPhoneError(false);
   });
 
-  // Also catch paste / autofill via input
   phoneInput?.addEventListener('input', () => {
     const formatted = formatPhone(phoneInput.value);
     if (phoneInput.value !== formatted) {
@@ -205,7 +208,6 @@ const { showHeading = true } = Astro.props;
 
   phoneInput?.addEventListener('blur', validatePhone);
 
-  // Block non-digit keypresses (allow control keys, arrows, etc.)
   phoneInput?.addEventListener('keydown', (e) => {
     if (
       e.ctrlKey || e.metaKey || e.altKey ||
@@ -226,6 +228,8 @@ const { showHeading = true } = Astro.props;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!form || !status) return;
+
     const field = (name) =>
       form.elements.namedItem(name)?.value ?? '';
 
@@ -242,6 +246,7 @@ const { showHeading = true } = Astro.props;
       return;
     }
 
+    const submit = form.querySelector('.form-submit');
     const data = {
       name: `${field('fname')} ${field('lname')}`.trim(),
       email: field('email'),
@@ -251,11 +256,15 @@ const { showHeading = true } = Astro.props;
       company: field('company'),
     };
 
-    if (!status) return;
-
     status.style.display = 'block';
     status.style.color = 'var(--muted)';
     status.textContent = 'Sending...';
+    if (submit) submit.disabled = true;
+
+    const fail = (msg) => {
+      status.style.color = '#f87171';
+      status.textContent = msg;
+    };
 
     try {
       const res = await fetch('/api/contact', {
@@ -263,21 +272,35 @@ const { showHeading = true } = Astro.props;
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (res.ok) {
-        status.style.color = '#4ade80';
-        status.textContent = "✓ Message sent! We'll follow up within one business day.";
-        form.reset();
-        setPhoneError(false);
-      } else {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || 'Request failed');
+
+      let payload = {};
+      try {
+        payload = await res.json();
+      } catch (err) {
+        console.error('contact form: response was not valid JSON', err);
       }
+
+      if (!res.ok) {
+        console.error(`contact form: server responded ${res.status}`, payload);
+        if (payload.error === 'Invalid phone number') {
+          fail('Please enter a valid 10-digit phone number.');
+        } else if (res.status >= 400 && res.status < 500 && payload.error) {
+          fail(payload.error);
+        } else {
+          fail('Something went wrong. Please call us directly.');
+        }
+        return;
+      }
+
+      status.style.color = '#4ade80';
+      status.textContent = "✓ Message sent! We'll follow up within one business day.";
+      form.reset();
+      setPhoneError(false);
     } catch (err) {
-      status.style.color = '#f87171';
-      status.textContent =
-        err instanceof Error && err.message === 'Invalid phone number'
-          ? 'Please enter a valid 10-digit phone number.'
-          : 'Something went wrong. Please call us directly.';
+      console.error('contact form: submission request failed', err);
+      fail('Could not reach the server. Please check your connection or call us directly.');
+    } finally {
+      if (submit) submit.disabled = false;
     }
   });
 </script>

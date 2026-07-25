@@ -69,7 +69,8 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
   let body: Record<string, unknown>;
   try {
     body = JSON.parse(raw);
-  } catch {
+  } catch (err) {
+    console.error('contact: could not parse request body', err);
     return json({ error: 'Invalid JSON' }, 400);
   }
   if (typeof body !== 'object' || body === null) {
@@ -89,14 +90,21 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
     message: text(body.message, LIMITS.message),
   };
 
-  if (!lead.name || !lead.email || !lead.phone || !lead.message) {
-    return json({ error: 'Missing required fields' }, 400);
+  const missing = [
+    !lead.name && 'name',
+    !lead.email && 'email',
+    !lead.phone && 'phone',
+    !lead.message && 'message',
+  ].filter(Boolean) as string[];
+
+  if (missing.length > 0) {
+    return json({ error: `Missing required fields: ${missing.join(', ')}`, fields: missing }, 400);
   }
   if (!EMAIL_RE.test(lead.email)) {
-    return json({ error: 'Invalid email address' }, 400);
+    return json({ error: 'Please enter a valid email address', fields: ['email'] }, 400);
   }
   if (!isValidPhone(lead.phone)) {
-    return json({ error: 'Invalid phone number' }, 400);
+    return json({ error: 'Invalid phone number', fields: ['phone'] }, 400);
   }
 
   const env = (locals as { runtime?: { env?: Record<string, string | undefined> } } | undefined)?.runtime?.env;
@@ -104,21 +112,33 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
   const notifyEmail = env?.NOTIFY_EMAIL ?? import.meta.env.NOTIFY_EMAIL ?? DEFAULT_NOTIFY_EMAIL;
 
   if (!resendApiKey) {
-    console.error('Contact form misconfigured: RESEND_API_KEY missing');
+    console.error('contact: RESEND_API_KEY is not set — cannot deliver submission');
     return json({ error: 'Server misconfiguration' }, 500);
   }
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(buildResendEmail(lead, notifyEmail)),
-  });
+  let res: Response;
+  try {
+    res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(buildResendEmail(lead, notifyEmail)),
+    });
+  } catch (err) {
+    console.error('contact: request to Resend failed', err);
+    return json({ error: 'Failed to send email' }, 502);
+  }
 
   if (!res.ok) {
-    console.error(`Resend request failed with status ${res.status}`);
+    let detail = '';
+    try {
+      detail = await res.text();
+    } catch (err) {
+      detail = `<unreadable response body: ${String(err)}>`;
+    }
+    console.error(`contact: Resend responded ${res.status}`, detail);
     return json({ error: 'Failed to send email' }, 502);
   }
 

@@ -229,6 +229,10 @@
 
   function renderInput(svc) {
     const wrap = document.getElementById('hest-input-wrap');
+    if (!wrap) {
+      console.error('estimator: #hest-input-wrap is missing');
+      return;
+    }
     const inp = svc.inp;
     if (inp.type === 'slider') {
       activeVal = inp.val;
@@ -244,9 +248,11 @@
           <span>${inp.max} ${inp.unit}</span>
         </div>
       `;
-      document.getElementById('hest-sl').addEventListener('input', (e) => {
+      const slider = document.getElementById('hest-sl');
+      const sliderVal = document.getElementById('hest-slval');
+      slider?.addEventListener('input', (e) => {
         activeVal = parseInt(e.target.value);
-        document.getElementById('hest-slval').textContent = `${activeVal} ${inp.unit}`;
+        if (sliderVal) sliderVal.textContent = `${activeVal} ${inp.unit}`;
         updateRange();
       });
     } else {
@@ -264,7 +270,7 @@
       wrap.querySelectorAll('input[type="radio"]').forEach(r => {
         r.addEventListener('change', () => {
           wrap.querySelectorAll('.hest-radio').forEach(l => l.classList.remove('selected'));
-          r.closest('.hest-radio').classList.add('selected');
+          r.closest('.hest-radio')?.classList.add('selected');
           activeVal = r.value;
           updateRange();
         });
@@ -275,17 +281,24 @@
   function updateRange() {
     if (!activeSvc || activeVal === null) return;
     const [lo, hi] = activeSvc.price(activeVal);
-    document.getElementById('hest-range').textContent = formatRange(lo, hi);
+    const range = document.getElementById('hest-range');
+    if (range) range.textContent = formatRange(lo, hi);
   }
 
   function selectSvc(id) {
     activeSvc = findService(id);
-    if (!activeSvc) return;
+    if (!activeSvc) {
+      console.error(`estimator: unknown service id "${id}"`);
+      return;
+    }
     document.querySelectorAll('.hest-card').forEach(c => c.classList.remove('selected'));
-    document.querySelector(`.hest-card[data-id="${id}"]`).classList.add('selected');
-    document.getElementById('hest-prompt').style.display = 'none';
-    document.getElementById('hest-active').classList.add('visible');
-    document.getElementById('hest-active-svc').textContent = activeSvc.label;
+    document.querySelector(`.hest-card[data-id="${id}"]`)?.classList.add('selected');
+    const prompt = document.getElementById('hest-prompt');
+    const active = document.getElementById('hest-active');
+    const activeLabel = document.getElementById('hest-active-svc');
+    if (prompt) prompt.style.display = 'none';
+    active?.classList.add('visible');
+    if (activeLabel) activeLabel.textContent = activeSvc.label;
     renderInput(activeSvc);
     updateRange();
   }
