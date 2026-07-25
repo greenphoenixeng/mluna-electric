@@ -1,4 +1,5 @@
 ---
+import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
 ---
 <section class="contact" id="contact">
   <div class="contact-inner">
@@ -15,7 +16,7 @@
           </div>
           <div>
             <div class="contact-method-label">Phone</div>
-            <div class="contact-method-value"><a href="tel:+16105550100">(610) 555-0100</a></div>
+            <div class="contact-method-value"><a href={TEL_HREF}>{SITE.phoneDisplay}</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -24,7 +25,7 @@
           </div>
           <div>
             <div class="contact-method-label">Email</div>
-            <div class="contact-method-value"><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></div>
+            <div class="contact-method-value"><a href={MAILTO_HREF}>{SITE.email}</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -33,7 +34,7 @@
           </div>
           <div>
             <div class="contact-method-label">Location</div>
-            <div class="contact-method-value">Kennett Square, PA</div>
+            <div class="contact-method-value">{SITE.address.locality}, {SITE.address.region}</div>
           </div>
         </div>
         <div class="contact-method">
@@ -42,7 +43,7 @@
           </div>
           <div>
             <div class="contact-method-label">Hours</div>
-            <div class="contact-method-value">Mon–Fri 7am–6pm · Sat by Appt</div>
+            <div class="contact-method-value">{SITE.hoursExtended}</div>
           </div>
         </div>
       </div>

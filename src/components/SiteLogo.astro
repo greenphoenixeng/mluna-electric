@@ -1,0 +1,18 @@
+---
+import BoltMark from './BoltMark.astro';
+import { SITE } from '@/data/site';
+
+interface Props {
+  href?: string;
+  style?: string;
+}
+
+const { href = '/', style } = Astro.props;
+const words = SITE.name.split(' ');
+const lead = words.slice(0, -1).join(' ');
+const tail = words[words.length - 1];
+---
+<a href={href} class="nav-logo" style={style}>
+  <BoltMark />
+  {lead} <span>&nbsp;{tail}</span>
+</a>
