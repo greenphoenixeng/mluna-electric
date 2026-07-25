@@ -4,10 +4,26 @@ import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import { Image } from 'astro:assets';
 
-import photo272 from '@/assets/images/IMG_0272.jpeg';
 import photo267 from '@/assets/images/IMG_0267.jpeg';
 import photo163 from '@/assets/images/IMG_0163.jpeg';
 import moema15 from '@/assets/images/moema-15.jpg';
+
+import elec03 from '@/assets/images/elec-03.jpg';
+import elec09 from '@/assets/images/elec-09.jpg';
+import elec15 from '@/assets/images/elec-15.jpg';
+import elec16 from '@/assets/images/elec-16.jpg';
+import elec18 from '@/assets/images/elec-18.jpg';
+import elec20 from '@/assets/images/elec-20.jpg';
+import elec22 from '@/assets/images/elec-22.jpg';
+import elec23 from '@/assets/images/elec-23.jpg';
+import elec25 from '@/assets/images/elec-25.jpg';
+import elec27 from '@/assets/images/elec-27.jpg';
+
+const teamPhotos = [
+  { src: elec16, alt: 'The full M. Luna Electric team' },
+  { src: elec15, alt: 'The M. Luna Family' },
+  { src: elec25, alt: 'M. Luna gents' },
+];
 ---
 
 <Layout
@@ -44,38 +60,21 @@ import moema15 from '@/assets/images/moema-15.jpg';
           Miguel Luna Cruz began his electrical journey in 2004, spending over a decade mastering the trade's complexities. His dedication culminated in 2018 when he earned his Master Electrician license — providing the foundation to launch M. Luna Electric as a solo operation with one truck.
         </p>
         <p class="section-sub" style="margin-top: 20px;"><strong style="color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">Growth &amp; Specialization</strong><br/>
-          The business found its footing in Kennett Square — the mushroom capital of the world — where a large portion of our work is with local mushroom farms. Precision and reliability aren't optional there. The reputation built on those jobs allowed M. Luna Electric to expand across Chester and Delaware County and eventually serve clients out of state — before officially incorporating.
+          The business found its footing in Kennett Square — <span class="mushroom-capital">🍄 the mushroom capital of the world</span> — where a large portion of our work is with local mushroom farms. Precision and reliability aren't optional there. The reputation built on those jobs allowed M. Luna Electric to expand across Chester and Delaware County and eventually serve clients out of state — before officially incorporating.
         </p>
         <p class="section-sub" style="margin-top: 20px;"><strong style="color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">M. Luna Electric Today</strong><br/>
           Driven by a loyal and growing client base, the company officially incorporated. Today, M. Luna Electric, Inc. is still family-run, still built on the same principles from day one — licensed in Delaware and Pennsylvania.
         </p>
         <blockquote class="about-pg-quote">"We are still small, but we hope to grow by continuously helping our clients." — Miguel Luna Cruz</blockquote>
-        <div class="about-pg-license fade-up">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          PA Electrical Contractor License: <strong>PA145866</strong>
-        </div>
       </div>
     </div>
   </section>
 
-  <section class="about-pg-stats">
-    <div class="about-pg-stats-inner">
-      <div class="about-pg-stat fade-up">
-        <div class="about-pg-stat-num">20+</div>
-        <div class="about-pg-stat-label">Years Experience</div>
-      </div>
-      <div class="about-pg-stat fade-up">
-        <div class="about-pg-stat-num">9</div>
-        <div class="about-pg-stat-label">Team Members</div>
-      </div>
-      <div class="about-pg-stat fade-up">
-        <div class="about-pg-stat-num">5</div>
-        <div class="about-pg-stat-label">Service Trucks</div>
-      </div>
-      <div class="about-pg-stat fade-up">
-        <div class="about-pg-stat-num">2</div>
-        <div class="about-pg-stat-label">Counties Served</div>
-      </div>
+  <section class="about-pg-license-band">
+    <p class="about-pg-license-text">Licensed in Delaware and Pennsylvania</p>
+    <div class="about-pg-license">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      PA Electrical Contractor License: <strong>PA145866</strong>
     </div>
   </section>
 
@@ -105,15 +104,32 @@ import moema15 from '@/assets/images/moema-15.jpg';
   </section>
 
   <section class="about-pg-gallery">
-    <div class="about-pg-gallery-inner">
-      <div class="about-pg-gallery-img fade-up">
-        <Image src={photo267} alt="Finished commercial Eaton panel installation" />
+    <div class="about-pg-gallery-wrap">
+      <div class="about-pg-gallery-header fade-up">
+        <div class="section-label">Meet the Team</div>
+        <h2 class="section-title" style="font-size: clamp(36px,5vw,56px);">The Crew Behind<br/>the Work</h2>
+        <p class="section-sub">
+          From the field to the front office — the people who show up, get it done, and stand behind every job.
+        </p>
       </div>
-      <div class="about-pg-gallery-img fade-up">
-        <Image src={photo163} alt="Multi-panel commercial system on stone building" />
+      <div class="about-pg-gallery-inner">
+        {teamPhotos.map((photo) => (
+          <button type="button" class="about-pg-gallery-img fade-up" aria-label={`View larger: ${photo.alt}`}>
+            <Image src={photo.src} alt={photo.alt} width={1200} quality={85} />
+          </button>
+        ))}
       </div>
     </div>
   </section>
+
+  <div class="about-lightbox" id="team-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Enlarged team photo">
+    <button type="button" class="about-lightbox-backdrop" aria-label="Close"></button>
+    <figure class="about-lightbox-figure">
+      <img class="about-lightbox-img" src="" alt="" />
+      <figcaption class="about-lightbox-caption"></figcaption>
+    </figure>
+    <button type="button" class="about-lightbox-close" aria-label="Close">&times;</button>
+  </div>
 
   <section class="about-pg-mission">
     <div class="about-pg-mission-inner">
@@ -194,22 +210,36 @@ import moema15 from '@/assets/images/moema-15.jpg';
   }
   .about-pg-badge-text { font-size: 12px; font-weight: 700; color: rgba(0,0,0,0.7); line-height: 1.3; }
 
-  .about-pg-stats { background: var(--black); padding: 60px 5%; border-top: 1px solid var(--dark3); border-bottom: 1px solid var(--dark3); }
-  .about-pg-stats-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 0; border-left: 1px solid var(--dark3);
+  .about-pg-license-band {
+    background: var(--black);
+    padding: 48px 5%;
+    border-top: 1px solid var(--dark3);
+    border-bottom: 1px solid var(--dark3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
-  .about-pg-stat {
-    padding: 32px 40px;
-    border-right: 1px solid var(--dark3);
+  .about-pg-license-text {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
   }
-  .about-pg-stat-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 52px; font-weight: 800; line-height: 1;
-    color: var(--orange); margin-bottom: 8px;
+
+  .about-pg-license {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin: 0; padding: 12px 18px;
+    background: rgba(255,103,43,0.08);
+    border: 1px solid rgba(255,103,43,0.25);
+    border-radius: 4px;
+    font-size: 14px; color: var(--light);
   }
-  .about-pg-stat-label { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .about-pg-license svg { color: var(--orange); flex-shrink: 0; }
+  .about-pg-license strong { color: var(--orange); }
 
   .about-pg-values { background: var(--dark2); padding: 100px 5%; }
   .about-pg-values-inner { max-width: 1200px; margin: 0 auto; }
@@ -231,21 +261,125 @@ import moema15 from '@/assets/images/moema-15.jpg';
   }
   .about-pg-value-body { font-size: 15px; color: var(--muted); line-height: 1.65; }
 
-  .about-pg-gallery { background: var(--black); padding: 0 5% 80px; }
-  .about-pg-gallery-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .about-pg-gallery-img { aspect-ratio: 16/9; overflow: hidden; border-radius: 4px; }
-  .about-pg-gallery-img img { width: 100%; height: 100%; object-fit: cover; }
-
-  .about-pg-license {
-    display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 24px; padding: 12px 18px;
-    background: rgba(255,103,43,0.08);
-    border: 1px solid rgba(255,103,43,0.25);
-    border-radius: 4px;
-    font-size: 14px; color: var(--light);
+  .about-pg-gallery { background: var(--black); padding: 80px 5%; }
+  .about-pg-gallery-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
   }
-  .about-pg-license svg { color: var(--orange); flex-shrink: 0; }
-  .about-pg-license strong { color: var(--orange); }
+  .about-pg-gallery-header { margin-bottom: 48px; }
+  .about-pg-gallery-header .section-sub { margin-top: 16px; }
+  .about-pg-gallery-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    justify-content: center;
+  }
+  .about-pg-gallery-img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    background: var(--dark2);
+    cursor: pointer;
+    display: block;
+  }
+  .about-pg-gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .about-pg-gallery-img:hover img,
+  .about-pg-gallery-img:focus-visible img {
+    transform: scale(1.06);
+  }
+
+  .about-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .about-lightbox[hidden] { display: none; }
+  .about-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.88);
+    cursor: zoom-out;
+  }
+  .about-lightbox-figure {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: min(1100px, 94vw);
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: about-lightbox-in 0.25s ease;
+  }
+  .about-lightbox-img {
+    max-width: 100%;
+    max-height: calc(88vh - 40px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  }
+  .about-lightbox-caption {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 640px;
+  }
+  .about-lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .about-lightbox-close:hover { background: rgba(255, 103, 43, 0.85); color: #000; }
+  @keyframes about-lightbox-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  body.lightbox-open { overflow: hidden; }
+
+  @media (min-width: 640px) {
+    .about-pg-gallery-inner {
+      grid-template-columns: repeat(2, minmax(0, 640px));
+      gap: 20px;
+    }
+    .about-pg-gallery-img { max-width: none; }
+  }
+  @media (min-width: 1100px) {
+    .about-pg-gallery-inner {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
   .about-pg-quote {
     margin-top: 28px; padding: 20px 24px;
     border-left: 3px solid var(--orange);
@@ -284,14 +418,11 @@ import moema15 from '@/assets/images/moema-15.jpg';
 
   @media (max-width: 1024px) {
     .about-pg-story-inner { grid-template-columns: 1fr; gap: 48px; }
-    .about-pg-stats-inner { grid-template-columns: repeat(2, 1fr); }
     .about-pg-values-grid { grid-template-columns: repeat(2, 1fr); }
-    .about-pg-gallery-inner { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     .about-pg-hero { padding: 120px 5% 60px; }
-    .about-pg-stats-inner { grid-template-columns: 1fr 1fr; border-left: none; }
-    .about-pg-stat { border-left: 1px solid var(--dark3); padding: 24px 20px; }
+    .about-pg-license-text { font-size: 16px; }
     .about-pg-values-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -306,4 +437,38 @@ import moema15 from '@/assets/images/moema-15.jpg';
     });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const lightbox = document.getElementById('team-lightbox');
+  const lightboxImg = lightbox?.querySelector('.about-lightbox-img');
+  const lightboxCaption = lightbox?.querySelector('.about-lightbox-caption');
+  const thumbs = document.querySelectorAll('.about-pg-gallery-img');
+
+  function openLightbox(thumb) {
+    if (!lightbox || !lightboxImg || !lightboxCaption) return;
+    const img = thumb.querySelector('img');
+    if (!img) return;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => openLightbox(thumb));
+  });
+
+  lightbox?.querySelector('.about-lightbox-backdrop')?.addEventListener('click', closeLightbox);
+  lightbox?.querySelector('.about-lightbox-close')?.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
+  });
 </script>
