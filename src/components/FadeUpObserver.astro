@@ -1,0 +1,21 @@
+---
+interface Props {
+  threshold?: number;
+  stagger?: number;
+  rootMargin?: string;
+}
+
+const { threshold = 0.08, stagger = 80, rootMargin = '0px' } = Astro.props;
+---
+<script is:inline define:vars={{ threshold, stagger, rootMargin }}>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * stagger);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold, rootMargin });
+
+  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+</script>

@@ -1,0 +1,93 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE, MAILTO_HREF } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  effectiveDate: string;
+  contactIntro: string;
+}
+
+const { title, description, heading, effectiveDate, contactIntro } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main class="legal-page">
+    <div class="legal-inner">
+      <h1>{heading}</h1>
+      <p class="legal-date">Effective date: {effectiveDate}</p>
+
+      <slot />
+
+      <h2>Contact</h2>
+      <p>{contactIntro}</p>
+      <p>
+        {SITE.legalName}<br />
+        {SITE.address.locality}, {SITE.address.region} {SITE.address.postalCode}<br />
+        <a href={MAILTO_HREF}>{SITE.email}</a>
+      </p>
+
+      <slot name="after-contact" />
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .legal-page {
+    background: var(--black);
+    min-height: 100vh;
+    padding: 120px 24px 80px;
+  }
+  .legal-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--light);
+  }
+  .legal-inner h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .legal-date {
+    color: var(--mid);
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+  .legal-inner h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 40px 0 12px;
+    letter-spacing: 0.03em;
+  }
+  .legal-inner p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-inner ul {
+    margin: 0 0 16px 24px;
+  }
+  .legal-inner ul li {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+  .legal-inner a {
+    color: var(--orange);
+    text-decoration: underline;
+  }
+</style>

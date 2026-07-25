@@ -1,21 +1,11 @@
 ---
+import SiteLogo from '@/components/SiteLogo.astro';
+import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
 ---
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#home" class="nav-logo" style="display:inline-flex; margin-bottom:16px; font-size:20px;">
-        <div class="bolt">
-          <svg viewBox="0 0 200 155" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 143,16 L 90,58 L 90,150 L 196,150 L 196,58 Z" fill="#0E0E0E" stroke="#FF672B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
-            <path d="M 55,5 L 3,50 L 3,150 L 28,150 L 28,100 L 82,100 L 82,150 L 107,150 L 107,50 Z" fill="#0E0E0E" stroke="#FF672B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
-            <rect x="132" y="66" width="7" height="22" rx="3" fill="#FF672B"/>
-            <rect x="147" y="66" width="7" height="22" rx="3" fill="#FF672B"/>
-            <rect x="121" y="88" width="44" height="17" rx="8" fill="#0E0E0E" stroke="#FF672B" stroke-width="6"/>
-            <line x1="143" y1="105" x2="143" y2="132" stroke="#FF672B" stroke-width="7" stroke-linecap="round"/>
-          </svg>
-        </div>
-        M. Luna <span>&nbsp;Electric</span>
-      </a>
+      <SiteLogo href="#home" style="display:inline-flex; margin-bottom:16px; font-size:20px;" />
       <p class="footer-brand-sub">
         Licensed electrical contractor serving Chester &amp; Delaware County, PA. Residential, commercial, and new construction.
       </p>
@@ -48,11 +38,11 @@
     <div>
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
-        <li><a href="tel:+14846433625">(484) 643-3625</a></li>
-        <li><a href="mailto:M.Luna.Electric@gmail.com">M.Luna.Electric@gmail.com</a></li>
-        <li style="color:var(--mid); cursor:default;">Kennett Square, PA</li>
+        <li><a href={TEL_HREF}>{SITE.phoneDisplay}</a></li>
+        <li><a href={MAILTO_HREF}>{SITE.email}</a></li>
+        <li style="color:var(--mid); cursor:default;">{SITE.address.locality}, {SITE.address.region}</li>
         <li style="color:var(--mid); cursor:default;">Chester &amp; Delaware County</li>
-        <li style="color:var(--mid); cursor:default; margin-top:4px;">Mon–Fri 7am–6pm</li>
+        <li style="color:var(--mid); cursor:default; margin-top:4px;">{SITE.hours}</li>
       </ul>
     </div>
   </div>
