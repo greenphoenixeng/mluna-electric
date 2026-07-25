@@ -1,13 +1,22 @@
 ---
+interface Props {
+  showHeading?: boolean;
+}
+
+const { showHeading = true } = Astro.props;
 ---
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="contact-info fade-up">
-      <div class="section-label">Get in Touch</div>
-      <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
-      <p class="section-sub">
-        Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
-      </p>
+      {showHeading && (
+        <Fragment>
+          <div class="section-label">Get in Touch</div>
+          <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
+          <p class="section-sub">
+            Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
+          </p>
+        </Fragment>
+      )}
       <div class="contact-methods">
         <div class="contact-method">
           <div class="contact-method-icon">
@@ -15,7 +24,7 @@
           </div>
           <div>
             <div class="contact-method-label">Phone</div>
-            <div class="contact-method-value"><a href="tel:+16105550100">(610) 555-0100</a></div>
+            <div class="contact-method-value"><a href="tel:+14846433625">(484) 643-3625</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -24,7 +33,7 @@
           </div>
           <div>
             <div class="contact-method-label">Email</div>
-            <div class="contact-method-value"><a href="mailto:info@mlunaelectric.com">info@mlunaelectric.com</a></div>
+            <div class="contact-method-value"><a href="mailto:M.Luna.Electric@gmail.com">M.Luna.Electric@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-method">
@@ -68,7 +77,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone</label>
-            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(610) 555-0100" maxlength="40" />
+            <input class="form-control" type="tel" id="phone" name="phone" placeholder="(484) 555-0100" maxlength="40" />
           </div>
         </div>
         <div class="form-group">
