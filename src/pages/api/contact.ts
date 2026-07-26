@@ -23,6 +23,10 @@ const MAX_BODY_BYTES = 16 * 1024;
 const LIMITS = { name: 120, email: 254, phone: 40, service: 80, message: 5000 } as const;
 const EMAIL_RE = /^[^\s@<>"'()[\],:;]+@[^\s@<>"'.]+(\.[^\s@<>"'.]+)+$/;
 
+function isValidPhone(value: string): boolean {
+  return value.replace(/\D/g, '').length === 10;
+}
+
 const ALLOWED_ORIGINS = [
   'https://mlunaelectric.com',
   'https://www.mlunaelectric.com',
@@ -119,11 +123,14 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
     message: text(body.message, LIMITS.message),
   };
 
-  if (!lead.name || !lead.email || !lead.message) {
+  if (!lead.name || !lead.email || !lead.phone || !lead.message) {
     return json({ error: 'Missing required fields' }, 400);
   }
   if (!EMAIL_RE.test(lead.email)) {
     return json({ error: 'Invalid email address' }, 400);
+  }
+  if (!isValidPhone(lead.phone)) {
+    return json({ error: 'Invalid phone number' }, 400);
   }
 
   const env = (locals as { runtime?: { env?: Record<string, string | undefined> } }).runtime?.env;

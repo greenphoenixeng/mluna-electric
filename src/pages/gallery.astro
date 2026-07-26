@@ -97,7 +97,7 @@ const categories = [
         </div>
         <div class="gallery-grid" data-count={cat.photos.length}>
           {cat.photos.map((photo) => (
-            <div class="gallery-item fade-up">
+            <div class="gallery-item">
               <Image src={photo.src} alt={photo.alt} width={1200} quality={82} />
             </div>
           ))}
@@ -118,12 +118,13 @@ const categories = [
   </div>
 
   <Footer />
+  <FadeUpObserver />
 </Layout>
 
 <style>
   .gallery-cat {
     background-color: var(--dark);
-    padding: 80px 24px;
+    padding: 80px 5%;
     border-bottom: 1px solid var(--dark3);
   }
   .gallery-cat:nth-child(odd) {
@@ -148,7 +149,7 @@ const categories = [
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
   .gallery-item {
@@ -170,7 +171,7 @@ const categories = [
 
   .gallery-cta {
     background-color: var(--orange);
-    padding: 80px 24px;
+    padding: 80px 5%;
     text-align: center;
   }
   .gallery-cta-inner {
@@ -223,9 +224,7 @@ const categories = [
       grid-template-columns: 1fr;
     }
     .gallery-cat {
-      padding: 60px 16px;
+      padding: 60px 5%;
     }
   }
 </style>
-
-<FadeUpObserver />

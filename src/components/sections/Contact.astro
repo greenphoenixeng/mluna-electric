@@ -79,7 +79,20 @@ const { showHeading = true } = Astro.props;
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone</label>
-            <input class="form-control" type="tel" id="phone" name="phone" placeholder={SITE.phoneDisplay} maxlength="40" />
+            <input
+              class="form-control"
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder={SITE.phoneDisplay}
+              inputmode="tel"
+              autocomplete="tel"
+              maxlength="14"
+              required
+              aria-describedby="phone-error"
+              title="Enter a 10-digit US phone number, e.g. (484) 643-3625"
+            />
+            <p id="phone-error" class="form-field-error" hidden>Enter a valid 10-digit US phone number</p>
           </div>
         </div>
         <div class="form-group">
@@ -119,16 +132,115 @@ const { showHeading = true } = Astro.props;
     height: 1px;
     overflow: hidden;
   }
+  .form-field-error {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #f87171;
+  }
+  .form-control.is-invalid {
+    border-color: #f87171;
+  }
 </style>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-  const status = document.getElementById('form-status') as HTMLElement;
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const phoneInput = document.getElementById('phone');
+  const phoneError = document.getElementById('phone-error');
+
+  function digitsOnly(value) {
+    return value.replace(/\D/g, '').slice(0, 10);
+  }
+
+  /** Format as (XXX) XXX-XXXX from up to 10 digits. */
+  function formatPhone(value) {
+    const d = digitsOnly(value);
+    if (d.length === 0) return '';
+    if (d.length < 4) return `(${d}`;
+    if (d.length < 7) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  }
+
+  function isValidPhone(value) {
+    return digitsOnly(value).length === 10;
+  }
+
+  function setPhoneError(show) {
+    if (!phoneInput || !phoneError) return;
+    phoneInput.classList.toggle('is-invalid', show);
+    phoneInput.setCustomValidity(show ? 'Enter a valid 10-digit US phone number' : '');
+    phoneError.hidden = !show;
+  }
+
+  function validatePhone() {
+    if (!phoneInput || !phoneError) return true;
+    const value = phoneInput.value.trim();
+    if (!value) {
+      phoneError.textContent = 'Phone number is required';
+      setPhoneError(true);
+      return false;
+    }
+    const ok = isValidPhone(value);
+    phoneError.textContent = 'Enter a valid 10-digit US phone number';
+    setPhoneError(!ok);
+    return ok;
+  }
+
+  phoneInput?.addEventListener('keyup', () => {
+    const formatted = formatPhone(phoneInput.value);
+    if (phoneInput.value !== formatted) {
+      phoneInput.value = formatted;
+    }
+    if (formatted) validatePhone();
+    else setPhoneError(false);
+  });
+
+  // Also catch paste / autofill via input
+  phoneInput?.addEventListener('input', () => {
+    const formatted = formatPhone(phoneInput.value);
+    if (phoneInput.value !== formatted) {
+      phoneInput.value = formatted;
+    }
+  });
+
+  phoneInput?.addEventListener('blur', validatePhone);
+
+  // Block non-digit keypresses (allow control keys, arrows, etc.)
+  phoneInput?.addEventListener('keydown', (e) => {
+    if (
+      e.ctrlKey || e.metaKey || e.altKey ||
+      e.key === 'Backspace' || e.key === 'Delete' ||
+      e.key === 'Tab' || e.key === 'Escape' || e.key === 'Enter' ||
+      e.key.startsWith('Arrow') || e.key === 'Home' || e.key === 'End'
+    ) {
+      return;
+    }
+    if (!/^\d$/.test(e.key)) {
+      e.preventDefault();
+      return;
+    }
+    if (digitsOnly(phoneInput.value).length >= 10 && phoneInput.selectionStart === phoneInput.selectionEnd) {
+      e.preventDefault();
+    }
+  });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const field = (name: string) =>
-      (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null)?.value ?? '';
+    const field = (name) =>
+      form.elements.namedItem(name)?.value ?? '';
+
+    if (phoneInput) phoneInput.value = formatPhone(phoneInput.value);
+
+    if (!validatePhone()) {
+      phoneInput?.focus();
+      phoneInput?.reportValidity();
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     const data = {
       name: `${field('fname')} ${field('lname')}`.trim(),
@@ -138,6 +250,8 @@ const { showHeading = true } = Astro.props;
       message: field('message'),
       company: field('company'),
     };
+
+    if (!status) return;
 
     status.style.display = 'block';
     status.style.color = 'var(--muted)';
@@ -151,14 +265,19 @@ const { showHeading = true } = Astro.props;
       });
       if (res.ok) {
         status.style.color = '#4ade80';
-        status.textContent = '✓ Message sent! We\'ll follow up within one business day.';
+        status.textContent = "✓ Message sent! We'll follow up within one business day.";
         form.reset();
+        setPhoneError(false);
       } else {
-        throw new Error();
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || 'Request failed');
       }
-    } catch {
+    } catch (err) {
       status.style.color = '#f87171';
-      status.textContent = 'Something went wrong. Please call us directly.';
+      status.textContent =
+        err instanceof Error && err.message === 'Invalid phone number'
+          ? 'Please enter a valid 10-digit phone number.'
+          : 'Something went wrong. Please call us directly.';
     }
   });
 </script>
