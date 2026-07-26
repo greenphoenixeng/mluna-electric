@@ -38,7 +38,10 @@ describe('POST /api/contact', () => {
   it('returns 400 when required fields are missing', async () => {
     const res = await post({ email: 'ada@example.com' });
     expect(res.status).toBe(400);
-    await expect(res.json()).resolves.toEqual({ error: 'Missing required fields' });
+    await expect(res.json()).resolves.toEqual({
+      error: 'Missing required fields: name, phone, message',
+      fields: ['name', 'phone', 'message'],
+    });
   });
 
   it('returns 500 when the Resend API key is not configured', async () => {
