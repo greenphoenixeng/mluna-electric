@@ -3,16 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import PageHero from '@/components/PageHero.astro';
-
-const jobs = [
-  { value: 'panel',      label: 'Panel Upgrade',        sub: '100A → 200A service upgrade', low: 1500,  high: 4000  },
-  { value: 'wiring',     label: 'New Wiring / Outlets',  sub: 'Outlets, circuits, rewire',   low: 300,   high: 1500  },
-  { value: 'lighting',   label: 'Lighting & Fixtures',   sub: 'Install, retrofit, dimmers',  low: 200,   high: 1000  },
-  { value: 'ev',         label: 'EV Charger Install',    sub: 'Level 2 home or commercial',  low: 500,   high: 1800  },
-  { value: 'commercial', label: 'Commercial Buildout',   sub: 'Office, retail, new build',   low: 2500,  high: 20000 },
-  { value: 'service',    label: 'Service Call / Repair', sub: 'Diagnosis + repair',          low: 150,   high: 600   },
-  { value: 'generator',  label: 'Generator Install',     sub: 'Standby whole-home backup',   low: 2800,  high: 13500 },
-];
+import { ESTIMATOR_JOBS as jobs } from '@/lib/estimator';
 ---
 
 <Layout
@@ -163,8 +154,7 @@ const jobs = [
   const rangeEl = document.getElementById('est-range')!;
   const jobName = document.getElementById('est-job-name')!;
 
-  const fmt = (n: number) =>
-    n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  import { formatRange } from '@/lib/estimator';
 
   cards.forEach((card) => {
     card.addEventListener('click', () => {
@@ -176,7 +166,7 @@ const jobs = [
       const label = card.dataset.label ?? '';
 
       jobName.textContent = label;
-      rangeEl.textContent = `${fmt(low)} – ${fmt(high)}`;
+      rangeEl.textContent = formatRange(low, high);
 
       result.classList.remove('visible');
       void result.offsetWidth; // reset animation

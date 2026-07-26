@@ -1,27 +1,17 @@
 import type { APIRoute } from 'astro';
+import { buildResendEmail, type ContactPayload } from '@/lib/contact';
 
 export const prerender = false;
 
-interface ContactPayload {
-  name?: unknown;
-  email?: unknown;
-  phone?: unknown;
-  service?: unknown;
-  message?: unknown;
-  company?: unknown;
-}
-
-interface Lead {
-  name: string;
-  email: string;
+interface Lead extends ContactPayload {
   phone: string;
   service: string;
-  message: string;
 }
 
 const MAX_BODY_BYTES = 16 * 1024;
 const LIMITS = { name: 120, email: 254, phone: 40, service: 80, message: 5000 } as const;
 const EMAIL_RE = /^[^\s@<>"'()[\],:;]+@[^\s@<>"'.]+(\.[^\s@<>"'.]+)+$/;
+const DEFAULT_NOTIFY_EMAIL = 'TBD@mlunaelectric.com';
 
 const ALLOWED_ORIGINS = [
   'https://mlunaelectric.com',
@@ -33,14 +23,6 @@ const json = (data: unknown, status: number) =>
     status,
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
   });
-
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 
 const text = (value: unknown, max: number) =>
   typeof value === 'string' ? value.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').trim().slice(0, max) : '';
@@ -59,22 +41,6 @@ function isAllowedOrigin(request: Request, siteOrigin: string | undefined): bool
   } catch {
     return false;
   }
-}
-
-function renderEmail(lead: Lead): string {
-  const rows = [
-    ['Name', escapeHtml(lead.name)],
-    ['Email', `<a href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a>`],
-    lead.phone ? ['Phone', escapeHtml(lead.phone)] : null,
-    lead.service ? ['Service', escapeHtml(lead.service)] : null,
-  ].filter((row): row is [string, string] => row !== null);
-
-  return `
-    <h2>New Contact Form Submission</h2>
-    ${rows.map(([label, value]) => `<p><strong>${label}:</strong> ${value}</p>`).join('')}
-    <p><strong>Message:</strong></p>
-    <p>${escapeHtml(lead.message).replace(/\r?\n/g, '<br>')}</p>
-  `;
 }
 
 export const POST: APIRoute = async ({ request, locals, site }) => {
@@ -96,7 +62,7 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
     return json({ error: 'Payload too large' }, 413);
   }
 
-  let body: ContactPayload;
+  let body: Record<string, unknown>;
   try {
     body = JSON.parse(raw);
   } catch {
@@ -112,7 +78,7 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
   }
 
   const lead: Lead = {
-    name: text(body.name, LIMITS.name),
+    name: singleLine(text(body.name, LIMITS.name)),
     email: text(body.email, LIMITS.email),
     phone: text(body.phone, LIMITS.phone),
     service: text(body.service, LIMITS.service),
@@ -126,12 +92,12 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
     return json({ error: 'Invalid email address' }, 400);
   }
 
-  const env = (locals as { runtime?: { env?: Record<string, string | undefined> } }).runtime?.env;
+  const env = (locals as { runtime?: { env?: Record<string, string | undefined> } } | undefined)?.runtime?.env;
   const resendApiKey = env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
-  const notifyEmail = env?.NOTIFY_EMAIL ?? import.meta.env.NOTIFY_EMAIL;
+  const notifyEmail = env?.NOTIFY_EMAIL ?? import.meta.env.NOTIFY_EMAIL ?? DEFAULT_NOTIFY_EMAIL;
 
-  if (!resendApiKey || !notifyEmail) {
-    console.error('Contact form misconfigured: RESEND_API_KEY or NOTIFY_EMAIL missing');
+  if (!resendApiKey) {
+    console.error('Contact form misconfigured: RESEND_API_KEY missing');
     return json({ error: 'Server misconfiguration' }, 500);
   }
 
@@ -141,13 +107,7 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
       Authorization: `Bearer ${resendApiKey}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      from: 'M Luna Electric Website <no-reply@mlunaelectric.com>',
-      to: [notifyEmail],
-      reply_to: lead.email,
-      subject: `New estimate request from ${singleLine(lead.name)}`,
-      html: renderEmail(lead),
-    }),
+    body: JSON.stringify(buildResendEmail(lead, notifyEmail)),
   });
 
   if (!res.ok) {

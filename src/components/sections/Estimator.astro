@@ -205,38 +205,15 @@
 </style>
 
 <script>
-  const SVCS = [
-    { id: 'residential',    label: 'Residential',        sub: 'Homes, condos & townhouses',
-      inp: { type: 'slider', label: 'Number of rooms', min: 1, max: 15, step: 1, val: 4, unit: 'rooms' },
-      price(v) { const b = 900 + v * 210; return [Math.round(b * 0.75), Math.round(b * 1.3)]; } },
-    { id: 'commercial',     label: 'Commercial',          sub: 'Offices, retail & industrial',
-      inp: { type: 'slider', label: 'Square footage', min: 500, max: 10000, step: 500, val: 2000, unit: 'sq ft' },
-      price(v) { return [Math.round(v * 2.5), Math.round(v * 5)]; } },
-    { id: 'panel',          label: 'Panel Upgrade',       sub: '100A → 200A & beyond',
-      inp: { type: 'radio', label: 'New panel size', options: ['100A', '200A', '400A'], val: '200A' },
-      price(v) { return ({'100A': [900,1700], '200A': [1500,3500], '400A': [3000,6500]})[v] || [1500,3500]; } },
-    { id: 'newconstruction', label: 'New Construction',   sub: 'Rough-in through finish',
-      inp: { type: 'slider', label: 'Square footage', min: 500, max: 6000, step: 250, val: 1500, unit: 'sq ft' },
-      price(v) { return [Math.round(v * 4), Math.round(v * 7)]; } },
-    { id: 'ev',             label: 'EV Charger',          sub: 'Level 2 home & commercial',
-      inp: { type: 'radio', label: 'Charger type', options: ['Level 1 (120V)', 'Level 2 (240V)', 'Commercial Station'], val: 'Level 2 (240V)' },
-      price(v) { return ({'Level 1 (120V)': [300,700], 'Level 2 (240V)': [600,1800], 'Commercial Station': [2000,6000]})[v] || [600,1800]; } },
-    { id: 'generator',      label: 'Generator',           sub: 'Standby whole-home backup',
-      inp: { type: 'radio', label: 'Generator size', options: ['7.5 kW', '11 kW', '14 kW', '20 kW', '22 kW'], val: '14 kW' },
-      price(v) { return ({'7.5 kW': [2800,4800], '11 kW': [3800,6200], '14 kW': [4800,8000], '20 kW': [7200,11500], '22 kW': [8500,13500]})[v] || [3000,10000]; } },
-    { id: 'lighting',       label: 'Lighting & Fixtures',  sub: 'Recessed, LED, outdoor',
-      inp: { type: 'slider', label: 'Number of fixtures', min: 1, max: 30, step: 1, val: 6, unit: 'fixtures' },
-      price(v) { return [Math.round(v * 150), Math.round(v * 290 + 100)]; } },
-  ];
+  import { SERVICES, findService, formatRange } from '@/lib/estimator';
 
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
   let activeSvc = null;
   let activeVal = null;
 
   function renderCards() {
     const el = document.getElementById('hest-cards');
     if (!el) return;
-    el.innerHTML = SVCS.map(s => `
+    el.innerHTML = SERVICES.map(s => `
       <button class="hest-card" data-id="${s.id}">
         <div class="hest-card-text">
           <span class="hest-card-label">${s.label}</span>
@@ -298,11 +275,11 @@
   function updateRange() {
     if (!activeSvc || activeVal === null) return;
     const [lo, hi] = activeSvc.price(activeVal);
-    document.getElementById('hest-range').textContent = `${fmt(lo)} – ${fmt(hi)}`;
+    document.getElementById('hest-range').textContent = formatRange(lo, hi);
   }
 
   function selectSvc(id) {
-    activeSvc = SVCS.find(s => s.id === id);
+    activeSvc = findService(id);
     if (!activeSvc) return;
     document.querySelectorAll('.hest-card').forEach(c => c.classList.remove('selected'));
     document.querySelector(`.hest-card[data-id="${id}"]`).classList.add('selected');
