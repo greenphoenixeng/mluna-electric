@@ -5,17 +5,30 @@ interface Props {
   rootMargin?: string;
 }
 
-const { threshold = 0.08, stagger = 80, rootMargin = '0px' } = Astro.props;
+const { threshold = 0, stagger = 80, rootMargin = '0px 0px -40px 0px' } = Astro.props;
 ---
 <script is:inline define:vars={{ threshold, stagger, rootMargin }}>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * stagger);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold, rootMargin });
+  (function () {
+    const els = document.querySelectorAll('.fade-up');
+    if (!els.length) return;
 
-  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    const reveal = (el, delay) => {
+      setTimeout(() => el.classList.add('visible'), delay);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        reveal(entry.target, i * stagger);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold, rootMargin });
+
+    els.forEach((el) => observer.observe(el));
+  })();
 </script>

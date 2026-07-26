@@ -32,9 +32,9 @@ const categories = [
     label: 'Panel Work',
     title: 'Panel Upgrades',
     photos: [
-      { src: img267, alt: 'Completed Eaton commercial panel installation — clean and labeled' },
-      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
       { src: img271, alt: 'Electrical panel wiring in progress on concrete block wall' },
+      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },      
+      { src: img267, alt: 'Completed Eaton commercial panel installation — clean and labeled' },
     ],
   },
   {
@@ -53,11 +53,11 @@ const categories = [
     label: 'Utility-Scale',
     title: 'Large-Scale Projects',
     photos: [
-      { src: img226, alt: 'Pad-mount transformer with meter base on galvanized support posts' },
+      { src: img228, alt: 'Underground conduit installation in excavated trench' },
+      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },      
       { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
       { src: img227, alt: 'Interior of open switchgear cabinet showing organized cable terminations' },
-      { src: img228, alt: 'Underground conduit installation in excavated trench' },
-      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },
+      { src: img226, alt: 'Pad-mount transformer with meter base on galvanized support posts' },
     ],
   },
   {
@@ -65,11 +65,10 @@ const categories = [
     label: 'Kennett Square Projects',
     title: 'Kennett Square',
     photos: [
-      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },
       { src: moema05, alt: 'Electrical installation — Kennett Square area' },
+      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },      
       { src: moema10, alt: 'M. Luna Electric field crew on site' },
-      { src: moema20, alt: 'Completed installation — Kennett Square' },
-      { src: moema24, alt: 'M. Luna Electric project work in Chester County' },
+      { src: moema20, alt: 'Completed installation — Kennett Square' },    
     ],
   },
 ];
@@ -97,7 +96,7 @@ const categories = [
         </div>
         <div class="gallery-grid" data-count={cat.photos.length}>
           {cat.photos.map((photo) => (
-            <div class="gallery-item fade-up">
+            <div class="gallery-item">
               <Image src={photo.src} alt={photo.alt} width={1200} quality={82} />
             </div>
           ))}
@@ -118,12 +117,13 @@ const categories = [
   </div>
 
   <Footer />
+  <FadeUpObserver />
 </Layout>
 
 <style>
   .gallery-cat {
     background-color: var(--dark);
-    padding: 80px 24px;
+    padding: 80px 5%;
     border-bottom: 1px solid var(--dark3);
   }
   .gallery-cat:nth-child(odd) {
@@ -148,7 +148,7 @@ const categories = [
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
   .gallery-item {
@@ -170,7 +170,7 @@ const categories = [
 
   .gallery-cta {
     background-color: var(--orange);
-    padding: 80px 24px;
+    padding: 80px 5%;
     text-align: center;
   }
   .gallery-cta-inner {
@@ -223,9 +223,7 @@ const categories = [
       grid-template-columns: 1fr;
     }
     .gallery-cat {
-      padding: 60px 16px;
+      padding: 60px 5%;
     }
   }
 </style>
-
-<FadeUpObserver />

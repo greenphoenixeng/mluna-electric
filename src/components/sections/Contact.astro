@@ -1,14 +1,24 @@
 ---
 import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
+
+interface Props {
+  showHeading?: boolean;
+}
+
+const { showHeading = true } = Astro.props;
 ---
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="contact-info fade-up">
-      <div class="section-label">Get in Touch</div>
-      <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
-      <p class="section-sub">
-        Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
-      </p>
+      {showHeading && (
+        <Fragment>
+          <div class="section-label">Get in Touch</div>
+          <h2 class="section-title">Let's Talk<br/>About Your<br/>Project</h2>
+          <p class="section-sub">
+            Fill out the form and we'll follow up within one business day with a free estimate. Rather talk? Call us directly.
+          </p>
+        </Fragment>
+      )}
       <div class="contact-methods">
         <div class="contact-method">
           <div class="contact-method-icon">
@@ -55,21 +65,34 @@ import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="fname">First Name</label>
-            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" required />
+            <input class="form-control" type="text" id="fname" name="fname" placeholder="Miguel" maxlength="60" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="lname">Last Name</label>
-            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" required />
+            <input class="form-control" type="text" id="lname" name="lname" placeholder="Luna" maxlength="60" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required />
+            <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" maxlength="254" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">Phone</label>
-            <input class="form-control" type="tel" id="phone" name="phone" placeholder={SITE.phoneDisplay} />
+            <input
+              class="form-control"
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder={SITE.phoneDisplay}
+              inputmode="tel"
+              autocomplete="tel"
+              maxlength="14"
+              required
+              aria-describedby="phone-error"
+              title="Enter a 10-digit US phone number, e.g. (484) 643-3625"
+            />
+            <p id="phone-error" class="form-field-error" hidden>Enter a valid 10-digit US phone number</p>
           </div>
         </div>
         <div class="form-group">
@@ -88,7 +111,11 @@ import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
         </div>
         <div class="form-group">
           <label class="form-label" for="message">Project Description</label>
-          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..."></textarea>
+          <textarea class="form-control" id="message" name="message" placeholder="Tell us what you need — address, scope, timeline..." maxlength="5000" required></textarea>
+        </div>
+        <div class="form-group form-hp" aria-hidden="true">
+          <label class="form-label" for="company">Company</label>
+          <input class="form-control" type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
         </div>
         <button type="submit" class="form-submit">Send My Quote Request →</button>
         <p id="form-status" class="form-status-msg" style="display:none; margin-top:12px; text-align:center; font-size:14px;"></p>
@@ -97,20 +124,134 @@ import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
   </div>
 </section>
 
+<style>
+  .form-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-field-error {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #f87171;
+  }
+  .form-control.is-invalid {
+    border-color: #f87171;
+  }
+</style>
+
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-  const status = document.getElementById('form-status') as HTMLElement;
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const phoneInput = document.getElementById('phone');
+  const phoneError = document.getElementById('phone-error');
+
+  function digitsOnly(value) {
+    return value.replace(/\D/g, '').slice(0, 10);
+  }
+
+  /** Format as (XXX) XXX-XXXX from up to 10 digits. */
+  function formatPhone(value) {
+    const d = digitsOnly(value);
+    if (d.length === 0) return '';
+    if (d.length < 4) return `(${d}`;
+    if (d.length < 7) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  }
+
+  function isValidPhone(value) {
+    return digitsOnly(value).length === 10;
+  }
+
+  function setPhoneError(show) {
+    if (!phoneInput || !phoneError) return;
+    phoneInput.classList.toggle('is-invalid', show);
+    phoneInput.setCustomValidity(show ? 'Enter a valid 10-digit US phone number' : '');
+    phoneError.hidden = !show;
+  }
+
+  function validatePhone() {
+    if (!phoneInput || !phoneError) return true;
+    const value = phoneInput.value.trim();
+    if (!value) {
+      phoneError.textContent = 'Phone number is required';
+      setPhoneError(true);
+      return false;
+    }
+    const ok = isValidPhone(value);
+    phoneError.textContent = 'Enter a valid 10-digit US phone number';
+    setPhoneError(!ok);
+    return ok;
+  }
+
+  phoneInput?.addEventListener('keyup', () => {
+    const formatted = formatPhone(phoneInput.value);
+    if (phoneInput.value !== formatted) {
+      phoneInput.value = formatted;
+    }
+    if (formatted) validatePhone();
+    else setPhoneError(false);
+  });
+
+  // Also catch paste / autofill via input
+  phoneInput?.addEventListener('input', () => {
+    const formatted = formatPhone(phoneInput.value);
+    if (phoneInput.value !== formatted) {
+      phoneInput.value = formatted;
+    }
+  });
+
+  phoneInput?.addEventListener('blur', validatePhone);
+
+  // Block non-digit keypresses (allow control keys, arrows, etc.)
+  phoneInput?.addEventListener('keydown', (e) => {
+    if (
+      e.ctrlKey || e.metaKey || e.altKey ||
+      e.key === 'Backspace' || e.key === 'Delete' ||
+      e.key === 'Tab' || e.key === 'Escape' || e.key === 'Enter' ||
+      e.key.startsWith('Arrow') || e.key === 'Home' || e.key === 'End'
+    ) {
+      return;
+    }
+    if (!/^\d$/.test(e.key)) {
+      e.preventDefault();
+      return;
+    }
+    if (digitsOnly(phoneInput.value).length >= 10 && phoneInput.selectionStart === phoneInput.selectionEnd) {
+      e.preventDefault();
+    }
+  });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const field = (name) =>
+      form.elements.namedItem(name)?.value ?? '';
+
+    if (phoneInput) phoneInput.value = formatPhone(phoneInput.value);
+
+    if (!validatePhone()) {
+      phoneInput?.focus();
+      phoneInput?.reportValidity();
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     const data = {
-      fname: (form.elements.namedItem('fname') as HTMLInputElement)?.value,
-      lname: (form.elements.namedItem('lname') as HTMLInputElement)?.value,
-      email: (form.elements.namedItem('email') as HTMLInputElement)?.value,
-      phone: (form.elements.namedItem('phone') as HTMLInputElement)?.value,
-      service: (form.elements.namedItem('service') as HTMLSelectElement)?.value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement)?.value,
+      name: `${field('fname')} ${field('lname')}`.trim(),
+      email: field('email'),
+      phone: field('phone'),
+      service: field('service'),
+      message: field('message'),
+      company: field('company'),
     };
+
+    if (!status) return;
 
     status.style.display = 'block';
     status.style.color = 'var(--muted)';
@@ -124,14 +265,19 @@ import { SITE, TEL_HREF, MAILTO_HREF } from '@/data/site';
       });
       if (res.ok) {
         status.style.color = '#4ade80';
-        status.textContent = '✓ Message sent! We\'ll follow up within one business day.';
+        status.textContent = "✓ Message sent! We'll follow up within one business day.";
         form.reset();
+        setPhoneError(false);
       } else {
-        throw new Error();
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || 'Request failed');
       }
-    } catch {
+    } catch (err) {
       status.style.color = '#f87171';
-      status.textContent = 'Something went wrong. Please call us directly.';
+      status.textContent =
+        err instanceof Error && err.message === 'Invalid phone number'
+          ? 'Please enter a valid 10-digit phone number.'
+          : 'Something went wrong. Please call us directly.';
     }
   });
 </script>

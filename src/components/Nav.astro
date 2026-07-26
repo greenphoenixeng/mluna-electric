@@ -19,9 +19,6 @@ import { NAV_LINKS } from '@/data/site';
   <ul>
     {NAV_LINKS.map(link => <li><a href={link.href}>{link.label}</a></li>)}
   </ul>
-  <a href="/#contact" class="nav-mobile-call">
-    Contact Now
-  </a>
 </div>
 
 <style>
@@ -69,16 +66,12 @@ import { NAV_LINKS } from '@/data/site';
   }
   .nav-mobile-menu ul li a:hover { color: var(--orange); }
 
-  .nav-mobile-call {
-    display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 32px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px; font-weight: 700; text-transform: uppercase;
-    color: var(--orange); letter-spacing: 0.04em;
+  @media (max-width: 1150px) {
+    .nav-hamburger { display: flex; }
   }
 
-  @media (max-width: 768px) {
-    .nav-hamburger { display: flex; }
+  @media (max-width: 350px) {
+    .nav-cta { display: none; }
   }
 </style>
 
