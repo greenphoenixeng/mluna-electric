@@ -9,12 +9,12 @@ import img226 from '@/assets/images/IMG_0226.JPG';
 import img231 from '@/assets/images/IMG_0231.JPG';
 
 const photos = [
-  { src: img267, alt: 'Completed commercial panel installation — Eaton breaker board' },
   { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
-  { src: img163, alt: 'Multi-panel commercial system on stone building — finished' },
+  { src: img267, alt: 'Completed commercial panel installation — Eaton breaker board' },
   { src: img161, alt: 'Exterior meter base installation on new construction' },
-  { src: img226, alt: 'Pad-mount transformer with meter base on galvanized posts' },
+  { src: img163, alt: 'Multi-panel commercial system on stone building — finished' },
   { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
+  { src: img226, alt: 'Pad-mount transformer with meter base on galvanized posts' },  
 ];
 ---
 
@@ -34,7 +34,7 @@ const photos = [
     <div class="projects-grid">
       {photos.map((photo) => (
         <a href="/gallery" class="projects-item fade-up">
-          <Image src={photo.src} alt={photo.alt} />
+          <Image src={photo.src} alt={photo.alt} width={1400} quality={85} />
         </a>
       ))}
     </div>
