@@ -116,8 +116,14 @@ const categories = [
       <h2>Ready to Start Your Project?</h2>
       <p>Get a free estimate — we respond within one business day.</p>
       <div class="gallery-cta-actions">
-        <a href="/#contact" class="btn-primary">Request a Free Quote</a>
-        <a href={MAILTO_HREF} class="btn-outline">Email Us</a>
+        <a href="/#contact" class="btn-dark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+          Request a Free Quote
+        </a>
+        <a href={MAILTO_HREF} class="btn-white">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          Email Us
+        </a>
       </div>
     </div>
   </div>
@@ -209,27 +215,6 @@ const categories = [
     justify-content: center;
     flex-wrap: wrap;
   }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 2px solid var(--black);
-    color: var(--black);
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-  }
-  .btn-outline:hover {
-    background: var(--black);
-    color: #fff;
-  }
-
   @media (max-width: 640px) {
     .gallery-grid {
       grid-template-columns: 1fr;
