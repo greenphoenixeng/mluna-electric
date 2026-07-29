@@ -73,13 +73,15 @@ const teamPhotos = [
 
   <section class="about-pg-license-band">
     <p class="about-pg-license-text">Licensed in Delaware and Pennsylvania</p>
-    <div class="about-pg-license">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      PA Electrical Contractor License: <strong>PA145866</strong>
-    </div>
-    <div class="about-pg-license">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      DE Electrical Contractor License: <strong>T1-0006293</strong>
+    <div class="about-pg-licenses">
+      <div class="about-pg-license">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        PA Electrical Contractor License: <strong>PA145866</strong>
+      </div>
+      <div class="about-pg-license">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DE Electrical Contractor License: <strong>T1-0006293</strong>
+      </div>
     </div>
   </section>
 
@@ -221,6 +223,19 @@ const teamPhotos = [
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--white);
+  }
+
+  .about-pg-licenses {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  @media (min-width: 768px) {
+    .about-pg-licenses {
+      flex-direction: row;
+      justify-content: center;
+    }
   }
 
   .about-pg-license {
