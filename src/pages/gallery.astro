@@ -4,7 +4,7 @@ import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import PageHero from '@/components/PageHero.astro';
 import FadeUpObserver from '@/components/FadeUpObserver.astro';
-import { TEL_HREF } from '@/data/site';
+import { MAILTO_HREF } from '@/data/site';
 import { Image } from 'astro:assets';
 
 import img267 from '@/assets/images/IMG_0267.jpeg';
@@ -26,35 +26,43 @@ import moema10 from '@/assets/images/moema-10.jpg';
 import moema20 from '@/assets/images/moema-20.jpg';
 import moema24 from '@/assets/images/moema-24.jpg';
 
+import outdoor01 from '@/assets/images/outdoor-01.jpg';
+import outdoor02 from '@/assets/images/outdoor-02.jpg';
+
 const categories = [
   {
     id: 'panels',
-    label: 'Panel Work',
     title: 'Panel Upgrades',
     photos: [
       { src: img271, alt: 'Electrical panel wiring in progress on concrete block wall' },
-      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },      
+      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
       { src: img267, alt: 'Completed Eaton commercial panel installation — clean and labeled' },
     ],
   },
   {
+    id: 'outdoor',
+    title: 'Outdoor & Landscape Lighting',
+    photos: [
+      { src: outdoor01, alt: 'Full outdoor entertainment area at night — pool lighting, deck recessed lighting, and landscape fixtures' },
+      { src: outdoor02, alt: 'Two-story deck with under-rail lighting, stair lighting, and landscape uplighting at dusk' },
+    ],
+  },
+  {
     id: 'commercial',
-    label: 'Commercial & New Construction',
-    title: 'Commercial Work',
+    title: 'Commercial & New Construction',
     photos: [
       { src: img161, alt: 'Exterior meter base installation on new construction stone building' },
       { src: img162, alt: 'Wide view — commercial multi-panel install with bucket truck on site' },
-      { src: img163, alt: 'Multi-panel commercial electrical system on stone building — finished' },      
+      { src: img163, alt: 'Multi-panel commercial electrical system on stone building — finished' },
       { src: img164, alt: 'Commercial electrical installation at multi-unit building' },
     ],
   },
   {
     id: 'utility',
-    label: 'Utility-Scale',
     title: 'Large-Scale Projects',
     photos: [
       { src: img228, alt: 'Underground conduit installation in excavated trench' },
-      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },      
+      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },
       { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
       { src: img227, alt: 'Interior of open switchgear cabinet showing organized cable terminations' },
       { src: img226, alt: 'Pad-mount transformer with meter base on galvanized support posts' },
@@ -62,13 +70,12 @@ const categories = [
   },
   {
     id: 'kennett',
-    label: 'Kennett Square Projects',
-    title: 'Kennett Square',
+    title: 'Kennett Square Project',
     photos: [
       { src: moema05, alt: 'Electrical installation — Kennett Square area' },
-      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },      
+      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },
       { src: moema10, alt: 'M. Luna Electric field crew on site' },
-      { src: moema20, alt: 'Completed installation — Kennett Square' },    
+      { src: moema20, alt: 'Completed installation — Kennett Square' },
     ],
   },
 ];
@@ -91,7 +98,6 @@ const categories = [
     <section class="gallery-cat" id={cat.id}>
       <div class="gallery-cat-inner">
         <div class="gallery-cat-header">
-          <div class="section-label">{cat.label}</div>
           <h2 class="gallery-cat-title">{cat.title}</h2>
         </div>
         <div class="gallery-grid" data-count={cat.photos.length}>
@@ -110,8 +116,14 @@ const categories = [
       <h2>Ready to Start Your Project?</h2>
       <p>Get a free estimate — we respond within one business day.</p>
       <div class="gallery-cta-actions">
-        <a href="/#contact" class="btn-primary">Request a Free Quote</a>
-        <a href={TEL_HREF} class="btn-outline">Call Us Directly</a>
+        <a href="/#contact" class="btn-dark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+          Request a Free Quote
+        </a>
+        <a href={MAILTO_HREF} class="btn-white">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          Email Us
+        </a>
       </div>
     </div>
   </div>
@@ -167,6 +179,12 @@ const categories = [
   .gallery-item:hover img {
     transform: scale(1.04);
   }
+  #outdoor .gallery-item:nth-child(2) img {
+    transform: rotate(-4deg) scale(1.12);
+  }
+  #outdoor .gallery-item:nth-child(2):hover img {
+    transform: rotate(-4deg) scale(1.16);
+  }
 
   .gallery-cta {
     background-color: var(--orange);
@@ -197,27 +215,6 @@ const categories = [
     justify-content: center;
     flex-wrap: wrap;
   }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 2px solid var(--black);
-    color: var(--black);
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-  }
-  .btn-outline:hover {
-    background: var(--black);
-    color: #fff;
-  }
-
   @media (max-width: 640px) {
     .gallery-grid {
       grid-template-columns: 1fr;
