@@ -26,35 +26,43 @@ import moema10 from '@/assets/images/moema-10.jpg';
 import moema20 from '@/assets/images/moema-20.jpg';
 import moema24 from '@/assets/images/moema-24.jpg';
 
+import outdoor01 from '@/assets/images/outdoor-01.jpg';
+import outdoor02 from '@/assets/images/outdoor-02.jpg';
+
 const categories = [
   {
     id: 'panels',
-    label: 'Panel Work',
     title: 'Panel Upgrades',
     photos: [
       { src: img271, alt: 'Electrical panel wiring in progress on concrete block wall' },
-      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },      
+      { src: img272, alt: 'M. Luna Electric technician mid-install on commercial panel' },
       { src: img267, alt: 'Completed Eaton commercial panel installation — clean and labeled' },
     ],
   },
   {
+    id: 'outdoor',
+    title: 'Outdoor & Landscape Lighting',
+    photos: [
+      { src: outdoor01, alt: 'Full outdoor entertainment area at night — pool lighting, deck recessed lighting, and landscape fixtures' },
+      { src: outdoor02, alt: 'Two-story deck with under-rail lighting, stair lighting, and landscape uplighting at dusk' },
+    ],
+  },
+  {
     id: 'commercial',
-    label: 'Commercial & New Construction',
-    title: 'Commercial Work',
+    title: 'Commercial & New Construction',
     photos: [
       { src: img161, alt: 'Exterior meter base installation on new construction stone building' },
       { src: img162, alt: 'Wide view — commercial multi-panel install with bucket truck on site' },
-      { src: img163, alt: 'Multi-panel commercial electrical system on stone building — finished' },      
+      { src: img163, alt: 'Multi-panel commercial electrical system on stone building — finished' },
       { src: img164, alt: 'Commercial electrical installation at multi-unit building' },
     ],
   },
   {
     id: 'utility',
-    label: 'Utility-Scale',
     title: 'Large-Scale Projects',
     photos: [
       { src: img228, alt: 'Underground conduit installation in excavated trench' },
-      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },      
+      { src: img232, alt: 'Commercial underground conduit trench with excavator on site' },
       { src: img231, alt: 'Electrician terminating high-voltage cables at commercial switchgear' },
       { src: img227, alt: 'Interior of open switchgear cabinet showing organized cable terminations' },
       { src: img226, alt: 'Pad-mount transformer with meter base on galvanized support posts' },
@@ -62,13 +70,12 @@ const categories = [
   },
   {
     id: 'kennett',
-    label: 'Kennett Square Projects',
-    title: 'Kennett Square',
+    title: 'Kennett Square Project',
     photos: [
       { src: moema05, alt: 'Electrical installation — Kennett Square area' },
-      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },      
+      { src: moema01, alt: 'M. Luna Electric project in Kennett Square, PA' },
       { src: moema10, alt: 'M. Luna Electric field crew on site' },
-      { src: moema20, alt: 'Completed installation — Kennett Square' },    
+      { src: moema20, alt: 'Completed installation — Kennett Square' },
     ],
   },
 ];
@@ -91,7 +98,6 @@ const categories = [
     <section class="gallery-cat" id={cat.id}>
       <div class="gallery-cat-inner">
         <div class="gallery-cat-header">
-          <div class="section-label">{cat.label}</div>
           <h2 class="gallery-cat-title">{cat.title}</h2>
         </div>
         <div class="gallery-grid" data-count={cat.photos.length}>
@@ -166,6 +172,12 @@ const categories = [
   }
   .gallery-item:hover img {
     transform: scale(1.04);
+  }
+  #outdoor .gallery-item:nth-child(2) img {
+    transform: rotate(-4deg) scale(1.12);
+  }
+  #outdoor .gallery-item:nth-child(2):hover img {
+    transform: rotate(-4deg) scale(1.16);
   }
 
   .gallery-cta {
