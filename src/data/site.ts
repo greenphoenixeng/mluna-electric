@@ -4,9 +4,9 @@ export const SITE = {
   url: 'https://mlunaelectric.com',
   description:
     'M. Luna Electric — Licensed electricians serving Kennett Square, Chester & Delaware County, PA. Residential, commercial, and new construction electrical services.',
-  phone: '+14846433625',
-  phoneDisplay: '(484) 643-3625',
-  email: 'M.Luna.Electric@gmail.com',
+  phone: '+16105465128',
+  phoneDisplay: '(610) 546-5128',
+  email: 'Info@mlunaelectricinc.com',
   hours: 'Mon–Fri 7am–6pm',
   hoursExtended: 'Mon–Fri 7am–6pm · Sat by Appt',
   address: {
