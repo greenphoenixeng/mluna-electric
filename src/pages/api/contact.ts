@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { buildResendEmail, type ContactPayload } from '@/lib/contact';
+import { buildResendEmail, DEFAULT_FROM_EMAIL, type ContactPayload } from '@/lib/contact';
 
 export const prerender = false;
 
@@ -11,7 +11,7 @@ interface Lead extends ContactPayload {
 const MAX_BODY_BYTES = 16 * 1024;
 const LIMITS = { name: 120, email: 254, phone: 40, service: 80, message: 5000 } as const;
 const EMAIL_RE = /^[^\s@<>"'()[\],:;]+@[^\s@<>"'.]+(\.[^\s@<>"'.]+)+$/;
-const DEFAULT_NOTIFY_EMAIL = 'TBD@mlunaelectric.com';
+const DEFAULT_NOTIFY_EMAIL = 'Info@mlunaelectricinc.com';
 
 function isValidPhone(value: string): boolean {
   return value.replace(/\D/g, '').length === 10;
@@ -110,6 +110,7 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
   const env = (locals as { runtime?: { env?: Record<string, string | undefined> } } | undefined)?.runtime?.env;
   const resendApiKey = env?.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
   const notifyEmail = env?.NOTIFY_EMAIL ?? import.meta.env.NOTIFY_EMAIL ?? DEFAULT_NOTIFY_EMAIL;
+  const fromEmail = env?.FROM_EMAIL ?? import.meta.env.FROM_EMAIL ?? DEFAULT_FROM_EMAIL;
 
   if (!resendApiKey) {
     console.error('contact: RESEND_API_KEY is not set — cannot deliver submission');
@@ -124,7 +125,7 @@ export const POST: APIRoute = async ({ request, locals, site }) => {
         Authorization: `Bearer ${resendApiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(buildResendEmail(lead, notifyEmail)),
+      body: JSON.stringify(buildResendEmail(lead, notifyEmail, fromEmail)),
     });
   } catch (err) {
     console.error('contact: request to Resend failed', err);

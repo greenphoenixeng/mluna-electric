@@ -14,12 +14,14 @@ const post = (body: unknown, raw?: string) => {
 const validBody = {
   name: 'Ada Lovelace',
   email: 'ada@example.com',
+  phone: '(610) 555-0100',
   message: 'Need a panel upgrade.',
 };
 
 beforeEach(() => {
   vi.stubEnv('RESEND_API_KEY', 're_test_key');
-  vi.stubEnv('NOTIFY_EMAIL', 'contact@mlunaelectric.com');
+  vi.stubEnv('NOTIFY_EMAIL', 'Info@mlunaelectricinc.com');
+  vi.stubEnv('FROM_EMAIL', 'M. Luna Electric <noreply@updates.mlunaelectricinc.com>');
   vi.spyOn(console, 'error').mockImplementation(() => {});
 });
 
@@ -66,12 +68,14 @@ describe('POST /api/contact', () => {
     expect(init.method).toBe('POST');
     expect((init.headers as Record<string, string>).Authorization).toBe('Bearer re_test_key');
     const payload = JSON.parse(init.body as string);
-    expect(payload.to).toEqual(['contact@mlunaelectric.com']);
+    expect(payload.to).toEqual(['Info@mlunaelectricinc.com']);
+    expect(payload.from).toBe('M. Luna Electric <noreply@updates.mlunaelectricinc.com>');
     expect(payload.reply_to).toBe('ada@example.com');
     expect(payload.html).toContain('610-555-0100');
+    expect(payload.text).toContain('610-555-0100');
   });
 
-  it('falls back to the placeholder notify address when none is configured', async () => {
+  it('falls back to the default notify address when none is configured', async () => {
     vi.stubEnv('NOTIFY_EMAIL', undefined);
     const fetchMock = vi
       .spyOn(globalThis, 'fetch')
@@ -80,7 +84,7 @@ describe('POST /api/contact', () => {
     await post(validBody);
 
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(JSON.parse(init.body as string).to).toEqual(['TBD@mlunaelectric.com']);
+    expect(JSON.parse(init.body as string).to).toEqual(['Info@mlunaelectricinc.com']);
   });
 
   it('returns 502 when Resend rejects the request', async () => {

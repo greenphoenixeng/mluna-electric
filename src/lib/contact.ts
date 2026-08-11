@@ -71,20 +71,42 @@ export function buildContactEmailHtml(payload: ContactPayload): string {
     .join('\n');
 }
 
+/** Plain-text alternative of the notification email. */
+export function buildContactEmailText(payload: ContactPayload): string {
+  const rows = [
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    payload.phone ? `Phone: ${payload.phone}` : null,
+    payload.service ? `Service: ${payload.service}` : null,
+  ].filter((row): row is string => row !== null);
+
+  return ['New Contact Form Submission', '', ...rows, '', 'Message:', payload.message].join('\n');
+}
+
 export interface ResendEmail {
   from: string;
   to: string[];
   reply_to: string;
   subject: string;
   html: string;
+  text: string;
 }
 
-export function buildResendEmail(payload: ContactPayload, notifyEmail: string): ResendEmail {
+/** Sender must be on a domain verified in Resend. */
+export const DEFAULT_FROM_EMAIL =
+  'M. Luna Electric <noreply@updates.mlunaelectricinc.com>';
+
+export function buildResendEmail(
+  payload: ContactPayload,
+  notifyEmail: string,
+  fromEmail: string = DEFAULT_FROM_EMAIL,
+): ResendEmail {
   return {
-    from: 'M Luna Electric Website <no-reply@mlunaelectric.com>',
+    from: fromEmail,
     to: [notifyEmail],
     reply_to: payload.email,
     subject: `New estimate request from ${payload.name}`,
     html: buildContactEmailHtml(payload),
+    text: buildContactEmailText(payload),
   };
 }
