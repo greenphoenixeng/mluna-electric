@@ -7,7 +7,7 @@ pages_build_output_dir = "./dist"
 # Non-secret vars only — secrets go in CF Pages dashboard or .dev.vars locally
 NOTIFY_EMAIL = "Info@mlunaelectricinc.com"
 # Must be on a domain verified in Resend (updates.mlunaelectricinc.com)
-FROM_EMAIL = "M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>"
+FROM_EMAIL = "M. Luna Electric <noreply@updates.mlunaelectricinc.com>"
 
 # Preview environment (used for staging review)
 [env.preview]
@@ -15,4 +15,4 @@ name = "mluna-electric-preview"
 
 [env.preview.vars]
 NOTIFY_EMAIL = "mike@greenphoenixengineering.com"
-FROM_EMAIL = "M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>"
+FROM_EMAIL = "M. Luna Electric <noreply@updates.mlunaelectricinc.com>"

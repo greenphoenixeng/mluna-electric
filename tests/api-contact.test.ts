@@ -21,7 +21,7 @@ const validBody = {
 beforeEach(() => {
   vi.stubEnv('RESEND_API_KEY', 're_test_key');
   vi.stubEnv('NOTIFY_EMAIL', 'Info@mlunaelectricinc.com');
-  vi.stubEnv('FROM_EMAIL', 'M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>');
+  vi.stubEnv('FROM_EMAIL', 'M. Luna Electric <noreply@updates.mlunaelectricinc.com>');
   vi.spyOn(console, 'error').mockImplementation(() => {});
 });
 
@@ -69,7 +69,7 @@ describe('POST /api/contact', () => {
     expect((init.headers as Record<string, string>).Authorization).toBe('Bearer re_test_key');
     const payload = JSON.parse(init.body as string);
     expect(payload.to).toEqual(['Info@mlunaelectricinc.com']);
-    expect(payload.from).toBe('M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>');
+    expect(payload.from).toBe('M. Luna Electric <noreply@updates.mlunaelectricinc.com>');
     expect(payload.reply_to).toBe('ada@example.com');
     expect(payload.html).toContain('610-555-0100');
     expect(payload.text).toContain('610-555-0100');

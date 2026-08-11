@@ -136,7 +136,7 @@ describe('buildResendEmail', () => {
     const email = buildResendEmail(validBody, 'Info@mlunaelectricinc.com');
     expect(email.to).toEqual(['Info@mlunaelectricinc.com']);
     expect(email.reply_to).toBe('ada@example.com');
-    expect(email.from).toBe('M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>');
+    expect(email.from).toBe('M. Luna Electric <noreply@updates.mlunaelectricinc.com>');
     expect(email.subject).toBe('New estimate request from Ada Lovelace');
     expect(email.html).toBe(buildContactEmailHtml(validBody));
     expect(email.text).toBe(buildContactEmailText(validBody));
