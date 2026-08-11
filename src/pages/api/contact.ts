@@ -11,7 +11,7 @@ interface Lead extends ContactPayload {
 const MAX_BODY_BYTES = 16 * 1024;
 const LIMITS = { name: 120, email: 254, phone: 40, service: 80, message: 5000 } as const;
 const EMAIL_RE = /^[^\s@<>"'()[\],:;]+@[^\s@<>"'.]+(\.[^\s@<>"'.]+)+$/;
-const DEFAULT_NOTIFY_EMAIL = 'contact@mlunaelectric.com';
+const DEFAULT_NOTIFY_EMAIL = 'Info@mlunaelectricinc.com';
 
 function isValidPhone(value: string): boolean {
   return value.replace(/\D/g, '').length === 10;

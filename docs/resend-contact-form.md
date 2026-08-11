@@ -9,7 +9,7 @@ Contact page (`/contact`) — render `src/components/sections/Contact.astro` and
 | Name | Type | Purpose |
 |---|---|---|
 | `RESEND_API_KEY` | secret | Resend API key. Without it the endpoint returns 500. |
-| `NOTIFY_EMAIL` | plain var | Inbox that receives leads. Defaults to `contact@mlunaelectric.com`. |
+| `NOTIFY_EMAIL` | plain var | Inbox that receives leads. Defaults to `Info@mlunaelectricinc.com`. |
 | `FROM_EMAIL` | plain var | Sender. Must be on a domain verified at resend.com/domains. |
 
 `NOTIFY_EMAIL` and `FROM_EMAIL` are declared in `wrangler.toml` (production under `[vars]`,

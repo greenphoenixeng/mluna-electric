@@ -93,7 +93,8 @@ export interface ResendEmail {
 }
 
 /** Sender must be on a domain verified in Resend. */
-export const DEFAULT_FROM_EMAIL = 'M. Luna Electric Website <no-reply@mlunaelectric.com>';
+export const DEFAULT_FROM_EMAIL =
+  'M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>';
 
 export function buildResendEmail(
   payload: ContactPayload,

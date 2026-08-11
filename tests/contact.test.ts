@@ -133,17 +133,17 @@ describe('buildContactEmailText', () => {
 
 describe('buildResendEmail', () => {
   it('addresses the notification email and replies to the visitor', () => {
-    const email = buildResendEmail(validBody, 'contact@mlunaelectric.com');
-    expect(email.to).toEqual(['contact@mlunaelectric.com']);
+    const email = buildResendEmail(validBody, 'Info@mlunaelectricinc.com');
+    expect(email.to).toEqual(['Info@mlunaelectricinc.com']);
     expect(email.reply_to).toBe('ada@example.com');
-    expect(email.from).toBe('M. Luna Electric Website <no-reply@mlunaelectric.com>');
+    expect(email.from).toBe('M. Luna Electric Website <noreply@updates.mlunaelectricinc.com>');
     expect(email.subject).toBe('New estimate request from Ada Lovelace');
     expect(email.html).toBe(buildContactEmailHtml(validBody));
     expect(email.text).toBe(buildContactEmailText(validBody));
   });
 
   it('uses the configured sender when one is provided', () => {
-    const email = buildResendEmail(validBody, 'contact@mlunaelectric.com', 'Leads <leads@example.com>');
+    const email = buildResendEmail(validBody, 'Info@mlunaelectricinc.com', 'Leads <leads@example.com>');
     expect(email.from).toBe('Leads <leads@example.com>');
   });
 });
