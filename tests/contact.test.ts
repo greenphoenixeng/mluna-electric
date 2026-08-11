@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildContactEmailHtml,
+  buildContactEmailText,
   buildResendEmail,
   escapeHtml,
   validateContactPayload,
@@ -113,13 +114,36 @@ describe('buildContactEmailHtml', () => {
   });
 });
 
+describe('buildContactEmailText', () => {
+  it('lists the submitted fields and message', () => {
+    const text = buildContactEmailText({ ...validBody, phone: '610-555-0100', service: 'EV Charger' });
+    expect(text).toContain('Name: Ada Lovelace');
+    expect(text).toContain('Email: ada@example.com');
+    expect(text).toContain('Phone: 610-555-0100');
+    expect(text).toContain('Service: EV Charger');
+    expect(text).toContain('Need a panel upgrade.');
+  });
+
+  it('omits optional fields that were not submitted', () => {
+    const text = buildContactEmailText(validBody);
+    expect(text).not.toContain('Phone:');
+    expect(text).not.toContain('Service:');
+  });
+});
+
 describe('buildResendEmail', () => {
   it('addresses the notification email and replies to the visitor', () => {
     const email = buildResendEmail(validBody, 'contact@mlunaelectric.com');
     expect(email.to).toEqual(['contact@mlunaelectric.com']);
     expect(email.reply_to).toBe('ada@example.com');
-    expect(email.from).toBe('M Luna Electric Website <no-reply@mlunaelectric.com>');
+    expect(email.from).toBe('M. Luna Electric Website <no-reply@mlunaelectric.com>');
     expect(email.subject).toBe('New estimate request from Ada Lovelace');
     expect(email.html).toBe(buildContactEmailHtml(validBody));
+    expect(email.text).toBe(buildContactEmailText(validBody));
+  });
+
+  it('uses the configured sender when one is provided', () => {
+    const email = buildResendEmail(validBody, 'contact@mlunaelectric.com', 'Leads <leads@example.com>');
+    expect(email.from).toBe('Leads <leads@example.com>');
   });
 });
