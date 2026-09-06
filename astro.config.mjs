@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://mlunaelectric.com',
+  site: 'https://mlunaelectricinc.com',
   output: 'static',
   adapter: cloudflare(),
   integrations: [

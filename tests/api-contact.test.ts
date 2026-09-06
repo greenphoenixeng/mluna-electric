@@ -2,10 +2,10 @@ import type { APIContext } from 'astro';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { POST } from '@/pages/api/contact';
 
-const post = (body: unknown, raw?: string) => {
-  const request = new Request('https://mlunaelectric.com/api/contact', {
+const post = (body: unknown, raw?: string, origin?: string) => {
+  const request = new Request('https://mlunaelectricinc.com/api/contact', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...(origin ? { Origin: origin } : {}) },
     body: raw ?? JSON.stringify(body),
   });
   return POST({ request } as APIContext);
@@ -31,6 +31,24 @@ afterEach(() => {
 });
 
 describe('POST /api/contact', () => {
+  it.each([
+    'https://mlunaelectricinc.com',
+    'https://www.mlunaelectricinc.com',
+    'https://preview.mlunaelectricinc.com',
+    'https://mlunaelectric.com',
+    'https://abc123.mluna-electric.pages.dev',
+  ])('accepts requests from allowed origin %s', async (origin) => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{}', { status: 200 }));
+    const res = await post(validBody, undefined, origin);
+    expect(res.status).toBe(200);
+  });
+
+  it('returns 403 for a disallowed origin', async () => {
+    const res = await post(validBody, undefined, 'https://evil.example.com');
+    expect(res.status).toBe(403);
+    await expect(res.json()).resolves.toEqual({ error: 'Forbidden' });
+  });
+
   it('returns 400 for a body that is not JSON', async () => {
     const res = await post(undefined, 'not json');
     expect(res.status).toBe(400);
