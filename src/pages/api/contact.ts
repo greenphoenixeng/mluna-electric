@@ -18,6 +18,8 @@ function isValidPhone(value: string): boolean {
 }
 
 const ALLOWED_ORIGINS = [
+  'https://mlunaelectricinc.com',
+  'https://www.mlunaelectricinc.com',
   'https://mlunaelectric.com',
   'https://www.mlunaelectric.com',
 ];
@@ -41,7 +43,11 @@ function isAllowedOrigin(request: Request, siteOrigin: string | undefined): bool
   try {
     const { hostname, protocol } = new URL(origin);
     if (protocol !== 'https:') return hostname === 'localhost' || hostname === '127.0.0.1';
-    return hostname.endsWith('.mluna-electric.pages.dev') || hostname.endsWith('.mlunaelectric.com');
+    return (
+      hostname.endsWith('.mluna-electric.pages.dev') ||
+      hostname.endsWith('.mlunaelectricinc.com') ||
+      hostname.endsWith('.mlunaelectric.com')
+    );
   } catch {
     return false;
   }
