@@ -18,10 +18,10 @@ function isValidPhone(value: string): boolean {
 }
 
 const ALLOWED_ORIGINS = [
-  'https://mlunaelectricinc.com',
-  'https://www.mlunaelectricinc.com',
   'https://mlunaelectric.com',
   'https://www.mlunaelectric.com',
+  'https://mlunaelectricinc.com',
+  'https://www.mlunaelectricinc.com',
 ];
 
 const json = (data: unknown, status: number) =>
